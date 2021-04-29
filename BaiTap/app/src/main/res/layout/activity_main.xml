@@ -4,27 +4,59 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
-    <LinearLayout
+    tools:context=".MainActivity"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/textView_title"
+            android:id="@+id/tvShopName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/aref_ruqaa_bold"
+            android:fontFamily="@font/cookie"
             android:text="Youth Memories"
-            android:textColor="@android:color/holo_red_dark"
-            android:textSize="36dp" />
-    </LinearLayout>
+            android:textColor="@color/black"
+            android:textSize="50dp"
+            android:textStyle="bold"/>
 
+        <TextView
+            android:id="@+id/nameTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/tvShopName"
+            android:layout_marginRight="20dp"
+            android:fontFamily="@font/niconne"
+            android:text="Hello Hang"
+            android:textSize="30dp" />
+
+        <ImageButton
+            android:id="@+id/editProfileBtn"
+            android:layout_alignParentEnd="true"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:srcCompat="@drawable/ic_account_settings"
+            tools:ignore="VectorDrawableCompat"
+            android:background="@null"/>
+
+
+        <ImageButton
+            android:id="@+id/addProductBtn"
+            android:layout_toStartOf="@+id/editProfileBtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:srcCompat="@drawable/ic_cart_black"
+            tools:ignore="VectorDrawableCompat"
+            android:background="@null"/>
+
+    </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="548dp"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <EditText
@@ -56,44 +88,10 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_discount"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="349dp"
             android:layout_marginTop="16dp" />
 
     </LinearLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="277dp"
-            android:layout_marginBottom="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imageView2"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
-            app:srcCompat="@drawable/ic_cart_black"
-            tools:ignore="VectorDrawableCompat" />
-
-        <ImageView
-
-            android:id="@+id/imageView2"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
-            app:srcCompat="@drawable/ic_account_settings"
-            tools:ignore="VectorDrawableCompat" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 </LinearLayout>
+
+

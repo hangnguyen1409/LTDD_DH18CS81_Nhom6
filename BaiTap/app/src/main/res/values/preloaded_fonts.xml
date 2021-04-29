@@ -3,5 +3,9 @@
     <array name="preloaded_fonts" translatable="false">
         <item>@font/aref_ruqaa_bold</item>
         <item>@font/arimo_bold</item>
+        <item>@font/bilbo_swash_caps</item>
+        <item>@font/cookie</item>
+        <item>@font/corben_bold</item>
+        <item>@font/niconne</item>
     </array>
 </resources>
