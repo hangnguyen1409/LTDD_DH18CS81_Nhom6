@@ -23,8 +23,9 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView discountRecyclerView;
     DiscountClothesAdapter discountClothesAdapter;
     List<DiscountClothes> discountClothesList;
-    private TextView nameTV,tvShopName;
+    private TextView nameTV,tvShopName,tvTabProducts,tvTabOrders;
     private ImageButton editProfileBtn,addProductBtn;
+    private LinearLayout LLProducts,LLOrders;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,14 +37,36 @@ public class MainActivity extends AppCompatActivity {
         tvShopName = findViewById(R.id.tvShopName);
         addProductBtn = findViewById(R.id.addProductBtn);
         editProfileBtn = findViewById(R.id.editProfileBtn);
+        tvTabProducts = findViewById(R.id.tvTabProducts);
+        tvTabOrders = findViewById(R.id.tvTabOrders);
+        LLProducts = findViewById(R.id.LLProducts);
+        LLOrders = findViewById(R.id.LLOrders);
 
+
+        showProducts();
         //ProgressDialog for Login
 
-        //addProduct
+        //add Product
         addProductBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this,AddProductActivity.class));
+            }
+        });
+
+        //Tab Products,Tab Orders
+        tvTabProducts.setOnClickListener(new View.OnClickListener() {
+                                             @Override
+                                             public void onClick(View v) {
+                                                 //Load Products
+                                                showProducts();
+                                             }
+                                         });
+        tvTabOrders.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    showOrders();
+                    //Load Orders
             }
         });
 
@@ -60,6 +83,23 @@ public class MainActivity extends AppCompatActivity {
         discountRecyclerView = findViewById(R.id.recycler_view_discount);
         setDiscountRecycler(discountClothesList);
     }
+
+
+    private void showProducts() {
+        LLProducts.setVisibility(View.VISIBLE);
+        LLOrders.setVisibility(View.GONE);
+
+        tvTabProducts.setBackgroundResource(R.drawable.shape_tab_product_order_fill);
+        tvTabOrders.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+    }
+    private void showOrders() {
+        LLOrders.setVisibility(View.VISIBLE);
+        LLProducts.setVisibility(View.GONE);
+
+        tvTabOrders.setBackgroundResource(R.drawable.shape_tab_product_order_fill);
+        tvTabProducts.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+    }
+
 
     private void setDiscountRecycler(List<DiscountClothes> dataList) {
         RecyclerView.LayoutManager layoutManager =  new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false);

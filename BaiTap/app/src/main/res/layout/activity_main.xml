@@ -59,12 +59,42 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+
+        <!--Show Products,Order-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/shape_tab_product_order">
+            <!--Products-->
+            <TextView
+                android:id="@+id/tvTabProducts"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Products"
+                android:textColor="@color/black"
+                android:background="@drawable/shape_tab_product_order_fill"/>
+            <!--Order-->
+            <TextView
+                android:id="@+id/tvTabOrders"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Orders"
+                android:textColor="@color/black"/>
+
+        </LinearLayout>
+
         <EditText
             android:id="@+id/editText"
             android:layout_width="377dp"
             android:layout_height="50dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
             android:layout_marginEnd="16dp"
             android:background="@drawable/search_bg"
             android:drawableLeft="@drawable/ic_search_black_24dp"
@@ -73,13 +103,12 @@
             android:hint="What are you looking for?"
             android:inputType="textPersonName"
             android:paddingStart="12dp" />
-
         <TextView
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
             android:fontFamily="@font/arimo_bold"
             android:text="Top Discounted Items"
             android:textColor="@android:color/background_dark"
@@ -88,8 +117,31 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_discount"
             android:layout_width="match_parent"
-            android:layout_height="349dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="16dp" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <!--Products-->
+            <LinearLayout
+                android:orientation="vertical"
+                android:id="@+id/LLProducts"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </LinearLayout>
+            <!--Orders-->
+            <LinearLayout
+                android:orientation="vertical"
+                android:id="@+id/LLOrders"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </LinearLayout>
+        </RelativeLayout>
+
 
     </LinearLayout>
 </LinearLayout>
