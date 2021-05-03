@@ -10,9 +10,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import com.example.baitap.adapter.DiscountClothesAdapter;
-import com.example.baitap.model.DiscountClothes;
+import android.widget.ViewFlipper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,9 +18,8 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     //declare whole variable
-    RecyclerView discountRecyclerView;
-    DiscountClothesAdapter discountClothesAdapter;
-    List<DiscountClothes> discountClothesList;
+
+    ViewFlipper viewFlipperGirl,viewFlipperBoy;
     private TextView nameTV,tvShopName,tvTabProducts,tvTabOrders;
     private ImageButton editProfileBtn,addProductBtn;
     private LinearLayout LLProducts,LLOrders;
@@ -41,7 +38,14 @@ public class MainActivity extends AppCompatActivity {
         tvTabOrders = findViewById(R.id.tvTabOrders);
         LLProducts = findViewById(R.id.LLProducts);
         LLOrders = findViewById(R.id.LLOrders);
+        viewFlipperGirl = findViewById(R.id.view_flipper_girl);
+        viewFlipperBoy = findViewById(R.id.view_flipper_boy);
 
+        //Adapter for ViewFlipperGirl,ViewFlipperBoy
+        viewFlipperGirl.setFlipInterval(3000);
+        viewFlipperGirl.setAutoStart(true);
+        viewFlipperBoy.setFlipInterval(3000);
+        viewFlipperBoy.setAutoStart(true);
 
         showProducts();
         //ProgressDialog for Login
@@ -69,19 +73,6 @@ public class MainActivity extends AppCompatActivity {
                     //Load Orders
             }
         });
-
-        //Adding data to model
-        discountClothesList = new ArrayList<>();
-        discountClothesList.add(new DiscountClothes(1,R.drawable.discountset));
-        discountClothesList.add(new DiscountClothes(2,R.drawable.discountdress));
-        discountClothesList.add(new DiscountClothes(3,R.drawable.discountjean));
-        discountClothesList.add(new DiscountClothes(4,R.drawable.discountmaxi));
-        discountClothesList.add(new DiscountClothes(5,R.drawable.discountsport));
-
-
-        //Reference
-        discountRecyclerView = findViewById(R.id.recycler_view_discount);
-        setDiscountRecycler(discountClothesList);
     }
 
 
@@ -100,14 +91,6 @@ public class MainActivity extends AppCompatActivity {
         tvTabProducts.setBackgroundColor(getResources().getColor(android.R.color.transparent));
     }
 
-
-    private void setDiscountRecycler(List<DiscountClothes> dataList) {
-        RecyclerView.LayoutManager layoutManager =  new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false);
-        discountRecyclerView.setLayoutManager(layoutManager);
-
-        discountClothesAdapter = new DiscountClothesAdapter(this,dataList);
-        discountRecyclerView.setAdapter(discountClothesAdapter);
-    }
 
     //Loading info
     private void loadMyInfo(){

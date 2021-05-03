@@ -5,28 +5,32 @@ public class ModelProducts {
     private String productName;
     private String productDescription;
     private String productCategory;
-    private String productQuantity;
+    private Integer productQuantityS;
+    private Integer productQuantityM;
+    private Integer productQuantityL;
+    private Integer productQuantityXL;
     private String productImage;
     private String originalPrice;
-    private String discountPrice;
-    private String discountNote;
     private String userID;
-
-    public  ModelProducts(){}
-
-    public ModelProducts(Integer productId, String productName, String productDescription, String productCategory, String productQuantity, String productImage, String originalPrice, String discountPrice, String discountNote, String userID) {
+    public ModelProducts(Integer productId, String productName, String productDescription,
+                         String productCategory, Integer productQuantityS, Integer productQuantityM,
+                         Integer productQuantityL, Integer productQuantityXL, String productImage,
+                         String originalPrice, String userID) {
         this.productId = productId;
         this.productName = productName;
         this.productDescription = productDescription;
         this.productCategory = productCategory;
-        this.productQuantity = productQuantity;
+        this.productQuantityS = productQuantityS;
+        this.productQuantityM = productQuantityM;
+        this.productQuantityL = productQuantityL;
+        this.productQuantityXL = productQuantityXL;
         this.productImage = productImage;
         this.originalPrice = originalPrice;
-        this.discountPrice = discountPrice;
-        this.discountNote = discountNote;
         this.userID = userID;
     }
 
+    public ModelProducts() {
+    }
 
     public Integer getProductId() {
         return productId;
@@ -60,12 +64,36 @@ public class ModelProducts {
         this.productCategory = productCategory;
     }
 
-    public String getProductQuantity() {
-        return productQuantity;
+    public Integer getProductQuantityS() {
+        return productQuantityS;
     }
 
-    public void setProductQuantity(String productQuantity) {
-        this.productQuantity = productQuantity;
+    public void setProductQuantityS(Integer productQuantityS) {
+        this.productQuantityS = productQuantityS;
+    }
+
+    public Integer getProductQuantityM() {
+        return productQuantityM;
+    }
+
+    public void setProductQuantityM(Integer productQuantityM) {
+        this.productQuantityM = productQuantityM;
+    }
+
+    public Integer getProductQuantityL() {
+        return productQuantityL;
+    }
+
+    public void setProductQuantityL(Integer productQuantityL) {
+        this.productQuantityL = productQuantityL;
+    }
+
+    public Integer getProductQuantityXL() {
+        return productQuantityXL;
+    }
+
+    public void setProductQuantityXL(Integer productQuantityXL) {
+        this.productQuantityXL = productQuantityXL;
     }
 
     public String getProductImage() {
@@ -84,22 +112,6 @@ public class ModelProducts {
         this.originalPrice = originalPrice;
     }
 
-    public String getDiscountPrice() {
-        return discountPrice;
-    }
-
-    public void setDiscountPrice(String discountPrice) {
-        this.discountPrice = discountPrice;
-    }
-
-    public String getDiscountNote() {
-        return discountNote;
-    }
-
-    public void setDiscountNote(String discountNote) {
-        this.discountNote = discountNote;
-    }
-
     public String getUserID() {
         return userID;
     }
@@ -107,5 +119,4 @@ public class ModelProducts {
     public void setUserID(String userID) {
         this.userID = userID;
     }
-
 }

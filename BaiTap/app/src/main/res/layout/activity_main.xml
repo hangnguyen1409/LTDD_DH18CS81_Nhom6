@@ -6,12 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:orientation="vertical">
-
-
+    <!--Name of shop-->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
         <TextView
             android:id="@+id/tvShopName"
             android:layout_width="wrap_content"
@@ -22,7 +20,7 @@
             android:textColor="@color/black"
             android:textSize="50dp"
             android:textStyle="bold"/>
-
+        <!--Name User-->
         <TextView
             android:id="@+id/nameTV"
             android:layout_width="wrap_content"
@@ -33,7 +31,7 @@
             android:fontFamily="@font/niconne"
             android:text="Hello Hang"
             android:textSize="30dp" />
-
+        <!--Button Edit-->
         <ImageButton
             android:id="@+id/editProfileBtn"
             android:layout_alignParentEnd="true"
@@ -42,8 +40,7 @@
             app:srcCompat="@drawable/ic_account_settings"
             tools:ignore="VectorDrawableCompat"
             android:background="@null"/>
-
-
+        <!--Button Add Product-->
         <ImageButton
             android:id="@+id/addProductBtn"
             android:layout_toStartOf="@+id/editProfileBtn"
@@ -52,14 +49,82 @@
             app:srcCompat="@drawable/ic_cart_black"
             tools:ignore="VectorDrawableCompat"
             android:background="@null"/>
-
     </RelativeLayout>
+    <!--Advertise-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+        <!--Girl-->
+        <ViewFlipper
+            android:id="@+id/view_flipper_girl"
+            android:layout_width="202dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="5dp">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/blackjean" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/dress" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/set" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/whitemaxi" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/sport" />
+        </ViewFlipper>
+        <!--Boy-->
+        <ViewFlipper
+            android:id="@+id/view_flipper_boy"
+            android:layout_width="202dp"
+            android:layout_height="100dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="5dp">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/khoacden" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/khoacvang" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/naucafe" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/shortden" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/xanhden" />
+        </ViewFlipper>
+    </RelativeLayout>
+    <!--Main-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
-
         <!--Show Products,Order-->
         <LinearLayout
             android:layout_width="match_parent"
@@ -86,13 +151,12 @@
                 android:gravity="center"
                 android:text="Orders"
                 android:textColor="@color/black"/>
-
         </LinearLayout>
-
+        <!--Search Product-->
         <EditText
             android:id="@+id/editText"
             android:layout_width="377dp"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="16dp"
@@ -103,24 +167,7 @@
             android:hint="What are you looking for?"
             android:inputType="textPersonName"
             android:paddingStart="12dp" />
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginStart="16dp"
-            android:fontFamily="@font/arimo_bold"
-            android:text="Top Discounted Items"
-            android:textColor="@android:color/background_dark"
-            android:textSize="16sp" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view_discount"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp" />
-
-
+        <!--Show Products,Orders depend on Tab-->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -130,19 +177,15 @@
                 android:id="@+id/LLProducts"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-
             </LinearLayout>
             <!--Orders-->
             <LinearLayout
-                android:orientation="vertical"
                 android:id="@+id/LLOrders"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
+                android:layout_height="match_parent"
+                android:orientation="vertical">
             </LinearLayout>
         </RelativeLayout>
-
-
     </LinearLayout>
 </LinearLayout>
 

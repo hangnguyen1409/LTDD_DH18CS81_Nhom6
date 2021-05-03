@@ -26,54 +26,114 @@
             android:layout_centerVertical="true"
             android:orientation="vertical"
             android:layout_toEndOf="@+id/IV_productIcon">
-
             <TextView
-                android:id="@+id/TV_discountNote"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/shape_textview_product_fill"
-                android:padding="10dp"
-                android:text="10% OFF"
-                android:textColor="@color/colorGreen"/>
-
-            <TextView
-                android:id="@+id/TV_title"
+                android:id="@+id/TV_productName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:text="Title"
                 android:textColor="@color/black"/>
-
-
-            <Spinner
-                android:id="@+id/spnSize"
-                android:layout_width="70dp"
-                android:layout_height="50dp"/>
-
-
-
+            <LinearLayout
+                android:orientation="horizontal"
+                android:id="@+id/Linear_S"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/TV_SizeS"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="Size S"
+                    android:textColor="@color/black"/>
+                <TextView
+                    android:layout_toEndOf="@+id/TV_SizeS"
+                    android:id="@+id/TV_QuantityS"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:padding="5dp"
+                    android:text="100"
+                    android:textColor="@color/black"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/Linear_M"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/TV_SizeM"
+                    android:layout_toEndOf="@+id/TV_QuantityS"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="Size M"
+                    android:textColor="@color/black"/>
+                <TextView
+                    android:layout_toEndOf="@+id/TV_SizeM"
+                    android:id="@+id/TV_QuantityM"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:layout_marginStart="5dp"
+                    android:text="100"
+                    android:textColor="@color/black"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/Linear_L"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/TV_SizeL"
+                    android:layout_toEndOf="@+id/TV_QuantityM"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="Size L"
+                    android:textColor="@color/black"/>
+                <TextView
+                    android:id="@+id/TV_QuantityL"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@+id/TV_SizeL"
+                    android:padding="5dp"
+                    android:text="100"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/Linear_XL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/TV_SizeXL"
+                    android:layout_toEndOf="@+id/TV_SizeL"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="Size XL"
+                    android:textColor="@color/black"/>
+                <TextView
+                    android:layout_toEndOf="@+id/TV_SizeXL"
+                    android:id="@+id/TV_QuantityXL"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:layout_marginStart="2dp"
+                    android:text="100"
+                    android:textColor="@color/black"/>
+            </LinearLayout>
+            <!--Price-->
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp">
-
                 <TextView
-                    android:id="@+id/TV_discountPrice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginEnd="10dp"
-                    android:text="$150.000"
-                    android:textColor="#808080"/>
-
-                <TextView
-                    android:layout_toEndOf="@+id/TV_discountPrice"
                     android:id="@+id/TV_originalPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="$200.000"
                     android:textColor="#808080"/>
-
             </RelativeLayout>
         </LinearLayout>
 

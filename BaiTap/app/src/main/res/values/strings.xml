@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">BaiTap</string>
+
+    <string-array name="sizeClothes">
+        <item>S</item>
+        <item>M</item>
+        <item>L</item>
+        <item>XL</item>
+    </string-array>
 </resources>
