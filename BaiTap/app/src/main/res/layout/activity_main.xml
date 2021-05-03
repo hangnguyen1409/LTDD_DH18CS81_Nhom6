@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context=".activity.MainActivity"
     android:orientation="vertical">
     <!--Name of shop-->
     <RelativeLayout
@@ -152,39 +152,73 @@
                 android:text="Orders"
                 android:textColor="@color/black"/>
         </LinearLayout>
-        <!--Search Product-->
-        <EditText
-            android:id="@+id/editText"
-            android:layout_width="377dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="16dp"
-            android:background="@drawable/search_bg"
-            android:drawableLeft="@drawable/ic_search_black_24dp"
-            android:drawablePadding="12dp"
-            android:fontFamily="monospace"
-            android:hint="What are you looking for?"
-            android:inputType="textPersonName"
-            android:paddingStart="12dp" />
+
         <!--Show Products,Orders depend on Tab-->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <!--Products-->
-            <LinearLayout
-                android:orientation="vertical"
-                android:id="@+id/LLProducts"
+            <RelativeLayout
+                android:id="@+id/RLProducts"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-            </LinearLayout>
+                <!--Search Product-->
+                <EditText
+                    android:id="@+id/SearchProductsEdtText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_toStartOf="@+id/filterProductBtn"
+                    android:background="@drawable/search_bg"
+                    android:drawableLeft="@drawable/ic_search_black_24dp"
+                    android:drawablePadding="10dp"
+                    android:fontFamily="@font/niconne"
+                    android:hint="Search something..."
+                    android:padding="10dp" />
+                <!--Filter Product-->
+                <ImageButton
+                    android:id="@+id/filterProductBtn"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@null"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_filter_list"/>
+
+                <TextView
+                    android:id="@+id/filterTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/SearchProductsEdtText"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="@font/corben_bold"
+                    android:text="New Release"
+                    android:textColor="@color/black"
+                    android:textSize="14dp" />
+                <!--Show product-->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/productShowRV"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/filterTV"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginBottom="5dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/row_product_seller">
+                </androidx.recyclerview.widget.RecyclerView>
+            </RelativeLayout>
             <!--Orders-->
-            <LinearLayout
-                android:id="@+id/LLOrders"
+            <RelativeLayout
+                android:id="@+id/RLOrders"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-            </LinearLayout>
+                android:layout_height="match_parent">
+            </RelativeLayout>
         </RelativeLayout>
     </LinearLayout>
 </LinearLayout>

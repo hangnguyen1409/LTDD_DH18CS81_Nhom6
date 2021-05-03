@@ -1,8 +1,10 @@
-package com.example.baitap;
+package com.example.baitap.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.baitap.R;
 
 public class AddProductActivity extends AppCompatActivity {
 
