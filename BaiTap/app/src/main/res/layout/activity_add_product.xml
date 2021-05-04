@@ -5,21 +5,66 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activity.AddProductActivity">
+    tools:context=".activity.CartActivity">
 
-    <RelativeLayout
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:padding="10dp">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
         <ImageButton
             android:id="@+id/backBtn"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@drawable/ic_back"
             android:background="@null"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
 
-    </RelativeLayout>
+        <TextView android:id="@+id/TextView01"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:textSize="24dip"
+            android:layout_margin="5dip"
+            android:text="Shopping Cart"/>
+
+    </LinearLayout>
+
+
+    <ListView
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:id="@+id/listproduct"
+        android:layout_width="fill_parent"
+        android:background="#ffffff"
+        android:cacheColorHint="#ffffff"
+        android:clickable="true"
+        android:choiceMode="multipleChoice">
+
+    </ListView>
+    <LinearLayout
+        android:id="@+id/LinearLayout01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:layout_margin="5dip">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:id="@+id/btnReset"
+            android:text="Reset">
+
+        </Button>
+        <Button
+            android:id="@+id/btnPay"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginLeft="100dp"
+            android:text="Pay">
+
+        </Button>
+    </LinearLayout>
 </LinearLayout>

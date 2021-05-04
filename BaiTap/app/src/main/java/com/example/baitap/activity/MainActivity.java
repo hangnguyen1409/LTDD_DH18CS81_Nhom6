@@ -23,7 +23,6 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     //declare whole variable
-
     ViewFlipper viewFlipperGirl,viewFlipperBoy;
     private TextView nameTV,tvShopName,tvTabProducts,tvTabOrders,filterTV;
     private ImageButton editProfileBtn,addProductBtn,filterProductBtn;
@@ -32,26 +31,13 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView productShowRV;
     private ArrayList<ModelProducts>productList;
     private AdapterProductSeller adapterProductSeller;
+    public static ArrayList<ModelProducts> cart;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         //Reference
-        nameTV = findViewById(R.id.nameTV);
-        tvShopName = findViewById(R.id.tvShopName);
-        addProductBtn = findViewById(R.id.addProductBtn);
-        editProfileBtn = findViewById(R.id.editProfileBtn);
-        tvTabProducts = findViewById(R.id.tvTabProducts);
-        tvTabOrders = findViewById(R.id.tvTabOrders);
-        RLProducts = findViewById(R.id.RLProducts);
-        RLOrders = findViewById(R.id.RLOrders);
-        viewFlipperGirl = findViewById(R.id.view_flipper_girl);
-        viewFlipperBoy = findViewById(R.id.view_flipper_boy);
-        SearchProductsEdtText = findViewById(R.id.SearchProductsEdtText);
-        filterProductBtn = findViewById(R.id.filterProductBtn);
-        filterTV = findViewById(R.id.filterTV);
-        productShowRV = findViewById(R.id.productShowRV);
+        inint();
         //Adapter for ViewFlipperGirl,ViewFlipperBoy
         viewFlipperGirl.setFlipInterval(3000);
         viewFlipperGirl.setAutoStart(true);
@@ -91,6 +77,28 @@ public class MainActivity extends AppCompatActivity {
                 builder.setTitle("Choose Category");
             }
         });
+    }
+
+    private void inint() {
+        nameTV = findViewById(R.id.nameTV);
+        tvShopName = findViewById(R.id.tvShopName);
+        addProductBtn = findViewById(R.id.addProductBtn);
+        editProfileBtn = findViewById(R.id.editProfileBtn);
+        tvTabProducts = findViewById(R.id.tvTabProducts);
+        tvTabOrders = findViewById(R.id.tvTabOrders);
+        RLProducts = findViewById(R.id.RLProducts);
+        RLOrders = findViewById(R.id.RLOrders);
+        viewFlipperGirl = findViewById(R.id.view_flipper_girl);
+        viewFlipperBoy = findViewById(R.id.view_flipper_boy);
+        SearchProductsEdtText = findViewById(R.id.SearchProductsEdtText);
+        filterProductBtn = findViewById(R.id.filterProductBtn);
+        filterTV = findViewById(R.id.filterTV);
+        productShowRV = findViewById(R.id.productShowRV);
+        if( cart!=null){
+
+        }else {
+            cart = new ArrayList<>();
+        }
     }
 
     private void loadAllProducts() {
