@@ -10,8 +10,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BaiTap">
-        <activity android:name=".CartActivity"></activity>
-        <activity android:name=".MainActivity">
+<<<<<<< HEAD
+        <activity android:name=".activity.CartActivity"></activity>
+        =======
+        <activity android:name=".activity.AddProductActivity"></activity>
+        <activity android:name=".activity.MainActivity">
+>>>>>>> main
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
