@@ -98,7 +98,7 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
         return filterProduct;
     }
 
-    class HolderProductSeller extends RecyclerView.ViewHolder {
+    public static class HolderProductSeller extends RecyclerView.ViewHolder {
 
         private ImageView IV_productIcon;
         private TextView TV_discountNote, TV_productName,TV_QuantityS,TV_QuantityM

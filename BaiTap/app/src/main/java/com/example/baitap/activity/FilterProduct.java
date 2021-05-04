@@ -17,7 +17,7 @@ public class FilterProduct extends Filter {
             constraint = constraint.toString().toUpperCase();
 
             ArrayList<ModelProducts> filterModels = new ArrayList<>();
-            /**
+            /*
              * filterModels: List of products after searching every turn
              * filterList: List of products
              */

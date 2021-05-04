@@ -11,11 +11,13 @@ public class ModelProducts {
     private Integer productQuantityXL;
     private String productImage;
     private String originalPrice;
+    private String discountPrice;
+    private String discountAvailable;
+    private String discountNote;
     private String userID;
-    public ModelProducts(Integer productId, String productName, String productDescription,
-                         String productCategory, Integer productQuantityS, Integer productQuantityM,
-                         Integer productQuantityL, Integer productQuantityXL, String productImage,
-                         String originalPrice, String userID) {
+    public ModelProducts(){}
+
+    public ModelProducts(Integer productId, String productName, String productDescription, String productCategory, Integer productQuantityS, Integer productQuantityM, Integer productQuantityL, Integer productQuantityXL, String productImage, String originalPrice, String discountPrice, String discountAvailable, String discountNote, String userID) {
         this.productId = productId;
         this.productName = productName;
         this.productDescription = productDescription;
@@ -26,10 +28,10 @@ public class ModelProducts {
         this.productQuantityXL = productQuantityXL;
         this.productImage = productImage;
         this.originalPrice = originalPrice;
+        this.discountPrice = discountPrice;
+        this.discountAvailable = discountAvailable;
+        this.discountNote = discountNote;
         this.userID = userID;
-    }
-
-    public ModelProducts() {
     }
 
     public Integer getProductId() {
@@ -110,6 +112,30 @@ public class ModelProducts {
 
     public void setOriginalPrice(String originalPrice) {
         this.originalPrice = originalPrice;
+    }
+
+    public String getDiscountPrice() {
+        return discountPrice;
+    }
+
+    public void setDiscountPrice(String discountPrice) {
+        this.discountPrice = discountPrice;
+    }
+
+    public String getDiscountAvailable() {
+        return discountAvailable;
+    }
+
+    public void setDiscountAvailable(String discountAvailable) {
+        this.discountAvailable = discountAvailable;
+    }
+
+    public String getDiscountNote() {
+        return discountNote;
+    }
+
+    public void setDiscountNote(String discountNote) {
+        this.discountNote = discountNote;
     }
 
     public String getUserID() {

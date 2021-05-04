@@ -10,19 +10,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BaiTap">
-<<<<<<< HEAD
         <activity android:name=".activity.CartActivity"></activity>
-        =======
         <activity android:name=".activity.AddProductActivity"></activity>
         <activity android:name=".activity.MainActivity">
->>>>>>> main
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
