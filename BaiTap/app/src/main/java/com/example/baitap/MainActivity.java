@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.baitap.adapter.DiscountClothesAdapter;
 import com.example.baitap.model.DiscountClothes;
+import com.example.baitap.model.ModelProducts;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView discountRecyclerView;
     DiscountClothesAdapter discountClothesAdapter;
     List<DiscountClothes> discountClothesList;
+    public static ArrayList<ModelProducts> cart;
     private TextView nameTV,tvShopName,tvTabProducts,tvTabOrders;
     private ImageButton editProfileBtn,addProductBtn;
     private LinearLayout LLProducts,LLOrders;
@@ -33,14 +35,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //Reference
-        nameTV = findViewById(R.id.nameTV);
-        tvShopName = findViewById(R.id.tvShopName);
-        addProductBtn = findViewById(R.id.addProductBtn);
-        editProfileBtn = findViewById(R.id.editProfileBtn);
-        tvTabProducts = findViewById(R.id.tvTabProducts);
-        tvTabOrders = findViewById(R.id.tvTabOrders);
-        LLProducts = findViewById(R.id.LLProducts);
-        LLOrders = findViewById(R.id.LLOrders);
+        inint();
 
 
         showProducts();
@@ -50,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         addProductBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,AddProductActivity.class));
+                startActivity(new Intent(MainActivity.this, CartActivity.class));
             }
         });
 
@@ -82,6 +77,23 @@ public class MainActivity extends AppCompatActivity {
         //Reference
         discountRecyclerView = findViewById(R.id.recycler_view_discount);
         setDiscountRecycler(discountClothesList);
+    }
+
+    private void inint() {
+        nameTV = findViewById(R.id.nameTV);
+        tvShopName = findViewById(R.id.tvShopName);
+        addProductBtn = findViewById(R.id.addProductBtn);
+        editProfileBtn = findViewById(R.id.editProfileBtn);
+        tvTabProducts = findViewById(R.id.tvTabProducts);
+        tvTabOrders = findViewById(R.id.tvTabOrders);
+        LLProducts = findViewById(R.id.LLProducts);
+        LLOrders = findViewById(R.id.LLOrders);
+
+        if( cart!=null){
+
+        }else {
+            cart = new ArrayList<>();
+        }
     }
 
 
