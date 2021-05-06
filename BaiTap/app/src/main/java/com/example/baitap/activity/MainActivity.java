@@ -7,7 +7,7 @@ import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
-import com.example.baitap.R
+import com.example.baitap.R;
 import com.example.baitap.adapter.AdapterProductSeller;
 import com.example.baitap.model.Cart;
 import com.example.baitap.api.ApiInterface;
@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
     private TextView nameTV,tvShopName,tvTabProducts,tvTabOrders;
     private ImageButton editProfileBtn,addProductBtn;
     private RelativeLayout RLProducts,RLOrders;
-    public static ArrayList<ModelProducts> cart;
     public static ArrayList<Cart> cart;
     ApiInterface apiInterface;
 

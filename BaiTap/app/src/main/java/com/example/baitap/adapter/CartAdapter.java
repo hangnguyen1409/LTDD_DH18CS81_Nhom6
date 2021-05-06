@@ -31,7 +31,7 @@ public class CartAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return listProduct.get(position).getId();
+        return listProduct.get(position).getProductId();
     }
 
     @Override
@@ -44,20 +44,22 @@ public class CartAdapter extends BaseAdapter {
         //Bind dữ liệu phần tử vào View
         Cart product = (Cart) getItem(position);
 
-      /*Thủy làm
+      /*Thủy làm*/
         Picasso.get().load(product.getProductImage())
                 .into((ImageView) viewProduct.findViewById(R.id.productImage));
         ((TextView) viewProduct.findViewById(R.id.nameproduct)).setText(String.format("%s (%s)", product.getProductName(), product.getSize()));
         ((TextView) viewProduct.findViewById(R.id.priceproduct)).setText(String.format("%s", product.getOriginalPrice()));
         ((EditText)viewProduct.findViewById(R.id.edt_quantityProduct)).setText(String.valueOf(product.getProductQuantity()));
-      */
-      /*Hằng làm
-        Picasso.get().load(/*"https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-image-512.png"*/product.getImage())
+
+      /*Hằng làm*/
+       Picasso.get().load(/*"https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-image-512.png"*/product.getProductImage())
                 .into((ImageView) viewProduct.findViewById(R.id.productImage));
-        ((TextView) viewProduct.findViewById(R.id.nameproduct)).setText(String.format("%s", product.getName()));
-        ((TextView) viewProduct.findViewById(R.id.priceproduct)).setText(String.format("%s", product.getPrice()));
+        ((TextView) viewProduct.findViewById(R.id.nameproduct)).setText(String.format("%s", product.getProductName()));
+        ((TextView) viewProduct.findViewById(R.id.priceproduct)).setText(String.format("%s", product.getOriginalPrice()));
         /*((EditText)viewProduct.findViewById(R.id.edt_quantityProduct)).setText(product.getProductQuantity());*/
-      */
+
+
+
 
 
         viewProduct.findViewById(R.id.plusProduct).setOnClickListener(new View.OnClickListener() {
@@ -65,7 +67,7 @@ public class CartAdapter extends BaseAdapter {
             public void onClick(View v) {
                 int quan = Integer.parseInt(((EditText)viewProduct.findViewById(R.id.edt_quantityProduct)).getText().toString());
                 ((EditText)viewProduct.findViewById(R.id.edt_quantityProduct)).setText(String.valueOf(quan+1));
-                MainActivity.cart.get(position).setProductQuantity(quan+1);
+               /* MainActivity.cart.get(position).s(quan+1); */
             }
         });
 

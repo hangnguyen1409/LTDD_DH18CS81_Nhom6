@@ -51,7 +51,7 @@ public class CartActivity extends AppCompatActivity {
                 cartAdapter.notifyDataSetChanged();
             }
         });
-
+        /*
         MainActivity.cart.add(new Cart(1, "Áo Khoác Classic Activewear M5 Màu Xám Trắng",5, "S"
                 ,"https://product.hstatic.net/200000254587/product/anh_cuong_thi_ffff3c15ed8c4113ada243c96c9a829f_master.jpg",
                 "250000"));
@@ -59,9 +59,9 @@ public class CartActivity extends AppCompatActivity {
         MainActivity.cart.add(new Cart(2, "Áo J09 Màu Xám Trắng",7, "M"
                 ,"https://cf.shopee.vn/file/b555dc466312242d15a59e022c40e2a3",
                 "180000"));
+        */
 
-
-        cartAdapter = new CartAdapter(  MainActivity.cart);
+        cartAdapter = new CartAdapter(MainActivity.cart);
 
 
         listViewProduct.setAdapter(cartAdapter);
