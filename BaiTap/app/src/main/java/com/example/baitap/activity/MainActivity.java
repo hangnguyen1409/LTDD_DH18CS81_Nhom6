@@ -16,6 +16,7 @@ import android.widget.ViewFlipper;
 
 import com.example.baitap.R;
 import com.example.baitap.adapter.AdapterProductSeller;
+import com.example.baitap.model.Cart;
 import com.example.baitap.model.ModelProducts;
 
 import java.util.ArrayList;
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView productShowRV;
     private ArrayList<ModelProducts>productList;
     private AdapterProductSeller adapterProductSeller;
-    public static ArrayList<ModelProducts> cart;
+    public static ArrayList<Cart> cart;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         addProductBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, AddProductActivity.class));
+                startActivity(new Intent(MainActivity.this, CartActivity.class));
             }
         });
 
