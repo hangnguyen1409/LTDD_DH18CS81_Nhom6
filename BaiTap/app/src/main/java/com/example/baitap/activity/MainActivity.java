@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
            @Override
            public void onResponse(Call<List<ModelProducts>> call, Response<List<ModelProducts>> response) {
                List<ModelProducts> productsList = response.body();
-               List<ModelProducts> productsList1= response.body();
+
            }
 
            @Override

@@ -14,57 +14,30 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.baitap.R;
 import com.example.baitap.activity.FilterProduct;
 import com.example.baitap.model.ModelProducts;
-import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
+import java.util.List;
 
 
-public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSeller.HolderProductSeller> implements Filterable {
+public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSeller.HolderProductSeller>{
     private Context context;
-    public ArrayList<ModelProducts>productList,filterList;
+    public List<ModelProducts> productList;
 
-    //Use when filter product returns null variable
-    private FilterProduct filterProduct;
 
     public AdapterProductSeller(Context context,ArrayList<ModelProducts>productList){
         this.context = context;
         this.productList = productList;
-        this.filterList = productList;
     }
 
     @NonNull
     @Override
     public HolderProductSeller onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        /*
-        * Inflate layout
-        */
+        //Inflate layout
         View view = LayoutInflater.from(context).inflate(R.layout.row_product_seller,parent,false);
         return new HolderProductSeller(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull HolderProductSeller holder, int position) {
-        //Import data from database
-        ModelProducts modelProducts = productList.get(position);
-        Integer category = modelProducts.getCategory();
-        String description = modelProducts.getDescription();
-        Integer id = modelProducts.getId();
-        String image = modelProducts.getImage();
-        String name = modelProducts.getName();
-        Integer price = modelProducts.getPrice();
-        Integer promotion_id = modelProducts.getPromotion_id();
-        Integer quantity_L_size = modelProducts.getQuantity_L_size();
-        Integer quantity_M_size = modelProducts.getQuantity_M_size();
-        Integer quantity_S_size = modelProducts.getQuantity_S_size();
-        Integer quantity_XL_size = modelProducts.getQuantity_XL_size();
-
-        //Set data
-        holder.TV_productName.setText(name);
-        holder.TV_QuantityS.setText(quantity_S_size);
-        holder.TV_QuantityM.setText(quantity_M_size);
-        holder.TV_QuantityL.setText(quantity_L_size);
-        holder.TV_QuantityXL.setText(quantity_XL_size);
-        holder.TV_originalPrice.setText(price);
 
     }
 
@@ -73,13 +46,6 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
         return productList.size();
     }
 
-    @Override
-    public Filter getFilter() {
-        if(filterProduct == null){
-            filterProduct = new FilterProduct(this,filterList);
-        }
-        return filterProduct;
-    }
 
     public static class HolderProductSeller extends RecyclerView.ViewHolder {
 
