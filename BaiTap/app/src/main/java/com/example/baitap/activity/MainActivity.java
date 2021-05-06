@@ -16,9 +16,8 @@ import com.example.baitap.model.Cart;
 import com.example.baitap.api.ApiInterface;
 import com.example.baitap.api.RetrofitClient;
 import com.example.baitap.model.ModelCate;
-import com.example.baitap.model.ModelListPromo;
 import com.example.baitap.model.ModelProducts;
-import com.example.baitap.model.ListPromotion;
+import com.example.baitap.model.Promotion;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,15 +74,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Call<List<ModelListPromo>> callPromo = apiInterface.getAllPromotions();
-        callPromo.enqueue(new Callback<List<ModelListPromo>>() {
+        Call<List<Promotion>> callPromo = apiInterface.getAllPromotions();
+        callPromo.enqueue(new Callback<List<Promotion>>() {
             @Override
-            public void onResponse(Call<List<ModelListPromo>> call, Response<List<ModelListPromo>> response) {
-                List<ModelListPromo> promo = response.body();
+            public void onResponse(Call<List<Promotion>> call, Response<List<Promotion>> response) {
+                List<Promotion> promo = response.body();
             }
 
             @Override
-            public void onFailure(Call<List<ModelListPromo>> call, Throwable t) {
+            public void onFailure(Call<List<Promotion>> call, Throwable t) {
 
             }
         });
@@ -142,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     private void getAllProducts(List<ModelProducts> productsList){
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);
         productShowRV.setLayoutManager(layoutManager);
         adapterProductSeller = new AdapterProductSeller(this,productsList);
         productShowRV.setAdapter(adapterProductSeller);

@@ -14,7 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.baitap.R;
 import com.example.baitap.model.ModelProducts;
-import com.example.baitap.model.ListPromotion;
+import com.example.baitap.model.Promotion;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -22,7 +23,7 @@ import java.util.List;
 public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSeller.HolderProductSeller>{
     private Context context;
     public List<ModelProducts> productList;
-    public List<ListPromotion> promotionList;
+    public List<Promotion> promotionList;
 
     public AdapterProductSeller(Context context,List<ModelProducts>productList){
         this.context = context;
@@ -41,7 +42,6 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
     public void onBindViewHolder(@NonNull HolderProductSeller holder, int position) {
             Integer discountPrice;
             ModelProducts modelProducts = productList.get(position);
-
             String img = modelProducts.getImage();
             String name = modelProducts.getName();
             Integer category = modelProducts.getCategory();
@@ -61,6 +61,12 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
             holder.TV_QuantityL.setText(quantity_L_size.toString());
             holder.TV_QuantityXL.setText(quantity_XL_size.toString());
             holder.TV_originalPrice.setText("$" + price.toString());
+            try {
+                Glide.with(context).load(img).into(holder.IV_productIcon);;
+            }
+            catch (Exception ex) {
+                holder.IV_productIcon.setImageResource(R.drawable.ic_shopping_cart);
+            }
             if(productList.get(position).getPromotion_id() == null){
                 //not discount
                 holder.TV_discountNote.setVisibility(View.GONE);
@@ -75,17 +81,14 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
                         discountPrice = productList.get(position).getPrice() - (productList.get(position).getPrice() * promotionList.get(position).getDiscount());
                         holder.TV_discountPrice.setText("$" + discountPrice.toString());
                         holder.TV_discountPrice.setVisibility(View.VISIBLE);
-                        holder.TV_originalPrice.setPaintFlags(holder.TV_originalPrice.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
+                        holder.TV_originalPrice.setPaintFlags(holder.TV_originalPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
                     }
 
-                }catch (NullPointerException e){
+                } catch (NullPointerException e) {
 
                 }
+
             }
-            try{
-                Glide.with(context).load(productList.get(position).getImage()).into(holder.IV_productIcon);
-            }
-            catch(Exception ex){}
 
     }
 
@@ -96,8 +99,7 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
 
 
     public static class HolderProductSeller extends RecyclerView.ViewHolder {
-
-        private ImageView IV_productIcon;
+        ImageView IV_productIcon;
         private TextView TV_discountNote, TV_productName,
                 TV_QuantityS,TV_QuantityM,TV_QuantityL,TV_QuantityXL
                 ,TV_discountPrice,TV_originalPrice;

@@ -1,9 +1,14 @@
 package com.example.baitap.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class ModelProducts {
     private Integer category;
     private String description;
     private Integer id;
+    @SerializedName("image")
+    @Expose
     private String image;
     private String name;
     private Integer price;

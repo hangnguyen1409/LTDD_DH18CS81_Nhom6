@@ -1,9 +1,9 @@
 package com.example.baitap.api;
 
 import com.example.baitap.model.ModelCate;
-import com.example.baitap.model.ModelListPromo;
 import com.example.baitap.model.ModelProducts;
-import com.example.baitap.model.ListPromotion;
+import com.example.baitap.model.Promotion;
+
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -18,5 +18,5 @@ public interface ApiInterface {
 
 
     @GET("api/get_promotion_today")
-    Call<List<ModelListPromo>> getAllPromotions();
+    Call<List<Promotion>> getAllPromotions();
 }
