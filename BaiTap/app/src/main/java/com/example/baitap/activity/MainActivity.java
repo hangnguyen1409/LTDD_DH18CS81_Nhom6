@@ -7,7 +7,9 @@ import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
-import com.example.baitap.R;
+import com.example.baitap.R
+import com.example.baitap.adapter.AdapterProductSeller;
+import com.example.baitap.model.Cart;
 import com.example.baitap.api.ApiInterface;
 import com.example.baitap.api.RetrofitClient;
 import com.example.baitap.model.ModelProducts;
@@ -25,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton editProfileBtn,addProductBtn;
     private RelativeLayout RLProducts,RLOrders;
     public static ArrayList<ModelProducts> cart;
-
+    public static ArrayList<Cart> cart;
     ApiInterface apiInterface;
 
     @Override
@@ -60,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         addProductBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, AddProductActivity.class));
+                startActivity(new Intent(MainActivity.this, CartActivity.class));
             }
         });
 
