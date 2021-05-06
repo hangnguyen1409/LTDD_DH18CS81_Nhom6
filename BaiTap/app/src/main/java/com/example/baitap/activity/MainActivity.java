@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         callPromo.enqueue(new Callback<List<Promotion>>() {
             @Override
             public void onResponse(Call<List<Promotion>> call, Response<List<Promotion>> response) {
-                List<Promotion> promo = response.body();
+                List<Promotion> listPromo = response.body();
             }
 
             @Override

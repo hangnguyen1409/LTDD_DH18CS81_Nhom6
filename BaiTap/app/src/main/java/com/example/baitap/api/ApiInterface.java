@@ -7,6 +7,7 @@ import com.example.baitap.model.Promotion;
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 
 public interface ApiInterface {
 
@@ -19,4 +20,6 @@ public interface ApiInterface {
 
     @GET("api/get_promotion_today")
     Call<List<Promotion>> getAllPromotions();
+    @GET("api/get_promotion_by_id/{id}")
+    Call<Promotion> getPromotioById(@Path("id") int id);
 }

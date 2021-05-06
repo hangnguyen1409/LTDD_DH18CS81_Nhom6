@@ -4,7 +4,7 @@ package com.example.baitap.model;
 
 public class Promotion {
     private String description;
-    private Integer discount;
+    private Float discount;
     private String name;
     private String start_date;
     private String end_date;
@@ -18,11 +18,11 @@ public class Promotion {
         this.description = description;
     }
 
-    public Integer getDiscount() {
+    public Float getDiscount() {
         return discount;
     }
 
-    public void setDiscount(Integer discount) {
+    public void setDiscount(Float discount) {
         this.discount = discount;
     }
 
@@ -58,7 +58,7 @@ public class Promotion {
         this.id = id;
     }
 
-    public Promotion(String description, Integer discount, String name, String start_date, String end_date, Integer id) {
+    public Promotion(String description, Float discount, String name, String start_date, String end_date, Integer id) {
         this.description = description;
         this.discount = discount;
         this.name = name;
