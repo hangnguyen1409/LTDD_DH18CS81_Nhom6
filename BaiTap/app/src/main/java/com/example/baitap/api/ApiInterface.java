@@ -19,6 +19,4 @@ public interface ApiInterface {
 
     @GET("api/get_promotion_today")
     Call<List<ModelListPromo>> getAllPromotions();
-
-
 }

@@ -56,11 +56,11 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
 
 
             holder.TV_productName.setText(name);
-            holder.TV_QuantityS.setText(quantity_S_size);
-            holder.TV_QuantityM.setText(quantity_M_size);
-            holder.TV_QuantityL.setText(quantity_L_size);
-            holder.TV_QuantityXL.setText(quantity_XL_size);
-            holder.TV_originalPrice.setText("$" + price);
+            holder.TV_QuantityS.setText(quantity_S_size.toString());
+            holder.TV_QuantityM.setText(quantity_M_size.toString());
+            holder.TV_QuantityL.setText(quantity_L_size.toString());
+            holder.TV_QuantityXL.setText(quantity_XL_size.toString());
+            holder.TV_originalPrice.setText("$" + price.toString());
             if(productList.get(position).getPromotion_id() == null){
                 //not discount
                 holder.TV_discountNote.setVisibility(View.GONE);
@@ -68,16 +68,20 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
             }
             else {
                 //discount
-                if (promotion_id == promotionList.get(position).getId()) {
-                    holder.TV_discountNote.setText(promotion_id);
-                    holder.TV_discountNote.setVisibility(View.VISIBLE);
-                    discountPrice = productList.get(position).getPrice() - (productList.get(position).getPrice() * promotionList.get(position).getDiscount());
-                    holder.TV_discountPrice.setText("$" + discountPrice);
-                    holder.TV_discountPrice.setVisibility(View.VISIBLE);
-                    holder.TV_originalPrice.setPaintFlags(holder.TV_originalPrice.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
+                try {
+                    if (promotion_id == promotionList.get(position).getId()) {
+                        holder.TV_discountNote.setText(promotion_id);
+                        holder.TV_discountNote.setVisibility(View.VISIBLE);
+                        discountPrice = productList.get(position).getPrice() - (productList.get(position).getPrice() * promotionList.get(position).getDiscount());
+                        holder.TV_discountPrice.setText("$" + discountPrice.toString());
+                        holder.TV_discountPrice.setVisibility(View.VISIBLE);
+                        holder.TV_originalPrice.setPaintFlags(holder.TV_originalPrice.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
+                    }
+
+                }catch (NullPointerException e){
+
                 }
             }
-
             try{
                 Glide.with(context).load(productList.get(position).getImage()).into(holder.IV_productIcon);
             }

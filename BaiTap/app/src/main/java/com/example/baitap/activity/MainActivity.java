@@ -80,7 +80,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<ModelListPromo>> call, Response<List<ModelListPromo>> response) {
                 List<ModelListPromo> promo = response.body();
-
             }
 
             @Override
