@@ -31,7 +31,7 @@ public class CartAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return listProduct.get(position).getProductId();
+        return listProduct.get(position).getId();
     }
 
     @Override
@@ -44,11 +44,20 @@ public class CartAdapter extends BaseAdapter {
         //Bind dữ liệu phần tử vào View
         Cart product = (Cart) getItem(position);
 
+      /*Thủy làm
         Picasso.get().load(product.getProductImage())
                 .into((ImageView) viewProduct.findViewById(R.id.productImage));
         ((TextView) viewProduct.findViewById(R.id.nameproduct)).setText(String.format("%s (%s)", product.getProductName(), product.getSize()));
         ((TextView) viewProduct.findViewById(R.id.priceproduct)).setText(String.format("%s", product.getOriginalPrice()));
         ((EditText)viewProduct.findViewById(R.id.edt_quantityProduct)).setText(String.valueOf(product.getProductQuantity()));
+      */
+      /*Hằng làm
+        Picasso.get().load(/*"https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-image-512.png"*/product.getImage())
+                .into((ImageView) viewProduct.findViewById(R.id.productImage));
+        ((TextView) viewProduct.findViewById(R.id.nameproduct)).setText(String.format("%s", product.getName()));
+        ((TextView) viewProduct.findViewById(R.id.priceproduct)).setText(String.format("%s", product.getPrice()));
+        /*((EditText)viewProduct.findViewById(R.id.edt_quantityProduct)).setText(product.getProductQuantity());*/
+      */
 
 
         viewProduct.findViewById(R.id.plusProduct).setOnClickListener(new View.OnClickListener() {

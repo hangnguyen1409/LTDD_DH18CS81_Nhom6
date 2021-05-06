@@ -44,45 +44,28 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
 
     @Override
     public void onBindViewHolder(@NonNull HolderProductSeller holder, int position) {
-        /*
-        * Import data from database
-        */
+        //Import data from database
         ModelProducts modelProducts = productList.get(position);
-        Integer productId = modelProducts.getProductId();
-        String productName = modelProducts.getProductName();
-        String productDescription = modelProducts.getProductDescription();
-        String productCategory = modelProducts.getProductCategory();
-        Integer productQuantityS = modelProducts.getProductQuantityS();
-        Integer productQuantityM = modelProducts.getProductQuantityM();
-        Integer productQuantityL = modelProducts.getProductQuantityL();
-        Integer productQuantityXL = modelProducts.getProductQuantityXL();
-        String productImage = modelProducts.getProductImage();
-        String originalPrice = modelProducts.getOriginalPrice();
-        String userID = modelProducts.getUserID();
+        Integer category = modelProducts.getCategory();
+        String description = modelProducts.getDescription();
+        Integer id = modelProducts.getId();
+        String image = modelProducts.getImage();
+        String name = modelProducts.getName();
+        Integer price = modelProducts.getPrice();
+        Integer promotion_id = modelProducts.getPromotion_id();
+        Integer quantity_L_size = modelProducts.getQuantity_L_size();
+        Integer quantity_M_size = modelProducts.getQuantity_M_size();
+        Integer quantity_S_size = modelProducts.getQuantity_S_size();
+        Integer quantity_XL_size = modelProducts.getQuantity_XL_size();
 
         //Set data
-        holder.TV_productName.setText(productName);
-        holder.TV_QuantityS.setText(productQuantityS);
-        holder.TV_QuantityM.setText(productQuantityM);
-        holder.TV_QuantityL.setText(productQuantityL);
-        holder.TV_QuantityXL.setText(productQuantityXL);
-        holder.TV_originalPrice.setText(originalPrice);
+        holder.TV_productName.setText(name);
+        holder.TV_QuantityS.setText(quantity_S_size);
+        holder.TV_QuantityM.setText(quantity_M_size);
+        holder.TV_QuantityL.setText(quantity_L_size);
+        holder.TV_QuantityXL.setText(quantity_XL_size);
+        holder.TV_originalPrice.setText(price);
 
-        //Load product Image
-        try{
-            Picasso.get().load(productImage).placeholder(R.drawable.ic_shopping_cart).into(holder.IV_productIcon);
-        }catch(Exception e){
-            //Cannot load
-            holder.IV_productIcon.setImageResource(R.drawable.ic_shopping_cart);
-        }
-        //Click item product
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Show item details
-
-            }
-        });
     }
 
     @Override
@@ -98,11 +81,12 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
         return filterProduct;
     }
 
-    class HolderProductSeller extends RecyclerView.ViewHolder {
+    public static class HolderProductSeller extends RecyclerView.ViewHolder {
 
         private ImageView IV_productIcon;
-        private TextView TV_discountNote, TV_productName,TV_QuantityS,TV_QuantityM
-                ,TV_QuantityL,TV_QuantityXL,TV_discountPrice,TV_originalPrice;
+        private TextView TV_discountNote, TV_productName,
+                TV_QuantityS,TV_QuantityM,TV_QuantityL,TV_QuantityXL
+                ,TV_discountPrice,TV_originalPrice;
         public HolderProductSeller(@NonNull View itemView) {
             super(itemView);
             IV_productIcon = itemView.findViewById(R.id.IV_productIcon);
@@ -112,6 +96,8 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
             TV_QuantityL = itemView.findViewById(R.id.TV_QuantityL);
             TV_QuantityXL = itemView.findViewById(R.id.TV_QuantityXL);
             TV_originalPrice = itemView.findViewById(R.id.TV_originalPrice);
+            TV_discountNote = itemView.findViewById(R.id.TV_discountNote);
+            TV_discountPrice = itemView.findViewById(R.id.TV_discountPrice);
         }
 
 }}
