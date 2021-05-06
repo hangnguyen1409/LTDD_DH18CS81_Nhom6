@@ -12,7 +12,6 @@
         android:theme="@style/Theme.BaiTap"
         android:usesCleartextTraffic="true">
         <activity android:name=".activity.CartActivity"></activity>
-        <activity android:name=".activity.AddProductActivity"></activity>
         <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
