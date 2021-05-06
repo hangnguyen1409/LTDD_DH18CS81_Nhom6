@@ -3,6 +3,7 @@ package com.example.baitap.adapter;
 
 import android.content.Context;
 import android.graphics.Paint;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,18 +14,24 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.baitap.R;
+import com.example.baitap.api.ApiInterface;
+import com.example.baitap.api.RetrofitClient;
+import com.example.baitap.model.ModelCate;
 import com.example.baitap.model.ModelProducts;
 import com.example.baitap.model.Promotion;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 
 public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSeller.HolderProductSeller>{
     private Context context;
     public List<ModelProducts> productList;
     public List<Promotion> promotionList;
-
     public AdapterProductSeller(Context context,List<ModelProducts>productList){
         this.context = context;
         this.productList = productList;
@@ -40,14 +47,16 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
 
     @Override
     public void onBindViewHolder(@NonNull HolderProductSeller holder, int position) {
-            Integer discountPrice;
+            ApiInterface apiInterface;
+            apiInterface = RetrofitClient.getRetrofitClient().create(ApiInterface.class);
+            Float discountPrice;
             ModelProducts modelProducts = productList.get(position);
             String img = modelProducts.getImage();
             String name = modelProducts.getName();
             Integer category = modelProducts.getCategory();
             String description = modelProducts.getDescription();
             Integer id = modelProducts.getId();
-            Integer price = modelProducts.getId();
+            Float price = modelProducts.getPrice();
             Integer promotion_id = modelProducts.getPromotion_id();
             Integer quantity_L_size = modelProducts.getQuantity_L_size();
             Integer quantity_M_size = modelProducts.getQuantity_M_size();
@@ -74,20 +83,23 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
             }
             else {
                 //discount
-                try {
-                    if (promotion_id == promotionList.get(position).getId()) {
-                        holder.TV_discountNote.setText(promotion_id);
+                Call<Promotion> Promo = apiInterface.getPromotioById(promotion_id);
+                Promo.enqueue(new Callback<Promotion>() {
+                    @Override
+                    public void onResponse(Call<Promotion> call, Response<Promotion> response) {
+                        Promotion promotion = response.body();
+                        holder.TV_discountNote.setText(promotion.getName());
                         holder.TV_discountNote.setVisibility(View.VISIBLE);
-                        discountPrice = productList.get(position).getPrice() - (productList.get(position).getPrice() * promotionList.get(position).getDiscount());
-                        holder.TV_discountPrice.setText("$" + discountPrice.toString());
+                        Float discountPrice = productList.get(position).getPrice() - (productList.get(position).getPrice() * promotion.getDiscount());
+                        holder.TV_discountPrice.setText(discountPrice.toString()+"VNĐ");
                         holder.TV_discountPrice.setVisibility(View.VISIBLE);
                         holder.TV_originalPrice.setPaintFlags(holder.TV_originalPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
                     }
 
-                } catch (NullPointerException e) {
-
-                }
-
+                    @Override
+                    public void onFailure(Call<Promotion> call, Throwable t) {
+                    }
+                });
             }
 
     }

@@ -11,7 +11,7 @@ public class ModelProducts {
     @Expose
     private String image;
     private String name;
-    private Integer price;
+    private Float price;
     private Integer promotion_id;
     private Integer quantity_L_size;
     private Integer quantity_M_size;
@@ -19,7 +19,7 @@ public class ModelProducts {
     private Integer quantity_XL_size;
 
     public ModelProducts(Integer category, String description,
-                         Integer id, String image, String name, Integer price,
+                         Integer id, String image, String name, Float price,
                          Integer promotion_id, Integer quantity_L_size,
                          Integer quantity_M_size, Integer quantity_S_size, Integer quantity_XL_size) {
         this.category = category;
@@ -75,11 +75,11 @@ public class ModelProducts {
         this.name = name;
     }
 
-    public Integer getPrice() {
+    public Float getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(Float price) {
         this.price = price;
     }
 

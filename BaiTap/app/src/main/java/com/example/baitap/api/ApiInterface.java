@@ -20,6 +20,7 @@ public interface ApiInterface {
 
     @GET("api/get_promotion_today")
     Call<List<Promotion>> getAllPromotions();
+
     @GET("api/get_promotion_by_id/{id}")
     Call<Promotion> getPromotioById(@Path("id") int id);
 }
