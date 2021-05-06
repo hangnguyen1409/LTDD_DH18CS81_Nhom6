@@ -47,8 +47,7 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
 
     @Override
     public void onBindViewHolder(@NonNull HolderProductSeller holder, int position) {
-            ApiInterface apiInterface;
-            apiInterface = RetrofitClient.getRetrofitClient().create(ApiInterface.class);
+
             Float discountPrice;
             ModelProducts modelProducts = productList.get(position);
             String img = modelProducts.getImage();
@@ -83,6 +82,8 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
             }
             else {
                 //discount
+                ApiInterface apiInterface;
+                apiInterface = RetrofitClient.getRetrofitClient().create(ApiInterface.class);
                 Call<Promotion> Promo = apiInterface.getPromotioById(promotion_id);
                 Promo.enqueue(new Callback<Promotion>() {
                     @Override
