@@ -24,8 +24,7 @@ public class FilterProduct extends Filter {
 
             for(int i = 0; i< filterList.size();i++)
             {
-                if(filterList.get(i).getProductName().toUpperCase().equals(constraint)
-                        || filterList.get(i).getProductCategory().toUpperCase().equals(constraint)){
+                if(filterList.get(i).getName().toUpperCase().equals(constraint)){
                     //Add data which was searched
                     filterModels.add(filterList.get(i));
                 }

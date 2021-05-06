@@ -1,148 +1,120 @@
 package com.example.baitap.model;
 
 public class ModelProducts {
-    private Integer productId;
-    private String productName;
-    private String productDescription;
-    private String productCategory;
-    private Integer productQuantityS;
-    private Integer productQuantityM;
-    private Integer productQuantityL;
-    private Integer productQuantityXL;
-    private String productImage;
-    private String originalPrice;
-    private String discountPrice;
-    private String discountAvailable;
-    private String discountNote;
-    private String userID;
-    public ModelProducts(){}
+    private Integer category;
+    private String description;
+    private Integer id;
+    private String image;
+    private String name;
+    private Integer price;
+    private Integer promotion_id;
+    private Integer quantity_L_size;
+    private Integer quantity_M_size;
+    private Integer quantity_S_size;
+    private Integer quantity_XL_size;
 
-    public ModelProducts(Integer productId, String productName, String productDescription, String productCategory, Integer productQuantityS, Integer productQuantityM, Integer productQuantityL, Integer productQuantityXL, String productImage, String originalPrice, String discountPrice, String discountAvailable, String discountNote, String userID) {
-        this.productId = productId;
-        this.productName = productName;
-        this.productDescription = productDescription;
-        this.productCategory = productCategory;
-        this.productQuantityS = productQuantityS;
-        this.productQuantityM = productQuantityM;
-        this.productQuantityL = productQuantityL;
-        this.productQuantityXL = productQuantityXL;
-        this.productImage = productImage;
-        this.originalPrice = originalPrice;
-        this.discountPrice = discountPrice;
-        this.discountAvailable = discountAvailable;
-        this.discountNote = discountNote;
-        this.userID = userID;
+    public ModelProducts(Integer category, String description,
+                         Integer id, String image, String name, Integer price,
+                         Integer promotion_id, Integer quantity_L_size,
+                         Integer quantity_M_size, Integer quantity_S_size, Integer quantity_XL_size) {
+        this.category = category;
+        this.description = description;
+        this.id = id;
+        this.image = image;
+        this.name = name;
+        this.price = price;
+        this.promotion_id = promotion_id;
+        this.quantity_L_size = quantity_L_size;
+        this.quantity_M_size = quantity_M_size;
+        this.quantity_S_size = quantity_S_size;
+        this.quantity_XL_size = quantity_XL_size;
     }
 
-    public Integer getProductId() {
-        return productId;
+    public Integer getCategory() {
+        return category;
     }
 
-    public void setProductId(Integer productId) {
-        this.productId = productId;
+    public void setCategory(Integer category) {
+        this.category = category;
     }
 
-    public String getProductName() {
-        return productName;
+    public String getDescription() {
+        return description;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String getProductDescription() {
-        return productDescription;
+    public Integer getId() {
+        return id;
     }
 
-    public void setProductDescription(String productDescription) {
-        this.productDescription = productDescription;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getProductCategory() {
-        return productCategory;
+    public String getImage() {
+        return image;
     }
 
-    public void setProductCategory(String productCategory) {
-        this.productCategory = productCategory;
+    public void setImage(String image) {
+        this.image = image;
     }
 
-    public Integer getProductQuantityS() {
-        return productQuantityS;
+    public String getName() {
+        return name;
     }
 
-    public void setProductQuantityS(Integer productQuantityS) {
-        this.productQuantityS = productQuantityS;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Integer getProductQuantityM() {
-        return productQuantityM;
+    public Integer getPrice() {
+        return price;
     }
 
-    public void setProductQuantityM(Integer productQuantityM) {
-        this.productQuantityM = productQuantityM;
+    public void setPrice(Integer price) {
+        this.price = price;
     }
 
-    public Integer getProductQuantityL() {
-        return productQuantityL;
+    public Integer getPromotion_id() {
+        return promotion_id;
     }
 
-    public void setProductQuantityL(Integer productQuantityL) {
-        this.productQuantityL = productQuantityL;
+    public void setPromotion_id(Integer promotion_id) {
+        this.promotion_id = promotion_id;
     }
 
-    public Integer getProductQuantityXL() {
-        return productQuantityXL;
+    public Integer getQuantity_L_size() {
+        return quantity_L_size;
     }
 
-    public void setProductQuantityXL(Integer productQuantityXL) {
-        this.productQuantityXL = productQuantityXL;
+    public void setQuantity_L_size(Integer quantity_L_size) {
+        this.quantity_L_size = quantity_L_size;
     }
 
-    public String getProductImage() {
-        return productImage;
+    public Integer getQuantity_M_size() {
+        return quantity_M_size;
     }
 
-    public void setProductImage(String productImage) {
-        this.productImage = productImage;
+    public void setQuantity_M_size(Integer quantity_M_size) {
+        this.quantity_M_size = quantity_M_size;
     }
 
-    public String getOriginalPrice() {
-        return originalPrice;
+    public Integer getQuantity_S_size() {
+        return quantity_S_size;
     }
 
-    public void setOriginalPrice(String originalPrice) {
-        this.originalPrice = originalPrice;
+    public void setQuantity_S_size(Integer quantity_S_size) {
+        this.quantity_S_size = quantity_S_size;
     }
 
-    public String getDiscountPrice() {
-        return discountPrice;
+    public Integer getQuantity_XL_size() {
+        return quantity_XL_size;
     }
 
-    public void setDiscountPrice(String discountPrice) {
-        this.discountPrice = discountPrice;
-    }
-
-    public String getDiscountAvailable() {
-        return discountAvailable;
-    }
-
-    public void setDiscountAvailable(String discountAvailable) {
-        this.discountAvailable = discountAvailable;
-    }
-
-    public String getDiscountNote() {
-        return discountNote;
-    }
-
-    public void setDiscountNote(String discountNote) {
-        this.discountNote = discountNote;
-    }
-
-    public String getUserID() {
-        return userID;
-    }
-
-    public void setUserID(String userID) {
-        this.userID = userID;
+    public void setQuantity_XL_size(Integer quantity_XL_size) {
+        this.quantity_XL_size = quantity_XL_size;
     }
 }

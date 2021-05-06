@@ -30,7 +30,7 @@ public class CartAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return listProduct.get(position).getProductId();
+        return listProduct.get(position).getId();
     }
 
     @Override
@@ -43,10 +43,10 @@ public class CartAdapter extends BaseAdapter {
         //Bind dữ liệu phần tử vào View
         ModelProducts product = (ModelProducts) getItem(position);
 
-        Picasso.get().load(/*"https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-image-512.png"*/product.getProductImage())
+        Picasso.get().load(/*"https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-image-512.png"*/product.getImage())
                 .into((ImageView) viewProduct.findViewById(R.id.productImage));
-        ((TextView) viewProduct.findViewById(R.id.nameproduct)).setText(String.format("%s", product.getProductName()));
-        ((TextView) viewProduct.findViewById(R.id.priceproduct)).setText(String.format("%s", product.getOriginalPrice()));
+        ((TextView) viewProduct.findViewById(R.id.nameproduct)).setText(String.format("%s", product.getName()));
+        ((TextView) viewProduct.findViewById(R.id.priceproduct)).setText(String.format("%s", product.getPrice()));
         /*((EditText)viewProduct.findViewById(R.id.edt_quantityProduct)).setText(product.getProductQuantity());*/
 
 
