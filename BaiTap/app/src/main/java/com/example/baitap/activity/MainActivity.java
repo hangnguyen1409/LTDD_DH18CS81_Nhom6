@@ -1,5 +1,8 @@
 package com.example.baitap.activity;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,7 +15,11 @@ import com.example.baitap.adapter.AdapterProductSeller;
 import com.example.baitap.model.Cart;
 import com.example.baitap.api.ApiInterface;
 import com.example.baitap.api.RetrofitClient;
+import com.example.baitap.model.ModelCate;
+import com.example.baitap.model.ModelListPromo;
 import com.example.baitap.model.ModelProducts;
+import com.example.baitap.model.ListPromotion;
+
 import java.util.ArrayList;
 import java.util.List;
 import retrofit2.Call;
@@ -26,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
     private TextView nameTV,tvShopName,tvTabProducts,tvTabOrders;
     private ImageButton editProfileBtn,addProductBtn;
     private RelativeLayout RLProducts,RLOrders;
+    RecyclerView productShowRV;
+    AdapterProductSeller adapterProductSeller;
+
     public static ArrayList<Cart> cart;
     ApiInterface apiInterface;
 
@@ -33,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //Reference
+        inint();
 
         apiInterface = RetrofitClient.getRetrofitClient().create(ApiInterface.class);
         Call<List<ModelProducts>> call = apiInterface.getAllProducts();
@@ -41,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
            @Override
            public void onResponse(Call<List<ModelProducts>> call, Response<List<ModelProducts>> response) {
                List<ModelProducts> productsList = response.body();
-
+                getAllProducts(productsList);
            }
 
            @Override
@@ -49,8 +61,36 @@ public class MainActivity extends AppCompatActivity {
 
            }
        });
-        //Reference
-        inint();
+
+        Call<List<ModelCate>> callCate = apiInterface.getAllCate();
+        callCate.enqueue(new Callback<List<ModelCate>>() {
+            @Override
+            public void onResponse(Call<List<ModelCate>> call, Response<List<ModelCate>> response) {
+                List<ModelCate> cateList = response.body();
+            }
+
+            @Override
+            public void onFailure(Call<List<ModelCate>> call, Throwable t) {
+
+            }
+        });
+
+        Call<List<ModelListPromo>> callPromo = apiInterface.getAllPromotions();
+        callPromo.enqueue(new Callback<List<ModelListPromo>>() {
+            @Override
+            public void onResponse(Call<List<ModelListPromo>> call, Response<List<ModelListPromo>> response) {
+                List<ModelListPromo> promo = response.body();
+
+            }
+
+            @Override
+            public void onFailure(Call<List<ModelListPromo>> call, Throwable t) {
+
+            }
+        });
+
+
+
         //Adapter for ViewFlipperGirl,ViewFlipperBoy
         viewFlipperGirl.setFlipInterval(3000);
         viewFlipperGirl.setAutoStart(true);
@@ -95,13 +135,21 @@ public class MainActivity extends AppCompatActivity {
         RLOrders = findViewById(R.id.RLOrders);
         viewFlipperGirl = findViewById(R.id.view_flipper_girl);
         viewFlipperBoy = findViewById(R.id.view_flipper_boy);
+        productShowRV = findViewById(R.id.productShowRV);
         if(cart!=null){
 
         }else {
             cart = new ArrayList<>();
         }
     }
+    private void getAllProducts(List<ModelProducts> productsList){
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false);
+        productShowRV.setLayoutManager(layoutManager);
+        adapterProductSeller = new AdapterProductSeller(this,productsList);
+        productShowRV.setAdapter(adapterProductSeller);
+        adapterProductSeller.notifyDataSetChanged();
 
+    }
     private void showProductsTab() {
         RLProducts.setVisibility(View.VISIBLE);
         RLOrders.setVisibility(View.GONE);

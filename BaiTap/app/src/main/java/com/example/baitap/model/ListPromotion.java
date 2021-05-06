@@ -2,7 +2,7 @@ package com.example.baitap.model;
 
 
 
-public class ModelPromotion {
+public class ListPromotion {
     private String description;
     private Integer discount;
     private String name;
@@ -58,7 +58,7 @@ public class ModelPromotion {
         this.id = id;
     }
 
-    public ModelPromotion(String description, Integer discount, String name, String start_date, String end_date, Integer id) {
+    public ListPromotion(String description, Integer discount, String name, String start_date, String end_date, Integer id) {
         this.description = description;
         this.discount = discount;
         this.name = name;
