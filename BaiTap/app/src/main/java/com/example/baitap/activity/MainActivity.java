@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -48,13 +49,33 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //Reference
         init();
-        loadProducts();
+
         //Adapter for ViewFlipperGirl,ViewFlipperBoy
         viewFlipperGirl.setFlipInterval(3000);
         viewFlipperGirl.setAutoStart(true);
         viewFlipperBoy.setFlipInterval(3000);
         viewFlipperBoy.setAutoStart(true);
+        // lấy ID cate
+        Intent i = getIntent();
+        int idCate = i.getIntExtra("Id_Cate",0);
+        if(idCate==0){
+            loadProducts();
+        }
+        else {
+            apiInterface = RetrofitClient.getRetrofitClient().create(ApiInterface.class);
+            Call<List<ModelProducts>> callProductById = apiInterface.getAllProductById(idCate);
+            callProductById.enqueue(new Callback<List<ModelProducts>>() {
+                @Override
+                public void onResponse(Call<List<ModelProducts>> call, Response<List<ModelProducts>> response) {
+                    getAllProducts(response.body());
+                }
 
+                @Override
+                public void onFailure(Call<List<ModelProducts>> call, Throwable t) {
+                    Log.i("mess","err");
+                }
+            });
+        }
         //add Product
         addProductBtn.setOnClickListener(new View.OnClickListener() {
             @Override

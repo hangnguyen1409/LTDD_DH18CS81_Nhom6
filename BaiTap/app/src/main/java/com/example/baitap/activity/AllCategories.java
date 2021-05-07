@@ -39,7 +39,6 @@ public class AllCategories extends AppCompatActivity {
         setContentView(R.layout.activity_all_categories);
         all_category = findViewById(R.id.all_category);
         back = findViewById(R.id.back);
-
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -1,6 +1,7 @@
 package com.example.baitap.adapter;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,22 +57,9 @@ public class AllCategoryAdapter extends RecyclerView.Adapter<AllCategoryAdapter.
                 ApiInterface apiInterface = RetrofitClient.getRetrofitClient().create(ApiInterface.class);
                 @Override
                 public void onClick(View v) {
-                    Call<List<ModelProducts>> call = apiInterface.getAllProductById(modelCate.getId());
-                    call.enqueue(new Callback<List<ModelProducts>>() {
-                        @Override
-                        public void onResponse(Call<List<ModelProducts>> call, Response<List<ModelProducts>> response) {
-                            List<ModelProducts> list = response.body();
-                        }
-
-                        @Override
-                        public void onFailure(Call<List<ModelProducts>> call, Throwable t) {
-                            Toast.makeText(context.getApplicationContext(),"Err",Toast.LENGTH_LONG).show();
-                        }
-                    });
-                    Intent back = new Intent(AllCategory.this, MainActivity.class);
-                    startActivity(back);
-                    finish();
-
+                    Intent i = new Intent(context, MainActivity.class);
+                    i.putExtra("Id_Cate", modelCate.getId());
+                    context.startActivity(i);
                 }
 
             });
