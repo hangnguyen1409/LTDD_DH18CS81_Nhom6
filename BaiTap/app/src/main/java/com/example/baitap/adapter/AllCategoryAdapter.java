@@ -32,7 +32,6 @@ public class AllCategoryAdapter extends RecyclerView.Adapter<AllCategoryAdapter.
 
     Context context;
     List<ModelCate> categoryList;
-    ApiInterface apiInterface;
 
     public AllCategoryAdapter(Context context, List<ModelCate> categoryList) {
         this.context = context;
@@ -54,7 +53,6 @@ public class AllCategoryAdapter extends RecyclerView.Adapter<AllCategoryAdapter.
             String catename = modelCate.getName();
             holder.TV_cate.setText(catename);
             holder.itemView.setOnClickListener(new View.OnClickListener() {
-                ApiInterface apiInterface = RetrofitClient.getRetrofitClient().create(ApiInterface.class);
                 @Override
                 public void onClick(View v) {
                     Intent i = new Intent(context, MainActivity.class);
@@ -65,25 +63,6 @@ public class AllCategoryAdapter extends RecyclerView.Adapter<AllCategoryAdapter.
             });
 
     }
-
-//    private void loadFilterProducts(String select) {
-//        apiInterface = RetrofitClient.getRetrofitClient().create(ApiInterface.class);
-//        Call<List<ModelProducts>> call = apiInterface.getAllProducts();
-//
-//        call.enqueue(new Callback<List<ModelProducts>>() {
-//            @Override
-//            public void onResponse(Call<List<ModelProducts>> call, Response<List<ModelProducts>> response) {
-//                listProduct = response.body();
-//                getAllProducts(listProduct);
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<ModelProducts>> call, Throwable t) {
-//
-//            }
-//        });
-//
-//    }
 
     @Override
     public int getItemCount() {

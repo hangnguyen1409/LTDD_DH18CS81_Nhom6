@@ -1,4 +1,4 @@
-package com.example.baitap.activity;
+package com.example.baitap.model;
 
 public class ModelUser {
     private String email;

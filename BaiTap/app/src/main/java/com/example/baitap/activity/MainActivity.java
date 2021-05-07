@@ -2,14 +2,16 @@ package com.example.baitap.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 import com.example.baitap.R;
@@ -17,6 +19,7 @@ import com.example.baitap.adapter.AdapterProductSeller;
 import com.example.baitap.api.ApiInterface;
 import com.example.baitap.api.RetrofitClient;
 import com.example.baitap.model.ModelProducts;
+import com.example.baitap.model.ModelUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,13 +29,12 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    //declare whole variable
     ViewFlipper viewFlipperGirl,viewFlipperBoy;
-    private TextView nameTV,tvShopName,tvTabProducts,tvTabOrders,filterTV;
-    private ImageButton editProfileBtn,addProductBtn,filterProductBtn;
+    private TextView tvShopName,tvTabProducts,tvTabOrders,filterTV;
+    private ImageButton editProfileBtn,addProductBtn,filterProductBtn,resetbtn;
     private RelativeLayout RLProducts,RLOrders;
-    private EditText SearchProductsEt;
     RecyclerView productShowRV;
+    SearchView btn_search;
 
     public static ModelUser Login;
 
@@ -54,13 +56,13 @@ public class MainActivity extends AppCompatActivity {
         viewFlipperGirl.setAutoStart(true);
         viewFlipperBoy.setFlipInterval(3000);
         viewFlipperBoy.setAutoStart(true);
+
         // lấy ID cate
         Intent i = getIntent();
-        int idCate = i.getIntExtra("Id_Cate",0);
-        if(idCate==0){
+        int idCate = i.getIntExtra("Id_Cate", 0);
+        if (idCate == 0) {
             loadProducts();
-        }
-        else {
+        } else {
             apiInterface = RetrofitClient.getRetrofitClient().create(ApiInterface.class);
             Call<List<ModelProducts>> callProductById = apiInterface.getAllProductById(idCate);
             callProductById.enqueue(new Callback<List<ModelProducts>>() {
@@ -71,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<List<ModelProducts>> call, Throwable t) {
-                    Log.i("mess","err");
+                    Log.i("mess", "err");
                 }
             });
         }
@@ -94,8 +96,8 @@ public class MainActivity extends AppCompatActivity {
         tvTabOrders.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    showOrdersTab();
-                    //Load Orders
+                showOrdersTab();
+                //Load Orders
             }
         });
 
@@ -107,28 +109,25 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-    }
-
-    private void loadFilter(String select) {
-        //Still doing
-        apiInterface = RetrofitClient.getRetrofitClient().create(ApiInterface.class);
-        Call<List<ModelProducts>> call = apiInterface.getAllProducts();
-
-        call.enqueue(new Callback<List<ModelProducts>>() {
+        resetbtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onResponse(Call<List<ModelProducts>> call, Response<List<ModelProducts>> response) {
-                List<ModelProducts> productsList = response.body();
-                getAllProducts(productsList);
+            public void onClick(View v) {
+                loadProducts();
+            }
+        });
+        btn_search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
             }
 
             @Override
-            public void onFailure(Call<List<ModelProducts>> call, Throwable t) {
-
+            public boolean onQueryTextChange(String newText) {
+                adapterProductSeller.getFilter().filter(newText);
+                return false;
             }
         });
     }
-
-
     private void loadProducts(){
         apiInterface = RetrofitClient.getRetrofitClient().create(ApiInterface.class);
         Call<List<ModelProducts>> call = apiInterface.getAllProducts();
@@ -149,7 +148,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init() {
-        nameTV = findViewById(R.id.nameTV);
         tvShopName = findViewById(R.id.tvShopName);
         addProductBtn = findViewById(R.id.addProductBtn);
         editProfileBtn = findViewById(R.id.editProfileBtn);
@@ -162,7 +160,8 @@ public class MainActivity extends AppCompatActivity {
         productShowRV = findViewById(R.id.productShowRV);
         filterTV = findViewById(R.id.filterTV);
         filterProductBtn = findViewById(R.id.filterProductBtn);
-        SearchProductsEt = findViewById(R.id.SearchProductsEt);
+        resetbtn = findViewById(R.id.Resetbtn);
+        btn_search = (SearchView)findViewById(R.id.btn_search);;
         if(cart!=null){
 
         }else {

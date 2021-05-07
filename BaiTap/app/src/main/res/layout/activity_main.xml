@@ -20,17 +20,15 @@
             android:textColor="@color/black"
             android:textSize="50dp"
             android:textStyle="bold"/>
-        <!--Name User-->
-        <TextView
-            android:id="@+id/nameTV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@+id/tvShopName"
-            android:layout_marginRight="20dp"
-            android:fontFamily="@font/niconne"
-            android:text="Hello Hang"
-            android:textSize="30dp" />
+        <!--Reset after filter-->
+        <ImageButton
+            android:id="@+id/Resetbtn"
+            android:layout_toStartOf="@+id/addProductBtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:srcCompat="@drawable/ic_baseline_refresh_24"
+            tools:ignore="VectorDrawableCompat"
+            android:background="@null"/>
         <!--Button Edit-->
         <ImageButton
             android:id="@+id/editProfileBtn"
@@ -165,8 +163,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <!--Search Product-->
-                <EditText
-                    android:id="@+id/SearchProductsEt"
+                <SearchView
+                    android:id="@+id/btn_search"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
@@ -176,10 +174,7 @@
                     android:layout_toStartOf="@+id/filterProductBtn"
                     android:background="@drawable/search_bg"
                     android:drawableLeft="@drawable/ic_search_black_24dp"
-                    android:drawablePadding="10dp"
-                    android:fontFamily="@font/niconne"
-                    android:hint="Search something..."
-                    android:padding="10dp" />
+                    app:iconifiedByDefault="false"/>
                 <!--Filter Product-->
                 <ImageButton
                     android:id="@+id/filterProductBtn"
@@ -196,7 +191,7 @@
                     android:id="@+id/filterTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/SearchProductsEt"
+                    android:layout_below="@+id/btn_search"
                     android:layout_marginStart="5dp"
                     android:layout_marginBottom="5dp"
                     android:fontFamily="@font/corben_bold"

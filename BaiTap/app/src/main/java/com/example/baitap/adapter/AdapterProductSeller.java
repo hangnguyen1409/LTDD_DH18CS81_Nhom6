@@ -3,7 +3,6 @@ package com.example.baitap.adapter;
 
 import android.content.Context;
 import android.graphics.Paint;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,18 +15,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.baitap.R;
-import com.example.baitap.activity.FilterProduct;
-import com.example.baitap.activity.MainActivity;
 import com.example.baitap.api.ApiInterface;
 import com.example.baitap.api.RetrofitClient;
-import com.example.baitap.model.ModelCate;
 import com.example.baitap.model.ModelProducts;
 import com.example.baitap.model.Promotion;
-import com.squareup.picasso.Picasso;
 
-import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
-import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -36,12 +31,13 @@ import retrofit2.Response;
 
 public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSeller.HolderProductSeller> implements Filterable {
     private Context context;
-    public List<ModelProducts> productList,filterList;
-    private  FilterProduct filter;
+    public List<ModelProducts> productList;
+    public List<ModelProducts> productListFull;
     public AdapterProductSeller(Context context,List<ModelProducts>productList){
         this.context = context;
         this.productList = productList;
-        this.filterList = productList;
+        productListFull = new ArrayList<>();
+        productListFull.addAll(productList);
     }
 
     @NonNull
@@ -119,16 +115,39 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
     @Override
     public int getItemCount() {
         return productList.size();
-
     }
 
     @Override
     public Filter getFilter() {
-        if (filter == null) {
-            filter = new FilterProduct(this,filterList);
-        }
-        return filter;
+        return filterList;
     }
+    private Filter filterList = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+
+            List<ModelProducts> filteredList = new ArrayList<>();
+
+            if (constraint == null || constraint.length() == 0) {
+                filteredList.addAll(productListFull);
+            } else {
+                for (ModelProducts item: productListFull) {
+                    if (item.toString().toLowerCase().contains(constraint.toString().toLowerCase())) {
+                        filteredList.add(item);
+                    }
+                }
+            }
+            FilterResults filterResults = new FilterResults();
+            filterResults.values = filteredList;
+            return filterResults;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            productList.clear();
+            productList.addAll((List) results.values);
+            notifyDataSetChanged();
+        }
+    };
 
 
     public static class HolderProductSeller extends RecyclerView.ViewHolder {

@@ -63,20 +63,13 @@ public class AllCategories extends AppCompatActivity {
 
             }
         });
-
-
     }
 
     private void setCategoryRecycler(List<ModelCate> cateList) {
-//        try {
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
             all_category.setLayoutManager(layoutManager);
             allCategoryAdapter = new AllCategoryAdapter(this, cateList);
             all_category.setAdapter(allCategoryAdapter);
             allCategoryAdapter.notifyDataSetChanged();
-//        }catch(NullPointerException ex){
-//
-//        }
     }
-
 }
