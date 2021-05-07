@@ -41,6 +41,7 @@ public class CartActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(CartActivity.this, MainActivity.class));
+                startActivity(new Intent(CartActivity.this, LoginActivity.class));
             }
         });
         btnReset.setOnClickListener(new View.OnClickListener() {
