@@ -37,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
     private EditText SearchProductsEt;
     RecyclerView productShowRV;
 
+    public static ModelUser Login;
+
     AdapterProductSeller adapterProductSeller;
     public static ArrayList<Cart> cart;
     public static List<ModelProducts> listProduct;
