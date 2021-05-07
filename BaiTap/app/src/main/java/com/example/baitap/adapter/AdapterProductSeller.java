@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -14,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.baitap.R;
+import com.example.baitap.activity.FilterProduct;
+import com.example.baitap.activity.MainActivity;
 import com.example.baitap.api.ApiInterface;
 import com.example.baitap.api.RetrofitClient;
 import com.example.baitap.model.ModelCate;
@@ -21,20 +25,23 @@ import com.example.baitap.model.ModelProducts;
 import com.example.baitap.model.Promotion;
 import com.squareup.picasso.Picasso;
 
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSeller.HolderProductSeller>{
+public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSeller.HolderProductSeller> implements Filterable {
     private Context context;
-    public List<ModelProducts> productList;
-    public List<Promotion> promotionList;
+    public List<ModelProducts> productList,filterList;
+    private  FilterProduct filter;
     public AdapterProductSeller(Context context,List<ModelProducts>productList){
         this.context = context;
         this.productList = productList;
+        this.filterList = productList;
     }
 
     @NonNull
@@ -47,8 +54,6 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
 
     @Override
     public void onBindViewHolder(@NonNull HolderProductSeller holder, int position) {
-
-            Float discountPrice;
             ModelProducts modelProducts = productList.get(position);
             String img = modelProducts.getImage();
             String name = modelProducts.getName();
@@ -68,7 +73,7 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
             holder.TV_QuantityM.setText(quantity_M_size.toString());
             holder.TV_QuantityL.setText(quantity_L_size.toString());
             holder.TV_QuantityXL.setText(quantity_XL_size.toString());
-            holder.TV_originalPrice.setText("$" + price.toString());
+            holder.TV_originalPrice.setText(price.toString() + " VNĐ");
             try {
                 Glide.with(context).load(img).into(holder.IV_productIcon);;
             }
@@ -92,7 +97,7 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
                         holder.TV_discountNote.setText(promotion.getName());
                         holder.TV_discountNote.setVisibility(View.VISIBLE);
                         Float discountPrice = productList.get(position).getPrice() - (productList.get(position).getPrice() * promotion.getDiscount());
-                        holder.TV_discountPrice.setText(discountPrice.toString()+"VNĐ");
+                        holder.TV_discountPrice.setText(discountPrice.toString()+" VNĐ");
                         holder.TV_discountPrice.setVisibility(View.VISIBLE);
                         holder.TV_originalPrice.setPaintFlags(holder.TV_originalPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
                     }
@@ -102,12 +107,26 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
                     }
                 });
             }
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
 
     }
 
     @Override
     public int getItemCount() {
         return productList.size();
+    }
+
+    @Override
+    public Filter getFilter() {
+        if (filter == null) {
+            filter = new FilterProduct(this,filterList);
+        }
+        return filter;
     }
 
 

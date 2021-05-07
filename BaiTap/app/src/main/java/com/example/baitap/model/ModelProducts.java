@@ -122,4 +122,21 @@ public class ModelProducts {
     public void setQuantity_XL_size(Integer quantity_XL_size) {
         this.quantity_XL_size = quantity_XL_size;
     }
+
+    @Override
+    public String toString() {
+        return "ModelProducts{" +
+                "category=" + category +
+                ", description='" + description + '\'' +
+                ", id=" + id +
+                ", image='" + image + '\'' +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", promotion_id=" + promotion_id +
+                ", quantity_L_size=" + quantity_L_size +
+                ", quantity_M_size=" + quantity_M_size +
+                ", quantity_S_size=" + quantity_S_size +
+                ", quantity_XL_size=" + quantity_XL_size +
+                '}';
+    }
 }

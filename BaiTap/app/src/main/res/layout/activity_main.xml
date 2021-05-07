@@ -60,11 +60,7 @@
             android:layout_width="202dp"
             android:layout_height="100dp"
             android:layout_marginTop="5dp">
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="fitCenter"
-                android:src="@drawable/blackjean" />
+
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -118,6 +114,12 @@
                 android:layout_height="match_parent"
                 android:scaleType="fitCenter"
                 android:src="@drawable/xanhden" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/blackjean" />
         </ViewFlipper>
     </RelativeLayout>
     <!--Main-->
@@ -164,7 +166,7 @@
                 android:layout_height="match_parent">
                 <!--Search Product-->
                 <EditText
-                    android:id="@+id/SearchProductsEdtText"
+                    android:id="@+id/SearchProductsEt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
@@ -194,11 +196,11 @@
                     android:id="@+id/filterTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/SearchProductsEdtText"
+                    android:layout_below="@+id/SearchProductsEt"
                     android:layout_marginStart="5dp"
                     android:layout_marginBottom="5dp"
                     android:fontFamily="@font/corben_bold"
-                    android:text="New Release"
+                    android:text="Our Products"
                     android:textColor="@color/black"
                     android:textSize="14dp" />
                 <!--Show product-->

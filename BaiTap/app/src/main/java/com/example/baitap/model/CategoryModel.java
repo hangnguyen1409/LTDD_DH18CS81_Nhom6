@@ -1,6 +1,8 @@
 package com.example.baitap.model;
 
-public class ModelCate {
+public class CategoryModel {
+
+
     private Integer id;
     private String name;
 
@@ -20,16 +22,8 @@ public class ModelCate {
         this.name = name;
     }
 
-    public ModelCate(Integer id, String name) {
+    public CategoryModel(Integer id, String name) {
         this.id = id;
         this.name = name;
-    }
-
-    @Override
-    public String toString() {
-        return "ModelCate{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
     }
 }

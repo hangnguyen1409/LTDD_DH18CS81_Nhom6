@@ -10,22 +10,26 @@ import java.util.List;
 
 public class FilterProduct extends Filter {
 
+    private AdapterProductSeller adapter;
+    private List<ModelProducts> filterList;
+
+    public FilterProduct(AdapterProductSeller adapter, List<ModelProducts> filterList) {
+        this.adapter = adapter;
+        this.filterList = filterList;
+    }
     @Override
     protected FilterResults performFiltering(CharSequence constraint) {
         FilterResults results = new FilterResults();
+        //get data to search
         if(constraint != null && constraint.length() > 0){
             constraint = constraint.toString().toUpperCase();
-
+            //filter list
             ArrayList<ModelProducts> filterModels = new ArrayList<>();
-            /*
-             * filterModels: List of products after searching every turn
-             * filterList: List of products
-             */
 
             for(int i = 0; i< filterList.size();i++)
             {
                 if(filterList.get(i).getName().toUpperCase().equals(constraint)){
-                    //Add data which was searched
+                    //Add data to list
                     filterModels.add(filterList.get(i));
                 }
 
@@ -48,12 +52,6 @@ public class FilterProduct extends Filter {
         //Refresh adapter of product seller
         adapter.notifyDataSetChanged();
     }
-    private AdapterProductSeller adapter;
-    private List<ModelProducts> filterList;
 
-    public FilterProduct(AdapterProductSeller adapter, List<ModelProducts> filterList) {
-        this.adapter = adapter;
-        this.filterList = filterList;
-    }
 
 }
