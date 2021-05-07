@@ -1,10 +1,8 @@
 package com.example.baitap.activity;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,7 +14,6 @@ import android.widget.TextView;
 import android.widget.ViewFlipper;
 import com.example.baitap.R;
 import com.example.baitap.adapter.AdapterProductSeller;
-import com.example.baitap.model.Cart;
 import com.example.baitap.api.ApiInterface;
 import com.example.baitap.api.RetrofitClient;
 import com.example.baitap.model.ModelProducts;
@@ -40,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     public static ModelUser Login;
 
     AdapterProductSeller adapterProductSeller;
-    public static ArrayList<Cart> cart;
+    public static ArrayList<ModelProducts> cart;
     public static List<ModelProducts> listProduct;
     ApiInterface apiInterface;
 
