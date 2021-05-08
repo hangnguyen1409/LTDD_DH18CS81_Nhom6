@@ -71,6 +71,15 @@
             android:textSize="20dp"
             android:text="Description"
             android:textColor="@color/black"/>
+        <TextView
+            android:id="@+id/TV_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_marginTop="5dp"
+            android:textSize="20dp"
+            android:text="Description"
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/TV_QuanS"
@@ -87,7 +96,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="5dp"
-            android:layout_marginTop="5dp"
             android:textSize="20dp"
             android:text="m"
             android:textColor="@color/black"/>
@@ -96,7 +104,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="5dp"
-            android:layout_marginTop="5dp"
             android:textSize="20dp"
             android:text="l"
             android:textColor="@color/black"/>
@@ -105,7 +112,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="5dp"
-            android:layout_marginTop="5dp"
             android:textSize="20dp"
             android:text="xl"
             android:textColor="@color/black"/>

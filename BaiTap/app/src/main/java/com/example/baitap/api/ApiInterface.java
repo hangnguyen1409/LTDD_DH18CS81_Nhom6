@@ -27,9 +27,13 @@ public interface ApiInterface {
 
     @GET("api/get_promotion_by_id/{id}")
     Call<Promotion> getPromotioById(@Path("id") int id);
+
     @GET ("api/get_product_by_category_id/category={id}")
     Call<List<ModelProducts>> getAllProductById(@Path("id") int id_cate);
 
     @POST("saleapp/create_bills")
     Call<Mess> creatBill(@Body ModelReceipt receipt);
+
+    @GET ("api/get_cate_by_id/{id}")
+    Call<ModelCate> getAllCateById(@Path("id") int id_cate);
 }

@@ -3,6 +3,7 @@ package com.example.baitap.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.ColorSpace;
 import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ import com.example.baitap.activity.AllCategories;
 import com.example.baitap.activity.MainActivity;
 import com.example.baitap.api.ApiInterface;
 import com.example.baitap.api.RetrofitClient;
+import com.example.baitap.model.ModelCate;
 import com.example.baitap.model.ModelProducts;
 import com.example.baitap.model.Promotion;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -58,9 +60,6 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
             ModelProducts modelProducts = productList.get(position);
             String img = modelProducts.getImage();
             String name = modelProducts.getName();
-            Integer category = modelProducts.getCategory();
-            String description = modelProducts.getDescription();
-            Integer id = modelProducts.getId();
             Float price = modelProducts.getPrice();
             Integer promotion_id = modelProducts.getPromotion_id();
             Integer quantity_L_size = modelProducts.getQuantity_L_size();
@@ -121,24 +120,22 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
         BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(context);
         View view = LayoutInflater.from(context).inflate(R.layout.product_detail_seller, null);
         bottomSheetDialog.setContentView(view);
-
         ImageButton backBtn = view.findViewById(R.id.backBtn);
         ImageView IV_productIcon = view.findViewById(R.id.IV_productIcon);
         TextView TV_discountNote = view.findViewById(R.id.TV_discountNote);
         TextView TV_productName = view.findViewById(R.id.TV_productName);
         TextView TV_productDes = view.findViewById(R.id.TV_productDes);
-
         TextView TV_QuantityS = view.findViewById(R.id.TV_QuanS);
         TextView TV_QuantityM = view.findViewById(R.id.TV_QuanM);
         TextView TV_QuantityL = view.findViewById(R.id.TV_QuanL);
         TextView TV_QuantityXL = view.findViewById(R.id.TV_QuanXL);
         TextView TV_originalPrice = view.findViewById(R.id.TV_originalPrice);
         TextView TV_discountPrice = view.findViewById(R.id.TV_discountPrice);
-
+        TextView TV_category = view.findViewById(R.id.TV_category);
         String img = modelProducts.getImage();
         String name = modelProducts.getName();
         String description = modelProducts.getDescription();
-        Integer id = modelProducts.getId();
+        Integer cate = modelProducts.getCategory();
         Float price = modelProducts.getPrice();
         Integer promotion_id = modelProducts.getPromotion_id();
         Integer quantity_L_size = modelProducts.getQuantity_L_size();
@@ -146,28 +143,42 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
         Integer quantity_S_size = modelProducts.getQuantity_S_size();
         Integer quantity_XL_size = modelProducts.getQuantity_XL_size();
 
+
+        ApiInterface apiInterface = RetrofitClient.getRetrofitClient().create(ApiInterface.class);
+        Call<ModelCate> callcate = apiInterface.getAllCateById(cate);
+        callcate.enqueue(new Callback<ModelCate>() {
+            @Override
+            public void onResponse(Call<ModelCate> call, Response<ModelCate> response) {
+                ModelCate modelCate = response.body();
+                TV_category.setText("Category: "+ modelCate.getName());
+            }
+
+            @Override
+            public void onFailure(Call<ModelCate> call, Throwable t) {
+
+            }
+        });
         TV_productName.setText(name);
         String pro = "No description !!!";
         try {
             if (description == null) {
                 TV_productDes.setText(pro);
             }
-            TV_productDes.setText(pro);
+            TV_productDes.setText(description);
         }catch (NullPointerException ex){
-
         }
-        TV_QuantityS.setText(quantity_S_size.toString());
-        TV_QuantityM.setText(quantity_M_size.toString());
-        TV_QuantityL.setText(quantity_L_size.toString());
-        TV_QuantityXL.setText(quantity_XL_size.toString());
-        TV_originalPrice.setText(String.format("%.0f", price) + " VNĐ");
+
+        TV_QuantityS.setText("Quantity of Size S: " + quantity_S_size.toString());
+        TV_QuantityM.setText("Quantity of Size M: " +quantity_M_size.toString());
+        TV_QuantityL.setText("Quantity of Size L: "+quantity_L_size.toString());
+        TV_QuantityXL.setText("Quantity of Size XL: " +quantity_XL_size.toString());
+        TV_originalPrice.setText(String.format("%.0f", price) + "VNĐ");
         if (promotion_id == null) {
             //not discount
             TV_discountNote.setVisibility(View.GONE);
             TV_discountPrice.setVisibility(View.GONE);
         } else {
             //discount
-            ApiInterface apiInterface;
             apiInterface = RetrofitClient.getRetrofitClient().create(ApiInterface.class);
             Call<Promotion> Promo = apiInterface.getPromotioById(promotion_id);
             Promo.enqueue(new Callback<Promotion>() {
@@ -207,7 +218,6 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
     public int getItemCount() {
         return productList.size();
     }
-
     @Override
     public Filter getFilter() {
         return filterList;
@@ -243,8 +253,6 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
             notifyDataSetChanged();
         }
     };
-
-
     public static class HolderProductSeller extends RecyclerView.ViewHolder {
         ImageView IV_productIcon;
         private TextView TV_discountNote, TV_productName,
@@ -262,5 +270,4 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
             TV_discountNote = itemView.findViewById(R.id.TV_discountNote);
             TV_discountPrice = itemView.findViewById(R.id.TV_discountPrice);
         }
-
 }}
