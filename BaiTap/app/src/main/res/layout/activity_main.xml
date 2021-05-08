@@ -51,24 +51,18 @@
     <!--Advertise-->
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp">
+        android:layout_height="150dp">
         <!--Girl-->
         <ViewFlipper
-            android:id="@+id/view_flipper_girl"
-            android:layout_width="202dp"
-            android:layout_height="100dp"
+            android:id="@+id/view_flipper"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_marginTop="5dp">
-
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="fitCenter"
-                android:src="@drawable/dress" />
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="fitCenter"
-                android:src="@drawable/set" />
+                android:src="@drawable/maxi" />
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -78,46 +72,58 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="fitCenter"
-                android:src="@drawable/sport" />
-        </ViewFlipper>
-        <!--Boy-->
-        <ViewFlipper
-            android:id="@+id/view_flipper_boy"
-            android:layout_width="202dp"
-            android:layout_height="100dp"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="5dp">
+                android:src="@drawable/set" />
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="fitCenter"
-                android:src="@drawable/khoacden" />
+                android:src="@drawable/somi" />
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="fitCenter"
-                android:src="@drawable/khoacvang" />
+                android:src="@drawable/shortnu" />
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="fitCenter"
-                android:src="@drawable/naucafe" />
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="fitCenter"
-                android:src="@drawable/shortden" />
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="fitCenter"
-                android:src="@drawable/xanhden" />
+                android:src="@drawable/damtieuthu" />
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="fitCenter"
-                android:src="@drawable/blackjean" />
+                android:src="@drawable/khoacden" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/khoacvang" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/naucafe" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/shortden" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/xanhden" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/quandai" />
+
         </ViewFlipper>
     </RelativeLayout>
     <!--Main-->
@@ -125,35 +131,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <!--Show Products,Order-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/shape_tab_product_order">
-            <!--Products-->
-            <TextView
-                android:id="@+id/tvTabProducts"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="Products"
-                android:textColor="@color/black"
-                android:background="@drawable/shape_tab_product_order_fill"/>
-            <!--Order-->
-            <TextView
-                android:id="@+id/tvTabOrders"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="Orders"
-                android:textColor="@color/black"/>
-        </LinearLayout>
-
-        <!--Show Products,Orders depend on Tab-->
+        <!--Show Products-->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -163,8 +141,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <!--Search Product-->
-                <SearchView
-                    android:id="@+id/btn_search"
+                <EditText
+                    android:id="@+id/btnSearch"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
@@ -174,7 +152,10 @@
                     android:layout_toStartOf="@+id/filterProductBtn"
                     android:background="@drawable/search_bg"
                     android:drawableLeft="@drawable/ic_search_black_24dp"
-                    app:iconifiedByDefault="false"/>
+                    android:drawablePadding="10dp"
+                    android:hint="Search something..."
+                    android:padding="10dp"
+                    android:inputType="textVisiblePassword"/>
                 <!--Filter Product-->
                 <ImageButton
                     android:id="@+id/filterProductBtn"
@@ -189,13 +170,14 @@
 
                 <TextView
                     android:id="@+id/filterTV"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/btn_search"
+                    android:layout_width="140dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@+id/btnSearch"
                     android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
                     android:fontFamily="@font/corben_bold"
-                    android:text="Our Products"
+                    android:text="New Release"
                     android:textColor="@color/black"
                     android:textSize="14dp" />
                 <!--Show product-->

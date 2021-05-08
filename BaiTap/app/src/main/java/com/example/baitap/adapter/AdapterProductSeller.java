@@ -147,7 +147,15 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
         Integer quantity_XL_size = modelProducts.getQuantity_XL_size();
 
         TV_productName.setText(name);
-        TV_productDes.setText(description);
+        String pro = "No description !!!";
+        try {
+            if (description == null) {
+                TV_productDes.setText(pro);
+            }
+            TV_productDes.setText(pro);
+        }catch (NullPointerException ex){
+
+        }
         TV_QuantityS.setText(quantity_S_size.toString());
         TV_QuantityM.setText(quantity_M_size.toString());
         TV_QuantityL.setText(quantity_L_size.toString());

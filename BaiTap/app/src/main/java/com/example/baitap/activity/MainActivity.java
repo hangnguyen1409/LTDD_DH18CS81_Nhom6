@@ -2,6 +2,8 @@ package com.example.baitap.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -29,12 +31,12 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    ViewFlipper viewFlipperGirl,viewFlipperBoy;
-    private TextView tvShopName,tvTabProducts,tvTabOrders,filterTV;
+    ViewFlipper viewFlipper;
+    private TextView tvShopName,filterTV;
     private ImageButton editProfileBtn,addProductBtn,filterProductBtn,resetbtn;
     private RelativeLayout RLProducts,RLOrders;
     RecyclerView productShowRV;
-    SearchView btn_search;
+    EditText btn_search;
 
     public static Boolean isAuthenticated = false;
 
@@ -53,11 +55,8 @@ public class MainActivity extends AppCompatActivity {
         //Reference
         init();
 
-        //Adapter for ViewFlipperGirl,ViewFlipperBoy
-        viewFlipperGirl.setFlipInterval(3000);
-        viewFlipperGirl.setAutoStart(true);
-        viewFlipperBoy.setFlipInterval(3000);
-        viewFlipperBoy.setAutoStart(true);
+        viewFlipper.setFlipInterval(3000);
+        viewFlipper.setAutoStart(true);
 
         // lấy ID cate
         Intent i = getIntent();
@@ -86,23 +85,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, CartActivity.class));
             }
         });
-
-        //Tab Products,Tab Orders
-        tvTabProducts.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Load Products
-                showProductsTab();
-            }
-        });
-        tvTabOrders.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showOrdersTab();
-                //Load Orders
-            }
-        });
-
         filterProductBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -117,16 +99,34 @@ public class MainActivity extends AppCompatActivity {
                 loadProducts();
             }
         });
-        btn_search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        btn_search.addTextChangedListener(new TextWatcher() {
             @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
             }
 
             @Override
-            public boolean onQueryTextChange(String newText) {
-                adapterProductSeller.getFilter().filter(newText);
-                return false;
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                try
+                {
+                    try
+                    {
+                        MainActivity.this.adapterProductSeller.getFilter().filter(s);
+
+                    }catch (IndexOutOfBoundsException index){
+                        index.printStackTrace();
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    ex.printStackTrace();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
     }
@@ -153,17 +153,14 @@ public class MainActivity extends AppCompatActivity {
         tvShopName = findViewById(R.id.tvShopName);
         addProductBtn = findViewById(R.id.addProductBtn);
         editProfileBtn = findViewById(R.id.editProfileBtn);
-        tvTabProducts = findViewById(R.id.tvTabProducts);
-        tvTabOrders = findViewById(R.id.tvTabOrders);
         RLProducts = findViewById(R.id.RLProducts);
         RLOrders = findViewById(R.id.RLOrders);
-        viewFlipperGirl = findViewById(R.id.view_flipper_girl);
-        viewFlipperBoy = findViewById(R.id.view_flipper_boy);
+        viewFlipper= findViewById(R.id.view_flipper);
         productShowRV = findViewById(R.id.productShowRV);
         filterTV = findViewById(R.id.filterTV);
         filterProductBtn = findViewById(R.id.filterProductBtn);
         resetbtn = findViewById(R.id.Resetbtn);
-        btn_search = (SearchView)findViewById(R.id.btn_search);;
+        btn_search = findViewById(R.id.btnSearch);;
         if(cart!=null){
 
         }else {
@@ -179,17 +176,4 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void showProductsTab() {
-        RLProducts.setVisibility(View.VISIBLE);
-        RLOrders.setVisibility(View.GONE);
-
-        tvTabProducts.setBackgroundResource(R.drawable.shape_tab_product_order_fill);
-        tvTabOrders.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-    }
-    private void showOrdersTab() {
-        RLOrders.setVisibility(View.VISIBLE);
-        RLProducts.setVisibility(View.GONE);
-        tvTabOrders.setBackgroundResource(R.drawable.shape_tab_product_order_fill);
-        tvTabProducts.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-    }
 }
