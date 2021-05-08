@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".LoginActivity">
+    android:background="@drawable/signup_bg"
+    tools:context=".activity.LoginActivity">
 
     <TextView
         android:layout_width="wrap_content"
@@ -39,7 +40,7 @@
 
     <Button
         android:id="@+id/butndangnhap"
-        android:layout_width="350dp"
+        android:layout_width="124dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:background="@drawable/round_border"
