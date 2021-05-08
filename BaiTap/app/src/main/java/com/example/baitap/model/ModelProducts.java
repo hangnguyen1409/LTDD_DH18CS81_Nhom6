@@ -35,6 +35,10 @@ public class ModelProducts {
         this.quantity_XL_size = quantity_XL_size;
     }
 
+    public Float totalPriceAllSize(){
+        return (this.quantity_S_size + this.quantity_L_size + this.quantity_M_size + this.quantity_XL_size)*this.price;
+    }
+
     public Integer getCategory() {
         return category;
     }

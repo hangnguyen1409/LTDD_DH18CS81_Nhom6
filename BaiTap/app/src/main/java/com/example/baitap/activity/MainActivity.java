@@ -36,7 +36,9 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView productShowRV;
     SearchView btn_search;
 
-    public static ModelUser Login;
+    public static Boolean isAuthenticated = false;
+
+    public static ModelUser Login = new ModelUser();
 
     AdapterProductSeller adapterProductSeller;
     public static ArrayList<ModelProducts> cart;
