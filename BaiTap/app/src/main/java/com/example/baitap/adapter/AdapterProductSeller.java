@@ -69,7 +69,7 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
             holder.TV_QuantityM.setText(quantity_M_size.toString());
             holder.TV_QuantityL.setText(quantity_L_size.toString());
             holder.TV_QuantityXL.setText(quantity_XL_size.toString());
-            holder.TV_originalPrice.setText(price.toString() + " VNĐ");
+            holder.TV_originalPrice.setText(String.format("%.0f", price) + " VNĐ");
             try {
                 Glide.with(context).load(img).into(holder.IV_productIcon);;
             }
@@ -93,7 +93,7 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
                         holder.TV_discountNote.setText(promotion.getName());
                         holder.TV_discountNote.setVisibility(View.VISIBLE);
                         Float discountPrice = productList.get(position).getPrice() - (productList.get(position).getPrice() * promotion.getDiscount());
-                        holder.TV_discountPrice.setText(discountPrice.toString()+" VNĐ");
+                        holder.TV_discountPrice.setText(String.format("%.0f", discountPrice) + "VNĐ");
                         holder.TV_discountPrice.setVisibility(View.VISIBLE);
                         holder.TV_originalPrice.setPaintFlags(holder.TV_originalPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
                     }
