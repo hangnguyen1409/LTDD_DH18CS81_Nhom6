@@ -2,12 +2,14 @@ package com.example.baitap.adapter;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -15,10 +17,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.baitap.R;
+import com.example.baitap.activity.AllCategories;
+import com.example.baitap.activity.MainActivity;
 import com.example.baitap.api.ApiInterface;
 import com.example.baitap.api.RetrofitClient;
 import com.example.baitap.model.ModelProducts;
 import com.example.baitap.model.Promotion;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -106,10 +111,88 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    detailsBottomSheet(modelProducts);
                 }
             });
 
+    }
+
+    private void detailsBottomSheet(ModelProducts modelProducts) {
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(context);
+        View view = LayoutInflater.from(context).inflate(R.layout.product_detail_seller, null);
+        bottomSheetDialog.setContentView(view);
+
+        ImageButton backBtn = view.findViewById(R.id.backBtn);
+        ImageView IV_productIcon = view.findViewById(R.id.IV_productIcon);
+        TextView TV_discountNote = view.findViewById(R.id.TV_discountNote);
+        TextView TV_productName = view.findViewById(R.id.TV_productName);
+        TextView TV_productDes = view.findViewById(R.id.TV_productDes);
+
+        TextView TV_QuantityS = view.findViewById(R.id.TV_QuanS);
+        TextView TV_QuantityM = view.findViewById(R.id.TV_QuanM);
+        TextView TV_QuantityL = view.findViewById(R.id.TV_QuanL);
+        TextView TV_QuantityXL = view.findViewById(R.id.TV_QuanXL);
+        TextView TV_originalPrice = view.findViewById(R.id.TV_originalPrice);
+        TextView TV_discountPrice = view.findViewById(R.id.TV_discountPrice);
+
+        String img = modelProducts.getImage();
+        String name = modelProducts.getName();
+        String description = modelProducts.getDescription();
+        Integer id = modelProducts.getId();
+        Float price = modelProducts.getPrice();
+        Integer promotion_id = modelProducts.getPromotion_id();
+        Integer quantity_L_size = modelProducts.getQuantity_L_size();
+        Integer quantity_M_size = modelProducts.getQuantity_M_size();
+        Integer quantity_S_size = modelProducts.getQuantity_S_size();
+        Integer quantity_XL_size = modelProducts.getQuantity_XL_size();
+
+        TV_productName.setText(name);
+        TV_productDes.setText(description);
+        TV_QuantityS.setText(quantity_S_size.toString());
+        TV_QuantityM.setText(quantity_M_size.toString());
+        TV_QuantityL.setText(quantity_L_size.toString());
+        TV_QuantityXL.setText(quantity_XL_size.toString());
+        TV_originalPrice.setText(String.format("%.0f", price) + " VNĐ");
+        if (promotion_id == null) {
+            //not discount
+            TV_discountNote.setVisibility(View.GONE);
+            TV_discountPrice.setVisibility(View.GONE);
+        } else {
+            //discount
+            ApiInterface apiInterface;
+            apiInterface = RetrofitClient.getRetrofitClient().create(ApiInterface.class);
+            Call<Promotion> Promo = apiInterface.getPromotioById(promotion_id);
+            Promo.enqueue(new Callback<Promotion>() {
+                @Override
+                public void onResponse(Call<Promotion> call, Response<Promotion> response) {
+                    Promotion promotion = response.body();
+                    TV_discountNote.setText(promotion.getName());
+                    TV_discountNote.setVisibility(View.VISIBLE);
+                    Float discountPrice = price - (price * promotion.getDiscount());
+                    TV_discountPrice.setText(String.format("%.0f", discountPrice) + "VNĐ");
+                    TV_discountPrice.setVisibility(View.VISIBLE);
+                    TV_originalPrice.setPaintFlags(TV_originalPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                }
+
+                @Override
+                public void onFailure(Call<Promotion> call, Throwable t) {
+                }
+            });
+        }
+        try {
+            Glide.with(context).load(img).into(IV_productIcon);
+            ;
+        } catch (Exception ex) {
+            IV_productIcon.setImageResource(R.drawable.ic_shopping_cart);
+        }
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bottomSheetDialog.dismiss();
+            }
+        });
+        bottomSheetDialog.show();
     }
 
     @Override
@@ -126,16 +209,20 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
         protected FilterResults performFiltering(CharSequence constraint) {
 
             List<ModelProducts> filteredList = new ArrayList<>();
-
-            if (constraint == null || constraint.length() == 0) {
-                filteredList.addAll(productListFull);
-            } else {
-                for (ModelProducts item: productListFull) {
-                    if (item.toString().toLowerCase().contains(constraint.toString().toLowerCase())) {
-                        filteredList.add(item);
+            try {
+                if (constraint == null || constraint.length() == 0) {
+                    filteredList.addAll(productListFull);
+                } else {
+                    for (ModelProducts item: productListFull) {
+                        if (item.toString().toLowerCase().contains(constraint.toString().toLowerCase())) {
+                            filteredList.add(item);
+                        }
                     }
                 }
+            } catch (NullPointerException ex){
+
             }
+
             FilterResults filterResults = new FilterResults();
             filterResults.values = filteredList;
             return filterResults;
