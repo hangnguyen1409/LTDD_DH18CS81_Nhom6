@@ -29,6 +29,7 @@ import org.json.JSONObject;
 import org.json.JSONStringer;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -85,20 +86,26 @@ public class CartActivity extends AppCompatActivity {
         btnPay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(MainActivity.isAuthenticated){
-                    try {
-                        if(creatReceipt()){
-                            MainActivity.cart.clear();
-                            hide();
-                            cartAdapter.notifyDataSetChanged();
+                if(MainActivity.cart.toArray().length > 0){
+                    if(MainActivity.isAuthenticated){
+                        try {
+                            if(creatReceipt()){
+                                MainActivity.cart.clear();
+                                hide();
+                                cartAdapter.notifyDataSetChanged();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }else {
-                    //Nếu chưa đăng nhập thì chuyển qua Login activity
+                    }else {
+                        //Nếu chưa đăng nhập thì chuyển qua Login activity
 //                    startActivity(new Intent(CartActivity.this, /*Login.class*/));
+                    }
                 }
+                else {
+                    noProductAlert();
+                }
+
 //
             }
         });
@@ -122,6 +129,7 @@ public class CartActivity extends AppCompatActivity {
     }
 
     private boolean creatReceipt() throws JSONException {
+
         ModelReceipt obj = new ModelReceipt(MainActivity.Login.getUsername(),MainActivity.Login.getEmail(),
                 mappingCartIntoReceipDetail());
         System.out.println(obj);
@@ -138,7 +146,6 @@ public class CartActivity extends AppCompatActivity {
                     int statusCode  = response.code();
                     Toast.makeText(getApplicationContext(),response.message(),Toast.LENGTH_SHORT).show();
                 }
-
             }
 
             @Override
@@ -146,14 +153,14 @@ public class CartActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),"Oh no, Have an error!!! Please try again",Toast.LENGTH_SHORT).show();
             }
         });
-
         return true;
     }
 
-    private ArrayList<ModelReciptDetail> mappingCartIntoReceipDetail() {
-        ArrayList<ModelReciptDetail> listP = new ArrayList<>();
+    private List<ModelReciptDetail> mappingCartIntoReceipDetail() {
+        List<ModelReciptDetail> listP = new ArrayList<>();
         for (ModelProducts p: MainActivity.cart){
-            ModelReciptDetail product = new ModelReciptDetail(p.getId(),
+            ModelReciptDetail product = new ModelReciptDetail(
+                    p.getId(),
                     p.getQuantity_S_size(), p.getQuantity_M_size(),
                     p.getQuantity_L_size(), p.getQuantity_XL_size(),
                     p.totalPriceAllSize());
@@ -161,6 +168,7 @@ public class CartActivity extends AppCompatActivity {
         }
         return listP;
     }
+
 
 
     private void noProductAlert() {

@@ -2,13 +2,14 @@ package com.example.baitap.model;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ModelReceipt {
     private String username;
     private String email;
-    private ArrayList<ModelReciptDetail> listProduct;
+    private List<ModelReciptDetail> listProduct;
 
-    public ModelReceipt( String customerUsername, String email, ArrayList<ModelReciptDetail> listProduct){
+    public ModelReceipt( String customerUsername, String email, List<ModelReciptDetail> listProduct){
         this.username = customerUsername;
         this.email = email;
         this.listProduct = listProduct;
@@ -23,11 +24,11 @@ public class ModelReceipt {
                 '}';
     }
 
-    public ArrayList<ModelReciptDetail> getListProduct() {
+    public List<ModelReciptDetail> getListProduct() {
         return listProduct;
     }
 
-    public void setListProduct(ArrayList<ModelReciptDetail> listProduct) {
+    public void setListProduct(List<ModelReciptDetail> listProduct) {
         this.listProduct = listProduct;
     }
 

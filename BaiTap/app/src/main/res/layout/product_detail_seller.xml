@@ -43,6 +43,7 @@
         android:layout_below="@+id/IV_productIcon"
         android:orientation="vertical"
         android:padding="10dp">
+
         <TextView
             android:id="@+id/TV_discountNote"
             android:layout_width="wrap_content"
@@ -115,10 +116,12 @@
             android:textSize="20dp"
             android:text="xl"
             android:textColor="@color/black"/>
+
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp">
+
             <TextView
                 android:id="@+id/TV_discountPrice"
                 android:layout_width="wrap_content"
@@ -126,16 +129,24 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="10dp"
                 android:text="$150.000"
-                android:textColor="#808080"/>
+                android:textColor="#808080" />
 
             <TextView
-                android:layout_toEndOf="@+id/TV_discountPrice"
                 android:id="@+id/TV_originalPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/TV_discountPrice"
                 android:text="$200.000"
-                android:textColor="#808080"/>
+                android:textColor="#808080" />
+
         </RelativeLayout>
+
+        <Button
+            android:id="@+id/addProdct"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_tab_product_order_fill"
+            android:text="ADD prodcut" />
 
     </LinearLayout>
 </RelativeLayout>
