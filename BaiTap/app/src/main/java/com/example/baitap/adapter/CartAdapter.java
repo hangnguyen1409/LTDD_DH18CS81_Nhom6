@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.baitap.R;
 import com.example.baitap.activity.MainActivity;
+import com.example.baitap.activity.ProductActivity;
 import com.example.baitap.model.ModelProducts;
 import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
@@ -80,7 +81,7 @@ public class CartAdapter extends BaseAdapter {
             public void onClick(View v) {
                 int quan = Integer.parseInt(((EditText)viewProduct.findViewById(R.id.edt_quantityProductS)).getText().toString());
                 ((EditText)viewProduct.findViewById(R.id.edt_quantityProductS)).setText(String.valueOf(quan+1));
-                MainActivity.cart.get(position).setQuantity_S_size(quan+1);
+                ProductActivity.cart.get(position).setQuantity_S_size(quan+1);
                 ((TextView)viewProduct.findViewById(R.id.priceproduct)).setText(String.format("%.0f", allPrice(product)));
             }
         });
@@ -91,7 +92,7 @@ public class CartAdapter extends BaseAdapter {
                 int quan = Integer.parseInt(((EditText)viewProduct.findViewById(R.id.edt_quantityProductS)).getText().toString());
                 if (quan >=1){
                     ((EditText)viewProduct.findViewById(R.id.edt_quantityProductS)).setText(String.valueOf(quan-1));
-                    MainActivity.cart.get(position).setQuantity_S_size(quan-1);
+                    ProductActivity.cart.get(position).setQuantity_S_size(quan-1);
                     ((TextView)viewProduct.findViewById(R.id.priceproduct)).setText(String.format("%.0f", allPrice(product)));
                 }else{
                     ((EditText)viewProduct.findViewById(R.id.edt_quantityProductS)).setText("0");
@@ -104,7 +105,7 @@ public class CartAdapter extends BaseAdapter {
             public void onClick(View v) {
                 int quan = Integer.parseInt(((EditText)viewProduct.findViewById(R.id.edt_quantityProductM)).getText().toString());
                 ((EditText)viewProduct.findViewById(R.id.edt_quantityProductM)).setText(String.valueOf(quan+1));
-                MainActivity.cart.get(position).setQuantity_M_size(quan+1);
+                ProductActivity.cart.get(position).setQuantity_M_size(quan+1);
                 ((TextView)viewProduct.findViewById(R.id.priceproduct)).setText(String.format("%.0f", allPrice(product)));
             }
         });
@@ -115,7 +116,7 @@ public class CartAdapter extends BaseAdapter {
                 int quan = Integer.parseInt(((EditText)viewProduct.findViewById(R.id.edt_quantityProductM)).getText().toString());
                 if (quan >=1){
                     ((EditText)viewProduct.findViewById(R.id.edt_quantityProductM)).setText(String.valueOf(quan-1));
-                    MainActivity.cart.get(position).setQuantity_M_size(quan-1);
+                    ProductActivity.cart.get(position).setQuantity_M_size(quan-1);
                     ((TextView)viewProduct.findViewById(R.id.priceproduct)).setText(String.format("%.0f", allPrice(product)));
                 }else{
                     ((EditText)viewProduct.findViewById(R.id.edt_quantityProductM)).setText("0");
@@ -128,7 +129,7 @@ public class CartAdapter extends BaseAdapter {
             public void onClick(View v) {
                 int quan = Integer.parseInt(((EditText)viewProduct.findViewById(R.id.edt_quantityProductL)).getText().toString());
                 ((EditText)viewProduct.findViewById(R.id.edt_quantityProductL)).setText(String.valueOf(quan+1));
-                MainActivity.cart.get(position).setQuantity_L_size(quan+1);
+                ProductActivity.cart.get(position).setQuantity_L_size(quan+1);
                 ((TextView)viewProduct.findViewById(R.id.priceproduct)).setText(String.format("%.0f", allPrice(product)));
             }
         });
@@ -139,7 +140,7 @@ public class CartAdapter extends BaseAdapter {
                 int quan = Integer.parseInt(((EditText)viewProduct.findViewById(R.id.edt_quantityProductL)).getText().toString());
                 if (quan >=1){
                     ((EditText)viewProduct.findViewById(R.id.edt_quantityProductL)).setText(String.valueOf(quan-1));
-                    MainActivity.cart.get(position).setQuantity_L_size(quan-1);
+                    ProductActivity.cart.get(position).setQuantity_L_size(quan-1);
                     ((TextView)viewProduct.findViewById(R.id.priceproduct)).setText(String.format("%.0f", allPrice(product)));
                 }else{
                     ((EditText)viewProduct.findViewById(R.id.edt_quantityProductL)).setText("0");
@@ -152,7 +153,7 @@ public class CartAdapter extends BaseAdapter {
             public void onClick(View v) {
                 int quan = Integer.parseInt(((EditText)viewProduct.findViewById(R.id.edt_quantityProductXL)).getText().toString());
                 ((EditText)viewProduct.findViewById(R.id.edt_quantityProductXL)).setText(String.valueOf(quan+1));
-                MainActivity.cart.get(position).setQuantity_XL_size(quan+1);
+                ProductActivity.cart.get(position).setQuantity_XL_size(quan+1);
                 ((TextView)viewProduct.findViewById(R.id.priceproduct)).setText(String.format("%.0f", allPrice(product)));
             }
         });
@@ -163,7 +164,7 @@ public class CartAdapter extends BaseAdapter {
                 int quan = Integer.parseInt(((EditText)viewProduct.findViewById(R.id.edt_quantityProductXL)).getText().toString());
                 if (quan >=1){
                     ((EditText)viewProduct.findViewById(R.id.edt_quantityProductXL)).setText(String.valueOf(quan-1));
-                    MainActivity.cart.get(position).setQuantity_XL_size(quan-1);
+                    ProductActivity.cart.get(position).setQuantity_XL_size(quan-1);
                     ((TextView)viewProduct.findViewById(R.id.priceproduct)).setText(String.format("%.0f", allPrice(product)));
                 }else{
                     ((EditText)viewProduct.findViewById(R.id.edt_quantityProductXL)).setText("0");

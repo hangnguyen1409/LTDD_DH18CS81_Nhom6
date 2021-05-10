@@ -16,6 +16,7 @@ import com.example.baitap.R;
 import com.example.baitap.activity.AllCategories;
 import com.example.baitap.activity.CartActivity;
 import com.example.baitap.activity.MainActivity;
+import com.example.baitap.activity.ProductActivity;
 import com.example.baitap.api.ApiInterface;
 import com.example.baitap.api.RetrofitClient;
 import com.example.baitap.model.CategoryModel;
@@ -55,7 +56,7 @@ public class AllCategoryAdapter extends RecyclerView.Adapter<AllCategoryAdapter.
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent i = new Intent(context, MainActivity.class);
+                    Intent i = new Intent(context, ProductActivity.class);
                     i.putExtra("Id_Cate", modelCate.getId());
                     context.startActivity(i);
                 }

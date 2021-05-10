@@ -1,10 +1,18 @@
 package com.example.baitap.activity;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -32,148 +40,89 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
 
     ViewFlipper viewFlipper;
-    private TextView tvShopName,filterTV;
-    private ImageButton editProfileBtn,addProductBtn,filterProductBtn,resetbtn;
-    private RelativeLayout RLProducts,RLOrders;
-    RecyclerView productShowRV;
-    EditText btn_search;
+    DrawerLayout drawerLayout;
 
-    public static Boolean isAuthenticated = false;
 
-    public static ModelUser Login = new ModelUser();
-
-    AdapterProductSeller adapterProductSeller;
-    public static ArrayList<ModelProducts> cart;
-    public static List<ModelProducts> listProduct;
-    ApiInterface apiInterface;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        listProduct = new ArrayList<>();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //Reference
-        init();
+
+        drawerLayout = findViewById(R.id.drawer_layout);
+        viewFlipper= findViewById(R.id.view_flipper);
 
         viewFlipper.setFlipInterval(3000);
         viewFlipper.setAutoStart(true);
 
-        // lấy ID cate
-        Intent i = getIntent();
-        int idCate = i.getIntExtra("Id_Cate", 0);
-        if (idCate == 0) {
-            loadProducts();
-        } else {
-            apiInterface = RetrofitClient.getRetrofitClient().create(ApiInterface.class);
-            Call<List<ModelProducts>> callProductById = apiInterface.getAllProductById(idCate);
-            callProductById.enqueue(new Callback<List<ModelProducts>>() {
-                @Override
-                public void onResponse(Call<List<ModelProducts>> call, Response<List<ModelProducts>> response) {
-                    getAllProducts(response.body());
-                }
-
-                @Override
-                public void onFailure(Call<List<ModelProducts>> call, Throwable t) {
-                    Log.i("mess", "err");
-                }
-            });
-        }
-        //add Product
-        addProductBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, CartActivity.class));
-            }
-        });
-        filterProductBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, AllCategories.class);
-                startActivity(i);
-
-            }
-        });
-        resetbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loadProducts();
-            }
-        });
-        btn_search.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                try
-                {
-                    try
-                    {
-                        MainActivity.this.adapterProductSeller.getFilter().filter(s);
-
-                    }catch (IndexOutOfBoundsException index){
-                        index.printStackTrace();
-                    }
-
-                }
-                catch (Exception ex)
-                {
-                    ex.printStackTrace();
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-    }
-    private void loadProducts(){
-        apiInterface = RetrofitClient.getRetrofitClient().create(ApiInterface.class);
-        Call<List<ModelProducts>> call = apiInterface.getAllProducts();
-
-        call.enqueue(new Callback<List<ModelProducts>>() {
-            @Override
-            public void onResponse(Call<List<ModelProducts>> call, Response<List<ModelProducts>> response) {
-                listProduct = response.body();
-                getAllProducts(listProduct);
-            }
-
-            @Override
-            public void onFailure(Call<List<ModelProducts>> call, Throwable t) {
-
-            }
-        });
 
     }
+    public void ClickMenu(View view){
+        openDrawer(drawerLayout);
+    }
 
-    private void init() {
-        tvShopName = findViewById(R.id.tvShopName);
-        addProductBtn = findViewById(R.id.addProductBtn);
-        editProfileBtn = findViewById(R.id.editProfileBtn);
-        RLProducts = findViewById(R.id.RLProducts);
-        RLOrders = findViewById(R.id.RLOrders);
-        viewFlipper= findViewById(R.id.view_flipper);
-        productShowRV = findViewById(R.id.productShowRV);
-        filterTV = findViewById(R.id.filterTV);
-        filterProductBtn = findViewById(R.id.filterProductBtn);
-        resetbtn = findViewById(R.id.Resetbtn);
-        btn_search = findViewById(R.id.btnSearch);;
-        if(cart!=null){
+    public static void openDrawer(DrawerLayout drawerLayout) {
+        drawerLayout.openDrawer(GravityCompat.START);
 
-        }else {
-            cart = new ArrayList<>();
+    }
+    public void ClickLogo(View view){
+        closeDrawer(drawerLayout);
+    }
+
+    public static void closeDrawer(DrawerLayout drawerLayout) {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
         }
     }
-    public void getAllProducts(List<ModelProducts> productsList){
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);
-        productShowRV.setLayoutManager(layoutManager);
-        adapterProductSeller = new AdapterProductSeller(this,productsList);
-        productShowRV.setAdapter(adapterProductSeller);
-        adapterProductSeller.notifyDataSetChanged();
-
+    public void ClickHome(View view){
+        recreate();
+    }
+    public void ClickProduct(View view){
+        redirectActivity(this,ProductActivity.class);
     }
 
+    public void ClickCart(View view){
+        redirectActivity(this,CartActivity.class);
+    }
+    //About Us - Thieu form
+    public void ClickLogout(View view){
+        redirectActivity(this,LoginActivity.class);
+    }
+
+    public void ClickExit(View view){
+        logout(this);
+    }
+
+    public static void logout(Activity activity) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder.setTitle("Exit");
+        builder.setTitle("Do you still want to exit ?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                activity.finishAffinity();
+                System.exit(0);
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.show();
+    }
+
+    public static void redirectActivity(Activity activity,Class aclass) {
+        Intent intent = new Intent(activity,aclass);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        activity.startActivity(intent);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        closeDrawer(drawerLayout);
+    }
 }
+

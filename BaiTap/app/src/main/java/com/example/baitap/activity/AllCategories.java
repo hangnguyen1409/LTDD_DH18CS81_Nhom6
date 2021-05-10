@@ -42,7 +42,7 @@ public class AllCategories extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(AllCategories.this, MainActivity.class));
+                startActivity(new Intent(AllCategories.this, ProductActivity.class));
             }
         });
 

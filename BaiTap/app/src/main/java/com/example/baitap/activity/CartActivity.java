@@ -1,6 +1,7 @@
 package com.example.baitap.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -38,7 +39,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CartActivity extends AppCompatActivity {
     CartAdapter cartAdapter;
-
+    DrawerLayout drawerLayout;
     ListView listViewProduct;
     Button btnPay, btnReset;
     ImageButton btnBack;
@@ -48,19 +49,20 @@ public class CartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_product);
+        drawerLayout = findViewById(R.id.drawer_layout);
 //          Tạo đối tượng để test, khi nào các hoạt động khác hoàn thành sẽ xóa
 //        Con phần xóa sản phẩm trong Cart,
 //                chuyển Trang khi chưa login,
 //        phần add sản phẩm vào cart(Lấy thông tin từ sản phẩm khi được click)
-        MainActivity.isAuthenticated = true;
-        MainActivity.Login.setId(1);
-        MainActivity.Login.setUsername("tuan");
-        MainActivity.Login.setEmail("1851050167tuan@ou.edu.vn");
-        MainActivity.cart.add(new ModelProducts(1,"áo khoác",1
+        ProductActivity.isAuthenticated = true;
+        ProductActivity.Login.setId(1);
+        ProductActivity.Login.setUsername("tuan");
+        ProductActivity.Login.setEmail("1851050167tuan@ou.edu.vn");
+        ProductActivity.cart.add(new ModelProducts(1,"áo khoác",1
                 ,"https://cdn3.yame.vn/pimg/ao-thun-nam-y2010-basic-bf01-0019691/435b20ea-0323-1700-c5fe-001742e83abe.jpg?w=440",
                 "Áo Khoác Classic Activewear M5 Màu Xám Trắng", (float) 200000, null,5,5,5,5));
 
-        MainActivity.cart.add(new ModelProducts(1,"áo khoác",2
+        ProductActivity.cart.add(new ModelProducts(1,"áo khoác",2
                 ,"https://cdn3.yame.vn/pimg/ao-khoac-du-co-non-y2010-f04-0019699/98fdfb6e-0d53-0900-0600-0017214fa534.jpg?w=440",
                 "Áo Khoác Classic Activewear M5 Màu Xám Trắng", (float) 200000, null,2,2,2,2));
 
@@ -78,7 +80,7 @@ public class CartActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 noProductAlert();
-                MainActivity.cart.clear();
+                ProductActivity.cart.clear();
                 hide();
                 cartAdapter.notifyDataSetChanged();
             }
@@ -86,11 +88,11 @@ public class CartActivity extends AppCompatActivity {
         btnPay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(MainActivity.cart.toArray().length > 0){
-                    if(MainActivity.isAuthenticated){
+                if(ProductActivity.cart.toArray().length > 0){
+                    if(ProductActivity.isAuthenticated){
                         try {
                             if(creatReceipt()){
-                                MainActivity.cart.clear();
+                                ProductActivity.cart.clear();
                                 hide();
                                 cartAdapter.notifyDataSetChanged();
                             }
@@ -111,7 +113,7 @@ public class CartActivity extends AppCompatActivity {
         });
 
 
-        cartAdapter = new CartAdapter(MainActivity.cart);
+        cartAdapter = new CartAdapter(ProductActivity.cart);
 
 
         listViewProduct.setAdapter(cartAdapter);
@@ -121,16 +123,53 @@ public class CartActivity extends AppCompatActivity {
 
     private int total() {
         int total = 0;
-        for (ModelProducts products : MainActivity.cart
+        for (ModelProducts products : ProductActivity.cart
         ) {
             total+=products.totalPriceAllSize();
         }
         return total;
     }
 
+    public void ClickMenu(View view){
+        MainActivity.openDrawer(drawerLayout);
+    }
+
+    public void ClickLogo(View view){
+        MainActivity.closeDrawer(drawerLayout);
+    }
+
+    public void ClickHome(View view){
+        MainActivity.redirectActivity(this,MainActivity.class);
+    }
+    public void ClickProduct(View view){
+        MainActivity.redirectActivity(this,ProductActivity.class);
+    }
+
+    public void ClickCart(View view){
+        recreate();
+
+    }
+    //About Us - Didn't create form
+
+    public void ClickLogout(View view){
+        MainActivity.redirectActivity(this,LoginActivity.class);
+    }
+
+    public void ClickExit(View view){
+        MainActivity.logout(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MainActivity.closeDrawer(drawerLayout);
+    }
+
+
+
     private boolean creatReceipt() throws JSONException {
 
-        ModelReceipt obj = new ModelReceipt(MainActivity.Login.getUsername(),MainActivity.Login.getEmail(),
+        ModelReceipt obj = new ModelReceipt(ProductActivity.Login.getUsername(),ProductActivity.Login.getEmail(),
                 mappingCartIntoReceipDetail());
         System.out.println(obj);
         ApiInterface apiInterface;
@@ -158,7 +197,7 @@ public class CartActivity extends AppCompatActivity {
 
     private List<ModelReciptDetail> mappingCartIntoReceipDetail() {
         List<ModelReciptDetail> listP = new ArrayList<>();
-        for (ModelProducts p: MainActivity.cart){
+        for (ModelProducts p:ProductActivity.cart){
             ModelReciptDetail product = new ModelReciptDetail(
                     p.getId(),
                     p.getQuantity_S_size(), p.getQuantity_M_size(),
@@ -172,13 +211,13 @@ public class CartActivity extends AppCompatActivity {
 
 
     private void noProductAlert() {
-        if (MainActivity.cart.isEmpty()){
+        if (ProductActivity.cart.isEmpty()){
             Toast.makeText(getApplicationContext(),"no product in cart!!!",Toast.LENGTH_LONG).show();
         }
     }
 
     private void hide() {
-        if (MainActivity.cart.isEmpty()){
+        if (ProductActivity.cart.isEmpty()){
             tvEmpty.setVisibility(View.VISIBLE);
             totalText.setVisibility(View.INVISIBLE);
             totalPrice.setVisibility(View.INVISIBLE);
