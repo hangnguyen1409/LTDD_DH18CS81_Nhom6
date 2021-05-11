@@ -360,12 +360,6 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
                 }
             }
         });
-        continueBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
     }
 
     private void detailsBottomSheet(ModelProducts modelProducts) {
