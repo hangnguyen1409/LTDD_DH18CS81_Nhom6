@@ -5,7 +5,7 @@ import com.example.baitap.model.ModelCate;
 import com.example.baitap.model.ModelProducts;
 import com.example.baitap.model.ModelReceipt;
 import com.example.baitap.model.Promotion;
-
+import com.example.baitap.model.SignupResponse;
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -36,4 +36,9 @@ public interface ApiInterface {
 
     @GET ("api/get_cate_by_id/{id}")
     Call<ModelCate> getAllCateById(@Path("id") int id_cate);
+
+    @POST("api/signup_user")
+    Call<Mess> signupUser(@Body SignupResponse response);
+
+
 }
