@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@color/white">
+
+        <com.blogspot.atifsoftwares.circularimageview.CircularImageView
+            android:id="@+id/productIV"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_shopping_cart" />
+
+        <TextView
+            android:id="@+id/titleTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/productIV"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:text="Product Name"
+            android:textSize="16dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:textAlignment="center"
+            android:id="@+id/descriptionTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/titleTV"
+            android:layout_centerHorizontal="true"
+            android:text="Description: "
+            android:textSize="16dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/discountNoteTV"
+            android:layout_width="50dp"
+            android:layout_height="20dp"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="5dp"
+            android:background="@drawable/shape_textview_product_fill"
+            android:text="10% OFF"
+            android:textAlignment="center"
+            android:textColor="@color/colorGreen"
+            android:textSize="10dp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+        <TextView
+            android:id="@+id/originalPriceTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="textStart"
+            android:padding="10dp"
+            android:text="200.000"
+            android:textColor="#808080"/>
+        <TextView
+            android:layout_toEndOf="@+id/originalPriceTV"
+            android:id="@+id/discountPriceTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="textStart"
+            android:padding="10dp"
+            android:text="150.000"
+            android:textColor="#808080"/>
+        <TextView
+            android:id="@+id/finalPriceTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:textAlignment="textStart"
+            android:padding="10dp"
+            android:text="Final Price"
+            android:textColor="#808080"/>
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+
+        <ImageButton
+            android:id="@+id/decrementBtnS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_gravity="center_vertical"
+            android:background="@null"
+            android:src="@drawable/ic_remove_24"/>
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/quanS"
+            android:layout_margin="10dp"
+            android:textAlignment="center"
+            android:layout_below="@+id/titleTV"
+            android:text="Quantity S"
+            android:textStyle="bold"
+            android:textSize="16dp"/>
+
+        <ImageButton
+            android:id="@+id/incrementBtnS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="5dp"
+            android:background="@null"
+            android:src="@drawable/ic_add_24" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+
+        <ImageButton
+            android:id="@+id/decrementBtnM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="5dp"
+            android:background="@null"
+            android:src="@drawable/ic_remove_24"/>
+        <TextView
+            android:textAlignment="center"
+            android:layout_margin="10dp"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/quanM"
+            android:layout_gravity="center"
+            android:layout_below="@+id/quanM"
+            android:text="Quantity M"
+            android:textStyle="bold"
+            android:textSize="16dp"/>
+
+        <ImageButton
+            android:layout_margin="5dp"
+            android:id="@+id/incrementBtnM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@null"
+            android:src="@drawable/ic_add_24"/>
+    </LinearLayout>
+    <LinearLayout
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+
+        <ImageButton
+            android:layout_margin="5dp"
+            android:id="@+id/decrementBtnL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="6dp"
+            android:layout_gravity="center_vertical"
+            android:background="@null"
+            android:src="@drawable/ic_remove_24"/>
+
+        <TextView
+            android:textAlignment="center"
+            android:layout_margin="10dp"
+            android:id="@+id/quanL"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/quanS"
+            android:layout_gravity="center"
+            android:text="Quantity L"
+            android:textSize="16dp"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:layout_margin="5dp"
+            android:id="@+id/incrementBtnL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@null"
+            android:src="@drawable/ic_add_24"/>
+    </LinearLayout>
+    <LinearLayout
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+
+        <ImageButton
+            android:layout_margin="5dp"
+            android:id="@+id/decrementBtnXL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="3dp"
+            android:background="@null"
+            android:src="@drawable/ic_remove_24"/>
+
+        <TextView
+            android:textAlignment="center"
+            android:layout_margin="10dp"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/quanXL"
+            android:layout_gravity="center"
+            android:layout_below="@+id/titleTV"
+            android:text="Quantity XL"
+            android:textStyle="bold"
+            android:textSize="16dp"/>
+
+        <ImageButton
+            android:layout_margin="5dp"
+            android:id="@+id/incrementBtnXL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@null"
+            android:src="@drawable/ic_add_24"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/continueBtn"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        android:padding="5dp"
+        android:text="ADD TO CART"
+        android:textAllCaps="false"/>
+
+</LinearLayout>

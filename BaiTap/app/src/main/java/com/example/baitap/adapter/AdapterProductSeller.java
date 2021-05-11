@@ -1,6 +1,7 @@
 package com.example.baitap.adapter;
 
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.ColorSpace;
@@ -8,6 +9,7 @@ import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageButton;
@@ -114,12 +116,263 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
                 }
             });
 
+
+    }
+    private double costPrice = 0;
+    private double finalCostPrice = 0;
+    private double costDiscount = 0;
+    private double finalCostDiscount = 0;
+    private int quanS = 0;
+    private int quanM = 0;
+    private int quanL = 0;
+    private int quanXL= 0;
+
+    private void showQuantityDialog(ModelProducts modelProducts) {
+        View view = LayoutInflater.from(context).inflate(R.layout.dialog_quantity,null);
+
+        ImageView productIV = view.findViewById(R.id.productIV);
+        TextView titleTV = view.findViewById(R.id.titleTV);
+        TextView descriptionTV = view.findViewById(R.id.descriptionTV);
+        TextView discountNoteTV = view.findViewById(R.id.discountNoteTV);
+        TextView originalPriceTV = view.findViewById(R.id.originalPriceTV);
+        TextView discountPriceTV = view.findViewById(R.id.discountPriceTV);
+        TextView finalPriceTV = view.findViewById(R.id.finalPriceTV);
+
+        ImageButton decrementBtnS = view.findViewById(R.id.decrementBtnS);
+        ImageButton decrementBtnM = view.findViewById(R.id.decrementBtnM);
+        ImageButton decrementBtnL = view.findViewById(R.id.decrementBtnL);
+        ImageButton decrementBtnXL = view.findViewById(R.id.decrementBtnXL);
+
+        ImageButton incrementBtnS = view.findViewById(R.id.incrementBtnS);
+        ImageButton incrementBtnM = view.findViewById(R.id.incrementBtnM);
+        ImageButton incrementBtnL = view.findViewById(R.id.incrementBtnL);
+        ImageButton incrementBtnXL = view.findViewById(R.id.incrementBtnXL);
+
+        TextView quanS_TV = view.findViewById(R.id.quanS);
+        TextView quanM_TV = view.findViewById(R.id.quanM);
+        TextView quanL_TV = view.findViewById(R.id.quanL);
+        TextView quanXL_TV = view.findViewById(R.id.quanXL);
+
+        Button continueBtn = view.findViewById(R.id.continueBtn);
+
+
+        String img = modelProducts.getImage();
+        String name = modelProducts.getName();
+        String des = modelProducts.getDescription();
+        Integer promotion_id = modelProducts.getPromotion_id();
+        Integer quantity_L_size = modelProducts.getQuantity_L_size();
+        Integer quantity_M_size = modelProducts.getQuantity_M_size();
+        Integer quantity_S_size = modelProducts.getQuantity_S_size();
+        Integer quantity_XL_size = modelProducts.getQuantity_XL_size();
+
+        Float price = modelProducts.getPrice();
+        if(modelProducts.getPromotion_id() == null){
+            //not discount
+            discountNoteTV.setVisibility(View.GONE);
+            discountPriceTV.setVisibility(View.GONE);
+            costPrice = Double.parseDouble(String.valueOf(price).replaceAll("VNĐ",""));
+            finalCostPrice = Double.parseDouble(String.valueOf(price).replaceAll("VNĐ",""));
+            finalPriceTV.setText("" + finalCostPrice);
+        }
+        else {
+            //discount
+            ApiInterface apiInterface;
+            apiInterface = RetrofitClient.getRetrofitClient().create(ApiInterface.class);
+            Call<Promotion> Promo = apiInterface.getPromotioById(promotion_id);
+            Promo.enqueue(new Callback<Promotion>() {
+                @Override
+                public void onResponse(Call<Promotion> call, Response<Promotion> response) {
+                    Promotion promotion = response.body();
+                    discountNoteTV.setText(promotion.getName());
+                    discountNoteTV.setVisibility(View.VISIBLE);
+                    Float discountPrice = modelProducts.getPrice() - (modelProducts.getPrice() * promotion.getDiscount());
+                    discountPriceTV.setText(String.format("%.0f",discountPrice) + "VNĐ");
+                    originalPriceTV.setPaintFlags(originalPriceTV.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                    costDiscount = Double.parseDouble(String.valueOf(discountPrice).replaceAll("VNĐ",""));
+                    finalCostDiscount = Double.parseDouble(String.valueOf(discountPrice).replaceAll("VNĐ",""));
+                    finalPriceTV.setText("" + finalCostDiscount);
+                }
+
+                @Override
+                public void onFailure(Call<Promotion> call, Throwable t) {
+                }
+            });
+        }
+        quanS = 1;
+        quanM = 1;
+        quanL = 1;
+        quanXL = 1;
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setView(view);
+        try {
+            Glide.with(context).load(img).into(productIV);;
+        }
+        catch (Exception ex) {
+           productIV.setImageResource(R.drawable.ic_shopping_cart);
+        }
+        titleTV.setText(name);
+        quanS_TV.setText(String.valueOf(quanS));
+        quanM_TV.setText(String.valueOf(quanM));
+        quanL_TV.setText(String.valueOf(quanL));
+        quanXL_TV.setText(String.valueOf(quanXL));
+        descriptionTV.setText(des);
+        originalPriceTV.setText(String.format("%.0f",price) + "VNĐ");
+
+
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        incrementBtnS.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (quanS <= quantity_S_size && promotion_id != null) {
+                    quanS++;
+                    quanS_TV.setText(String.valueOf(quanS));
+                    finalCostDiscount = finalCostDiscount + costDiscount;
+                    finalPriceTV.setText(String.format("%.0f",finalCostDiscount) + "VNĐ");
+                }
+                else if(quanS <= quantity_S_size && promotion_id == null){
+                    quanS++;
+                    quanS_TV.setText(String.valueOf(quanS));
+                    finalCostPrice = finalCostPrice + costPrice;
+                    finalPriceTV.setText(String.format("%.0f",finalCostPrice) + "VNĐ");
+                }
+            }});
+        incrementBtnM.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (quanM <= quantity_M_size && promotion_id != null) {
+                    quanM++;
+                    quanM_TV.setText(String.valueOf(quanM));
+                    finalCostDiscount = finalCostDiscount + costDiscount;
+                    finalPriceTV.setText(String.format("%.0f",finalCostDiscount) + "VNĐ");
+                }
+                else if(quanM <= quantity_M_size && promotion_id == null){
+                    quanM++;
+                    quanM_TV.setText(String.valueOf(quanM));
+                    finalCostPrice = finalCostPrice + costPrice;
+                    finalPriceTV.setText(String.format("%.0f",finalCostPrice) + "VNĐ");
+                }
+            }
+        });
+
+        incrementBtnL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (quanL <= quantity_L_size && promotion_id != null) {
+                    quanL++;
+                    quanL_TV.setText(String.valueOf(quanL));
+                    finalCostDiscount = finalCostDiscount + costDiscount;
+                    finalPriceTV.setText(String.format("%.0f",finalCostDiscount) + "VNĐ");
+                }
+                else if(quanL <= quantity_XL_size && promotion_id == null){
+                    quanL++;
+                    quanL_TV.setText(String.valueOf(quanL));
+                    finalCostPrice = finalCostPrice + costPrice;
+                    finalPriceTV.setText(String.format("%.0f",finalCostPrice) + "VNĐ");
+                }
+            }
+        });
+
+        incrementBtnXL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (quanXL <= quantity_XL_size && promotion_id != null) {
+                    quanXL++;
+                    quanXL_TV.setText(String.valueOf(quanXL));
+                    finalCostDiscount = finalCostDiscount + costDiscount;
+                    finalPriceTV.setText(String.format("%.0f",finalCostDiscount) + "VNĐ");
+                }
+                else if(quanXL <= quantity_XL_size && promotion_id == null){
+                    quanXL++;
+                    quanXL_TV.setText(String.valueOf(quanXL));
+                    finalCostPrice = finalCostPrice + costPrice;
+                    finalPriceTV.setText(String.format("%.0f",finalCostPrice) + "VNĐ");
+                }
+            }
+        });
+        decrementBtnS.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (quanS > 1 && promotion_id != null) {
+                    quanS--;
+                    quanS_TV.setText(String.valueOf(quanS));
+                    finalCostDiscount = finalCostDiscount - costDiscount;
+                    finalPriceTV.setText(String.format("%.0f",finalCostDiscount) + "VNĐ");
+                }
+                else if(quanS > 1 && promotion_id == null){
+                    quanS--;
+                    quanS_TV.setText(String.valueOf(quanS));
+                    finalCostPrice = finalCostPrice - costPrice;
+                    finalPriceTV.setText(String.format("%.0f",finalCostPrice) + "VNĐ");
+                }
+            }
+        });
+        decrementBtnM.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (quanM > 1 && promotion_id != null) {
+                    quanM--;
+                    quanM_TV.setText(String.valueOf(quanM));
+                    finalCostDiscount = finalCostDiscount - costDiscount;
+                    finalPriceTV.setText(String.format("%.0f",finalCostDiscount) + "VNĐ");
+                }
+                else if(quanM > 1 && promotion_id == null){
+                    quanM--;
+                    quanM_TV.setText(String.valueOf(quanM));
+                    finalCostPrice = finalCostPrice - costPrice;
+                    finalPriceTV.setText(String.format("%.0f",finalCostPrice) + "VNĐ");
+                }
+            }
+        });
+        decrementBtnL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (quanL > 1 && promotion_id != null) {
+                    quanL--;
+                    quanL_TV.setText(String.valueOf(quanL));
+                    finalCostDiscount = finalCostDiscount - costDiscount;
+                    finalPriceTV.setText(String.format("%.0f",finalCostDiscount) + "VNĐ");
+                }
+                else if(quanL <= quantity_XL_size && promotion_id == null){
+                    quanL--;
+                    quanL_TV.setText(String.valueOf(quanL));
+                    finalCostPrice = finalCostPrice - costPrice;
+                    finalPriceTV.setText(String.format("%.0f",finalCostPrice) + "VNĐ");
+                }
+            }
+        });
+        decrementBtnXL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (quanXL > 1 && promotion_id != null) {
+                    quanXL--;
+                    quanXL_TV.setText(String.valueOf(quanXL));
+                    finalCostDiscount = finalCostDiscount - costDiscount;
+                    finalPriceTV.setText(String.format("%.0f",finalCostDiscount) + "VNĐ");
+                }
+                else if(quanXL <= quantity_XL_size && promotion_id == null){
+                    quanXL--;
+                    quanXL_TV.setText(String.valueOf(quanXL));
+                    finalCostPrice = finalCostPrice - costPrice;
+                    finalPriceTV.setText(String.format("%.0f",finalCostPrice) + "VNĐ");
+                }
+            }
+        });
+        continueBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     private void detailsBottomSheet(ModelProducts modelProducts) {
         BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(context);
         View view = LayoutInflater.from(context).inflate(R.layout.product_detail_seller, null);
         bottomSheetDialog.setContentView(view);
+        ImageView IV_add = view.findViewById(R.id.IV_add);
         ImageButton backBtn = view.findViewById(R.id.backBtn);
         ImageView IV_productIcon = view.findViewById(R.id.IV_productIcon);
         TextView TV_discountNote = view.findViewById(R.id.TV_discountNote);
@@ -211,6 +464,12 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
                 bottomSheetDialog.dismiss();
             }
         });
+        IV_add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showQuantityDialog(modelProducts);
+            }
+        });
         bottomSheetDialog.show();
     }
 
@@ -254,12 +513,13 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
         }
     };
     public static class HolderProductSeller extends RecyclerView.ViewHolder {
-        ImageView IV_productIcon;
+        ImageView IV_productIcon,IV_add;
         private TextView TV_discountNote, TV_productName,
                 TV_QuantityS,TV_QuantityM,TV_QuantityL,TV_QuantityXL
                 ,TV_discountPrice,TV_originalPrice;
         public HolderProductSeller(@NonNull View itemView) {
             super(itemView);
+
             IV_productIcon = itemView.findViewById(R.id.IV_productIcon);
             TV_productName = itemView.findViewById(R.id.TV_productName);
             TV_QuantityS = itemView.findViewById(R.id.TV_QuantityS);

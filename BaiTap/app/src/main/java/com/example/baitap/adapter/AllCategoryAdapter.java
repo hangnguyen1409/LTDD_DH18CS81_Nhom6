@@ -1,33 +1,18 @@
 package com.example.baitap.adapter;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.baitap.R;
-import com.example.baitap.activity.AllCategories;
-import com.example.baitap.activity.CartActivity;
-import com.example.baitap.activity.MainActivity;
 import com.example.baitap.activity.ProductActivity;
-import com.example.baitap.api.ApiInterface;
-import com.example.baitap.api.RetrofitClient;
-import com.example.baitap.model.CategoryModel;
 import com.example.baitap.model.ModelCate;
-import com.example.baitap.model.ModelProducts;
 
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class AllCategoryAdapter extends RecyclerView.Adapter<AllCategoryAdapter.AllCategoryViewHolder> {
 

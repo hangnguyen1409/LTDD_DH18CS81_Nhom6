@@ -41,14 +41,4 @@
         app:layout_constraintTop_toBottomOf="@+id/back"
         app:layout_constraintVertical_bias="0.0" />
 
-    <ImageView
-        android:id="@+id/IV_Cart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView5"
-        app:srcCompat="@drawable/ic_cart_black"
-        tools:ignore="VectorDrawableCompat" />
 </androidx.constraintlayout.widget.ConstraintLayout>

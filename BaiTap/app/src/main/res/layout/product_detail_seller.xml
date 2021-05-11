@@ -39,19 +39,32 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@+id/IV_productIcon"
         android:orientation="vertical"
         android:padding="10dp">
-
-        <TextView
-            android:id="@+id/TV_discountNote"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/shape_textview_product_fill"
-            android:padding="10dp"
-            android:text="10% OFF"
-            android:textColor="@color/colorGreen" />
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/TV_discountNote"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_textview_product_fill"
+                android:padding="10dp"
+                android:text="10% OFF"
+                android:textColor="@color/colorGreen"
+                android:layout_marginEnd="20dp"/>
+            <ImageView
+
+                android:id="@+id/IV_add"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_add" />
+        </LinearLayout>
         <TextView
             android:id="@+id/TV_productName"
             android:layout_width="wrap_content"
@@ -140,13 +153,5 @@
                 android:textColor="#808080" />
 
         </RelativeLayout>
-
-        <Button
-            android:id="@+id/addProdct"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shape_tab_product_order_fill"
-            android:text="ADD prodcut" />
-
     </LinearLayout>
 </RelativeLayout>

@@ -51,8 +51,6 @@ public class ProductActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product);
-
-        addProductBtn = findViewById(R.id.addProductBtn);
         productShowRV = findViewById(R.id.productShowRV);
         filterProductBtn = findViewById(R.id.filterProductBtn);
         resetbtn = findViewById(R.id.Resetbtn);
@@ -88,13 +86,6 @@ public class ProductActivity extends AppCompatActivity {
                 }
             });
         }
-        //add Product
-        addProductBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(ProductActivity.this, CartActivity.class));
-            }
-        });
         filterProductBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -153,9 +144,7 @@ public class ProductActivity extends AppCompatActivity {
         recreate();
     }
 
-    public void ClickCart(View view){
-        MainActivity.redirectActivity(this,CartActivity.class);
-    }
+
 
     //About Us - Thieu form
 
