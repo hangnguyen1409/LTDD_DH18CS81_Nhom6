@@ -50,11 +50,18 @@ public class CartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_product);
         drawerLayout = findViewById(R.id.drawer_layout);
+
+        if(ProductActivity.cart!=null){
+        }
+        else
+        {
+            ProductActivity.cart = new ArrayList<>();
+        }
 //          Tạo đối tượng để test, khi nào các hoạt động khác hoàn thành sẽ xóa
 //        Con phần xóa sản phẩm trong Cart,
 //                chuyển Trang khi chưa login,
 //        phần add sản phẩm vào cart(Lấy thông tin từ sản phẩm khi được click)
-        ProductActivity.isAuthenticated = true;
+        ProductActivity.isAuthenticated = false;
         ProductActivity.Login.setId(1);
         ProductActivity.Login.setUsername("tuan");
         ProductActivity.Login.setEmail("1851050167tuan@ou.edu.vn");
@@ -101,7 +108,7 @@ public class CartActivity extends AppCompatActivity {
                         }
                     }else {
                         //Nếu chưa đăng nhập thì chuyển qua Login activity
-//                    startActivity(new Intent(CartActivity.this, /*Login.class*/));
+                    startActivity(new Intent(CartActivity.this, LoginActivity.class));
                     }
                 }
                 else {
