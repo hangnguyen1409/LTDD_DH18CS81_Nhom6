@@ -132,31 +132,27 @@ public class ProductActivity extends AppCompatActivity {
     public void ClickMenu(View view){
         MainActivity.openDrawer(drawerLayout);
     }
-
     public void ClickLogo(View view){
         MainActivity.closeDrawer(drawerLayout);
     }
-
     public void ClickHome(View view){
         MainActivity.redirectActivity(this,MainActivity.class);
     }
-
     public void ClickProduct(View view){
         recreate();
     }
-
     public void ClickUser(View view){
         MainActivity.redirectActivity(this,UserProfile.class);
     }
-    //About Us - Thieu form
+    public void ClickCart(View view){
+        MainActivity.redirectActivity(this,ShowCartActivity.class);
+    }
     public void ClickLogout(View view){
         MainActivity.redirectActivity(this,LoginActivity.class);
     }
-
     public void ClickExit(View view){
         MainActivity.logout(this);
     }
-
     @Override
     protected void onPause() {
         super.onPause();
