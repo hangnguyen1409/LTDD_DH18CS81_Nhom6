@@ -80,6 +80,9 @@ public class MainActivity extends AppCompatActivity {
     public void ClickProduct(View view){
         redirectActivity(this,ProductActivity.class);
     }
+    public void ClickUser(View view){
+        redirectActivity(this,UserProfile.class);
+    }
 
     //About Us - Thieu form
     public void ClickLogout(View view){

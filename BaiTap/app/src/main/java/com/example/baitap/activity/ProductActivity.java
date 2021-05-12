@@ -140,14 +140,15 @@ public class ProductActivity extends AppCompatActivity {
     public void ClickHome(View view){
         MainActivity.redirectActivity(this,MainActivity.class);
     }
+
     public void ClickProduct(View view){
         recreate();
     }
 
-
-
+    public void ClickUser(View view){
+        MainActivity.redirectActivity(this,UserProfile.class);
+    }
     //About Us - Thieu form
-
     public void ClickLogout(View view){
         MainActivity.redirectActivity(this,LoginActivity.class);
     }
