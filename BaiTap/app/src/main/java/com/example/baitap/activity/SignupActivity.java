@@ -83,6 +83,7 @@ public class SignupActivity extends AppCompatActivity {
                         if(response.isSuccessful()) {
                             System.out.println("success!");
                             Toast.makeText(getBaseContext(),response.body().getMess(),Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(SignupActivity.this, LoginActivity.class));
                         }else {
                             int statusCode  = response.code();
                             Toast.makeText(getApplicationContext(),response.message(),Toast.LENGTH_SHORT).show();
