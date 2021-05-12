@@ -2,11 +2,11 @@ package com.example.baitap.model;
 
 public class LoginResponse {
     private String mess;
-    public ModelUser modelUser;
+        public ModelUser user_login;
 
     public LoginResponse(String mess, ModelUser modelUser) {
         this.mess = mess;
-        this.modelUser = modelUser;
+        this.user_login = modelUser;
     }
 
 
@@ -19,10 +19,10 @@ public class LoginResponse {
     }
 
     public ModelUser getModelUser() {
-        return modelUser;
+        return user_login;
     }
 
     public void setModelUser(ModelUser modelUser) {
-        this.modelUser = modelUser;
+        this.user_login = modelUser;
     }
 }

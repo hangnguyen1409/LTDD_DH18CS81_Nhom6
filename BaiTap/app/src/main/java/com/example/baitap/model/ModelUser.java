@@ -1,21 +1,13 @@
 package com.example.baitap.model;
 
 public class ModelUser {
+    private String avatar;
     private String email;
     private int id;
     private String name;
     private String password;
     private String user_role;
     private String username;
-
-    public ModelUser() {
-        this.email = email;
-        this.id = id;
-        this.name = name;
-        this.password = password;
-        this.user_role = user_role;
-        this.username = username;
-    }
 
     public String getEmail() {
         return email;
@@ -64,4 +56,12 @@ public class ModelUser {
     public void setUsername(String username) {
         this.username = username;
     }
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
 }

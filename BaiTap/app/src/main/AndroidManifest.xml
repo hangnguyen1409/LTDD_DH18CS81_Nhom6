@@ -14,16 +14,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BaiTap"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.ProductActivity"
-            android:windowSoftInputMode="stateHidden"></activity>
-        <activity android:name=".activity.AllCategories"
-            android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".activity.LoginActivity"
-            android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".activity.MainActivity"
+        <activity android:name=".activity.UserProfile"
+            android:windowSoftInputMode="stateHidden"
+            />
+        <activity
+            android:name=".activity.ProductActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activity.AllCategories"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activity.LoginActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activity.MainActivity"
             android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
