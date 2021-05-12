@@ -4,9 +4,18 @@ public class ModelUser {
     private String email;
     private int id;
     private String name;
-    private int password;
+    private String password;
     private String user_role;
     private String username;
+
+    public ModelUser() {
+        this.email = email;
+        this.id = id;
+        this.name = name;
+        this.password = password;
+        this.user_role = user_role;
+        this.username = username;
+    }
 
     public String getEmail() {
         return email;
@@ -32,11 +41,11 @@ public class ModelUser {
         this.name = name;
     }
 
-    public int getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(int password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 

@@ -1,7 +1,9 @@
 package com.example.baitap.api;
 
+import com.example.baitap.model.LoginResponse;
 import com.example.baitap.model.Mess;
 import com.example.baitap.model.ModelCate;
+import com.example.baitap.model.ModelLogin;
 import com.example.baitap.model.ModelProducts;
 import com.example.baitap.model.ModelReceipt;
 import com.example.baitap.model.Promotion;
@@ -40,5 +42,7 @@ public interface ApiInterface {
     @POST("api/signup_user")
     Call<Mess> signupUser(@Body SignupResponse response);
 
+    @POST("api/login")
+    Call<LoginResponse> userLogin(@Body ModelLogin login);
 
 }
