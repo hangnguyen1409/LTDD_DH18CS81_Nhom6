@@ -36,13 +36,16 @@ public class LoginActivity extends AppCompatActivity {
         edtUser = findViewById(R.id.edittextuser);
         edtPassword = findViewById(R.id.edittextpassword);
         btnLogin = findViewById(R.id.butndangnhap);
-//        tvSignup = findViewById(R.id.textViewSignUp);
+      tvSignup = findViewById(R.id.textViewSignUp);
 
-//        findViewById(R.id.butndangnhap).setOnClickListener(this);
+        TextView btn = findViewById(R.id.textViewSignUp);
 
-
-
-//        TextView btn = findViewById(R.id.textViewSignUp);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, SignupActivity.class));
+            }
+        });
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
