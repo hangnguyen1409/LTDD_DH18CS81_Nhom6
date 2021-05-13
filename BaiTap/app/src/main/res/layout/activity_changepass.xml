@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:ignore="ExtraText"
+    android:orientation="vertical"
+    android:id="@+id/drawer_layout"
+    tools:context=".activity.ChangePassActivity">
+
+        <include layout="@layout/main_toolbar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="Change Password"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="30dp" />
+
+        <EditText
+            android:id="@+id/edtpassword"
+            android:layout_width="336dp"
+            android:layout_height="54dp"
+            android:layout_marginTop="40dp"
+            android:drawablePadding="10dp"
+            android:hint="Password old"
+            android:inputType="textPassword" />
+
+        <EditText
+            android:id="@+id/edtpassnew"
+            android:layout_width="335dp"
+            android:layout_height="54dp"
+            android:layout_marginTop="40dp"
+            android:drawablePadding="10dp"
+            android:hint="New Password"
+            android:inputType="textPassword" />
+
+        <EditText
+            android:id="@+id/edtpassconfirm"
+            android:layout_width="333dp"
+            android:layout_height="54dp"
+            android:layout_marginTop="40dp"
+            android:drawablePadding="10dp"
+            android:hint="Confirm Password"
+            android:inputType="textPassword" />
+
+        <Button
+            android:id="@+id/btnconfirm"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/round_border"
+            android:text="Confirm"
+            app:backgroundTint="#2196F3" />
+    </LinearLayout>
+</LinearLayout>
