@@ -22,6 +22,7 @@ import com.bumptech.glide.Glide;
 import com.example.baitap.R;
 import com.example.baitap.activity.AllCategories;
 import com.example.baitap.activity.MainActivity;
+import com.example.baitap.activity.ProductActivity;
 import com.example.baitap.api.ApiInterface;
 import com.example.baitap.api.RetrofitClient;
 import com.example.baitap.model.ModelCate;
@@ -198,10 +199,10 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
                 }
             });
         }
-        quanS = 1;
+        quanS = 0;
         quanM = 1;
-        quanL = 1;
-        quanXL = 1;
+        quanL = 0;
+        quanXL = 0;
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setView(view);
@@ -223,6 +224,23 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
 
         AlertDialog dialog = builder.create();
         dialog.show();
+
+        continueBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ModelProducts newPrduct = modelProducts;
+                newPrduct.setQuantity_S_size(quanS);
+                newPrduct.setQuantity_M_size(quanM);
+                newPrduct.setQuantity_L_size(quanL);
+                newPrduct.setQuantity_XL_size(quanXL);
+                ProductActivity.cart.add(newPrduct);
+                if (finalCostDiscount !=0){
+                    ProductActivity.listDiscount.add((float) finalCostDiscount);
+                }else {
+                    ProductActivity.listDiscount.add(null);
+                }
+            }
+        });
         incrementBtnS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
