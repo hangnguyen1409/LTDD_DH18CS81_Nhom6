@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.baitap">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -31,6 +32,10 @@
         <activity
             android:name=".activity.SignupActivity"
             android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activity.ChangePassActivity"
+            android:windowSoftInputMode="stateHidden"
+            tools:ignore="Instantiatable" />
         <activity
             android:name=".activity.IntroducingActivity"
             android:windowSoftInputMode="stateHidden">

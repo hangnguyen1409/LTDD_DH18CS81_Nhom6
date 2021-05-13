@@ -47,10 +47,11 @@
         app:backgroundTint="#2196F3" />
 
     <TextView
+        android:id="@+id/tvchangepass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="Forgot your password"
+        android:text="Change password"
         android:textSize="18dp" />
 
     <LinearLayout

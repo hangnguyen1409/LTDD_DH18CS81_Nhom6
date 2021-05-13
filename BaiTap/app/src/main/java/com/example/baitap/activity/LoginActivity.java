@@ -53,6 +53,15 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        TextView btnchangepass = findViewById(R.id.tvchangepass);
+
+        btnchangepass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, ChangePassActivity.class));
+            }
+        });
+
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
