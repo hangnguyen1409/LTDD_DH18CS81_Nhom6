@@ -1,6 +1,8 @@
 package com.example.baitap.model;
 
-public class ModelUser {
+import java.io.Serializable;
+
+public class ModelUser implements Serializable {
     private String avatar;
     private String email;
     private int id;
@@ -64,4 +66,16 @@ public class ModelUser {
         this.avatar = avatar;
     }
 
+    @Override
+    public String toString() {
+        return "ModelUser{" +
+                "avatar='" + avatar + '\'' +
+                ", email='" + email + '\'' +
+                ", id=" + id +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", user_role='" + user_role + '\'' +
+                ", username='" + username + '\'' +
+                '}';
+    }
 }
