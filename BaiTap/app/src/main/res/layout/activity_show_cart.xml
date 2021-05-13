@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/drawer_layout"
-    tools:context=".activity.UserProfile">
+    tools:context=".activity.ShowCartActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -16,11 +16,128 @@
         <!--Hiển thị cart trong layout này-->
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <TextView
+            android:layout_height="match_parent"
+            android:gravity="start">
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Cart" />
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="430dp">
+
+                    <TextView
+                        android:id="@+id/tv_Empty"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textSize="35sp"
+                        android:text="Cart empty!!!"
+                        android:gravity="center"/>
+                    <ListView
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:id="@+id/listproduct"
+                        android:layout_width="fill_parent"
+                        android:background="#ffffff"
+                        android:cacheColorHint="#ffffff"
+                        android:clickable="true"
+                        android:choiceMode="multipleChoice">
+                    </ListView>
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center">
+                    <TextView
+                        android:id="@+id/totalText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Total:"
+                        android:textSize="19dp"
+                        android:textAlignment="center"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/totalPrice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:textSize="19dp"
+                        android:textStyle="bold" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center">
+                    <TextView
+                        android:id="@+id/distcountText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Discount:"
+                        android:textSize="19dp"
+                        android:textAlignment="center"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/discountPrice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:text="0"
+                        android:textSize="19dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center">
+                    <TextView
+                        android:id="@+id/paymentText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Payment:"
+                        android:textSize="19dp"
+                        android:textAlignment="center"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/paymentPrice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:textSize="19dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/LinearLayout01"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dip">
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:id="@+id/btnReset"
+                        android:text="Reset">
+                    </Button>
+                    <Button
+                        android:id="@+id/btnPay"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="100dp"
+                        android:text="Pay">
+                    </Button>
+                </LinearLayout>
+            </LinearLayout>
+
         </RelativeLayout>
 
     </LinearLayout>

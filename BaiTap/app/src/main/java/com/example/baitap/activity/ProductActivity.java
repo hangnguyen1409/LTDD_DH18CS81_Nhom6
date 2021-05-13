@@ -47,6 +47,8 @@ public class ProductActivity extends AppCompatActivity {
     public static ModelUser Login = new ModelUser();
     public static ArrayList<ModelProducts> cart;
 
+    public static ArrayList<Float> listDiscount;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +65,7 @@ public class ProductActivity extends AppCompatActivity {
         }
         else
         {
+            listDiscount = new ArrayList<>();
             cart = new ArrayList<>();
         }
 
