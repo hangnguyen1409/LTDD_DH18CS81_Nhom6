@@ -56,7 +56,10 @@ public class SignupActivity extends AppCompatActivity {
                         if(check(view)){
                             if(signupUser())
                                 startActivity(new Intent(SignupActivity.this, LoginActivity.class));
-                        }
+                            else
+                                System.out.println("no");
+                        }else
+                            System.out.println("err");
 
                         break;
                     default:
@@ -81,13 +84,13 @@ public class SignupActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<Mess> call, Response<Mess> response) {
                         if(response.isSuccessful()) {
-                            System.out.println("success!");
+                            System.out.println("Tài khoản đã được đăng kí!");
                             Toast.makeText(getBaseContext(),response.body().getMess(),Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(SignupActivity.this, LoginActivity.class));
+
                         }else {
                             int statusCode  = response.code();
                             Toast.makeText(getApplicationContext(),response.message(),Toast.LENGTH_SHORT).show();
-                            System.out.println("fail");
+                            System.out.println("err!");
                         }
 
                     }
@@ -152,7 +155,6 @@ public class SignupActivity extends AppCompatActivity {
                 String val = edtPassword.getText().toString();
                 String passwordVal = "^" +
                         "(?=.*[a-zA-Z])" +      //any letter
-                        "(?=.*[@#$%^&+=])" +    //at least 1 special character
                         "(?=\\S+$)" +           //no white spaces
                         ".{4,}" +               //at least 4 characters
                         "$";
@@ -169,7 +171,7 @@ public class SignupActivity extends AppCompatActivity {
                 }
             }
             public boolean check(View view) {
-                return (!validateName() &!validatePassword() & !validateEmail() & !validateUsername());
+                return (validateName() & validatePassword() & validateEmail() & validateUsername());
             }
 
 
