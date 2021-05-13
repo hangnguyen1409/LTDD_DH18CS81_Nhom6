@@ -15,7 +15,7 @@
         android:theme="@style/Theme.BaiTap"
         android:usesCleartextTraffic="true">
         <activity android:name=".activity.ShowCartActivity"></activity>
-        <activity android:name=".activity.IntroducingActivity" />
+        <activity android:name=".activity.MainActivity" />
         <activity
             android:name=".activity.UserProfile"
             android:windowSoftInputMode="stateHidden" />
@@ -32,7 +32,7 @@
             android:name=".activity.SignupActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".activity.MainActivity"
+            android:name=".activity.IntroducingActivity"
             android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

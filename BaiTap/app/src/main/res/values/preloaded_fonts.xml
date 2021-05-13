@@ -2,9 +2,13 @@
 <resources>
     <array name="preloaded_fonts" translatable="false">
         <item>@font/anonymous_pro_bold</item>
+        <item>@font/anonymous_pro_bold_italic</item>
         <item>@font/aref_ruqaa_bold</item>
         <item>@font/arimo_bold</item>
+        <item>@font/asul_bold</item>
+        <item>@font/berkshire_swash</item>
         <item>@font/bilbo_swash_caps</item>
+        <item>@font/cantata_one</item>
         <item>@font/cookie</item>
         <item>@font/corben_bold</item>
         <item>@font/niconne</item>
