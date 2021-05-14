@@ -30,7 +30,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="100dp"/>
 
-            <EditText
+            <TextView
                 android:layout_centerInParent="true"
                 android:id="@+id/showtextuser"
                 android:layout_width="261dp"
@@ -39,7 +39,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="290dp"
                 android:drawablePadding="10dp" />
-            <EditText
+            <TextView
                 android:layout_marginTop="20dp"
                 android:layout_below="@+id/showtextuser"
                 android:layout_centerInParent="true"
@@ -48,7 +48,7 @@
                 android:layout_height="54dp"
                 android:layout_marginLeft="20dp"
                 android:drawablePadding="20dp" />
-            <EditText
+            <TextView
                 android:layout_marginTop="20dp"
                 android:layout_below="@+id/showtextname"
                 android:layout_centerInParent="true"
@@ -57,6 +57,29 @@
                 android:layout_height="54dp"
                 android:layout_marginLeft="20dp"
                 android:drawablePadding="20dp" />
+
+            <Button
+                android:id="@+id/butnchangpass"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="50dp"
+                android:background="@drawable/round_border"
+                android:text="Change pass"
+                app:backgroundTint="#2196F3" />
+
+            <Button
+                android:id="@+id/butnchangeinfor"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="50dp"
+                android:background="@drawable/round_border"
+                android:text="change infor"
+                app:backgroundTint="#2196F3" />
 
         </RelativeLayout>
 
@@ -68,7 +91,8 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:background="@color/white">
-        <include layout ="@layout/main_nav_drawer"/>
+
+        <include layout="@layout/main_nav_drawer" />
     </RelativeLayout>
 
 </androidx.drawerlayout.widget.DrawerLayout>

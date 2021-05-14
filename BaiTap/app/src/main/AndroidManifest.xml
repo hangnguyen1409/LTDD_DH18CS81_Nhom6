@@ -37,6 +37,10 @@
             android:windowSoftInputMode="stateHidden"
             tools:ignore="Instantiatable" />
         <activity
+            android:name=".activity.ChangeInforActivity"
+            android:windowSoftInputMode="stateHidden"
+            tools:ignore="Instantiatable" />
+        <activity
             android:name=".activity.IntroducingActivity"
             android:windowSoftInputMode="stateHidden">
             <intent-filter>
