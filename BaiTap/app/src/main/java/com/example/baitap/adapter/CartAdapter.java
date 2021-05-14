@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.example.baitap.R;
 import com.example.baitap.activity.MainActivity;
+import com.example.baitap.activity.ShowCartActivity;
 import com.example.baitap.model.ModelProducts;
 import com.squareup.picasso.Picasso;
 
@@ -68,6 +69,9 @@ public class CartAdapter extends BaseAdapter {
             public void onClick(View v) {
                 MainActivity.cart.remove(position);
                 notifyDataSetChanged();
+                MainActivity.listDiscount.remove(position);
+                MainActivity.listCost.remove(position);
+                ShowCartActivity.hide();
             }
         });
 

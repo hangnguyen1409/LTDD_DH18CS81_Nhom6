@@ -30,24 +30,29 @@ import retrofit2.Response;
 
 import static com.example.baitap.activity.MainActivity.cart;
 import static com.example.baitap.activity.MainActivity.listDiscount;
+import static com.example.baitap.activity.MainActivity.listCost;
 
 public class ShowCartActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
     CartAdapter cartAdapter;
     ListView listViewProduct;
-    Button btnPay, btnReset;
-    TextView tvEmpty, totalPrice, totalText, discountText, discountPrice, paymentText, paymentPrice;
+    public static Button btnPay, btnReset;
+    public static TextView tvEmpty, totalPrice, totalText, discountText, discountPrice, paymentText, paymentPrice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_cart);
         drawerLayout = findViewById(R.id.drawer_layout);
+        ProductActivity.Login.setEmail("mr.tuan1749@gmail.com");
+        ProductActivity.Login.setUsername("tuan123");
+        ProductActivity.isAuthenticated = true;
         if(cart!=null){
         }
         else
         {
             listDiscount = new ArrayList<>();
+            listCost = new ArrayList<>();
             cart = new ArrayList<>();
         }
 
@@ -59,6 +64,7 @@ public class ShowCartActivity extends AppCompatActivity {
                 noProductAlert();
                 cart.clear();
                 listDiscount.clear();
+                listCost.clear();
                 hide();
                 cartAdapter.notifyDataSetChanged();
             }
@@ -71,6 +77,7 @@ public class ShowCartActivity extends AppCompatActivity {
                         if(creatReceipt()){
                             cart.clear();
                             listDiscount.clear();
+                            listCost.clear();
                             hide();
                             cartAdapter.notifyDataSetChanged();
                         }
@@ -91,15 +98,18 @@ public class ShowCartActivity extends AppCompatActivity {
     }
 
 
-    private int total() {
-        int total = 0;
-        for (ModelProducts products : cart
+    private static Float total(){
+        float tt = 0;
+        for (Float i: listCost
         ) {
-            total+=products.totalPriceAllSize();
+            if (i!= null){
+                tt+= i;
+            }
+
         }
-        return total;
+        return tt;
     }
-    private Float discounted(){
+    private static Float discounted(){
         float dc = 0;
         for (Float i: MainActivity.listDiscount
         ) {
@@ -113,8 +123,6 @@ public class ShowCartActivity extends AppCompatActivity {
 
 
     private boolean creatReceipt() throws JSONException {
-        ProductActivity.Login.setUsername("trinh");
-        ProductActivity.Login.setEmail("trinh2709@gmail.com");
         ModelReceipt obj = new ModelReceipt(ProductActivity.Login.getUsername(),ProductActivity.Login.getEmail(),
                 mappingCartIntoReceipDetail());
         ApiInterface apiInterface;
@@ -160,7 +168,7 @@ public class ShowCartActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),"no product in cart!!!",Toast.LENGTH_LONG).show();
         }
     }
-    private void hide() {
+    public static void hide() {
         if (cart.isEmpty()){
             tvEmpty.setVisibility(View.VISIBLE);
             totalText.setVisibility(View.INVISIBLE);
@@ -181,7 +189,7 @@ public class ShowCartActivity extends AppCompatActivity {
             paymentPrice.setVisibility(View.VISIBLE);
             btnPay.setVisibility(View.VISIBLE);
             btnReset.setVisibility(View.VISIBLE);
-            ((TextView)findViewById(R.id.totalPrice)).setText(String.valueOf(total()));
+            totalPrice.setText(String.valueOf(total()));
             discountPrice.setText(String.valueOf(total()- discounted()));
             paymentPrice.setText(String.valueOf(discounted()));
         }

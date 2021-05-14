@@ -13,6 +13,7 @@ import android.widget.Filterable;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -229,12 +230,17 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
                 newPrduct.setQuantity_M_size(quanM);
                 newPrduct.setQuantity_L_size(quanL);
                 newPrduct.setQuantity_XL_size(quanXL);
-                MainActivity.cart.add(newPrduct);
+                MainActivity.listCost.add(modelProducts.getPrice()*(quanS+quanM+quanL+quanXL));
                 if (finalCostDiscount !=0){
                     MainActivity.listDiscount.add((float) finalCostDiscount);
+                    newPrduct.setPrice((float) costDiscount);
                 }else {
                     MainActivity.listDiscount.add((float) finalCostPrice);
+                    newPrduct.setPrice((float) costPrice);
                 }
+                MainActivity.cart.add(newPrduct);
+                Toast.makeText(view.getContext(),"Đã thêm sản phẩm vào giỏ hàng",Toast.LENGTH_SHORT).show();
+                dialog.hide();
             }
         });
         incrementBtnS.setOnClickListener(new View.OnClickListener() {

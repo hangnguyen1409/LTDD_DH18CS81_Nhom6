@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     public static ArrayList<ModelProducts> cart;
 
     public static ArrayList<Float> listDiscount;
+    public static ArrayList<Float> listCost;
 
 
     @Override
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         else
         {
             listDiscount = new ArrayList<>();
+            listCost = new ArrayList<>();
             cart = new ArrayList<>();
         }
 
