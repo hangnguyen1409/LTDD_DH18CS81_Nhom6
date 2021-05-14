@@ -19,7 +19,6 @@ import com.example.baitap.adapter.AdapterProductSeller;
 import com.example.baitap.api.ApiInterface;
 import com.example.baitap.api.RetrofitClient;
 import com.example.baitap.model.ModelProducts;
-import com.example.baitap.model.ModelUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,8 +38,6 @@ public class ProductActivity extends AppCompatActivity {
     AdapterProductSeller adapterProductSeller;
     public static List<ModelProducts> listProduct;
     ApiInterface apiInterface;
-    public static Boolean isAuthenticated = false;
-    public static ModelUser Login = new ModelUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
