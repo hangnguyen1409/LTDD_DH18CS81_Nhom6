@@ -12,6 +12,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.baitap.R;
+import com.example.baitap.SessionManagement;
 import com.example.baitap.model.ModelProducts;
 
 import java.util.ArrayList;
@@ -76,6 +77,8 @@ public class MainActivity extends AppCompatActivity {
         MainActivity.redirectActivity(this,ShowCartActivity.class);
     }
     public void ClickLogout(View view){
+        SessionManagement sessionManagement = new SessionManagement(this);
+        sessionManagement.removeSession();
         redirectActivity(this,LoginActivity.class);
     }
     public void ClickExit(View view){

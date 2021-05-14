@@ -3,6 +3,7 @@ package com.example.baitap.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.baitap.R;
+import com.example.baitap.SessionManagement;
 import com.example.baitap.api.ApiInterface;
 import com.example.baitap.api.RetrofitClient;
 import com.example.baitap.model.LoginResponse;
@@ -28,7 +30,7 @@ import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
     EditText edtUser, edtPassword;
-    Button btnLogin;
+    Button btnLogin,butnhome;
     //    TextView tvSignup;
     String username, password;
 //    private List<ModelUser> mListModelUser;
@@ -41,6 +43,7 @@ public class LoginActivity extends AppCompatActivity {
         edtUser = findViewById(R.id.edittextuser);
         edtPassword = findViewById(R.id.edittextpassword);
         btnLogin = findViewById(R.id.butndangnhap);
+        butnhome = findViewById(R.id.butnhome);
 //      tvSignup = findViewById(R.id.textViewSignUp);
 
         TextView btn = findViewById(R.id.textViewSignUp);
@@ -52,16 +55,12 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(new Intent(LoginActivity.this, SignupActivity.class));
             }
         });
-
-        TextView btnchangepass = findViewById(R.id.tvchangepass);
-
-        btnchangepass.setOnClickListener(new View.OnClickListener() {
+        butnhome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, ChangePassActivity.class));
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
             }
         });
-
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,6 +99,8 @@ public class LoginActivity extends AppCompatActivity {
                         LoginResponse loginResponse = response.body();
                         if (response.isSuccessful()) {
                             if (loginResponse.getMess().equals("Đăng Nhập Thành Công!")) {
+                                SessionManagement sessionManagement = new SessionManagement(LoginActivity.this);
+                                sessionManagement.saveSession(response.body().user_login);
                                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
                             }
                             Toast.makeText(LoginActivity.this, loginResponse.getMess(), Toast.LENGTH_SHORT).show();
@@ -117,6 +118,21 @@ public class LoginActivity extends AppCompatActivity {
             }
 
         });
+    }
+    private void checkSession() {
+        //check if user is logged in
+        //if user is logged in --> move to mainActivity
+
+        SessionManagement sessionManagement = new SessionManagement(this);
+        int userID = sessionManagement.getSession();
+
+        if(userID != -1){
+            //user id logged in and so move to mainActivity
+            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+        }
+        else{
+            //do nothing
+        }
     }
 
 }
