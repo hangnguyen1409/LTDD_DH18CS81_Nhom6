@@ -13,6 +13,7 @@ import android.widget.Filterable;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -235,6 +236,8 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
                 }else {
                     MainActivity.listDiscount.add((float) finalCostPrice);
                 }
+                Toast.makeText(view.getContext(),"Đã thêm sản phẩm vào giỏ hàng",Toast.LENGTH_SHORT).show();
+                dialog.hide();
             }
         });
         incrementBtnS.setOnClickListener(new View.OnClickListener() {

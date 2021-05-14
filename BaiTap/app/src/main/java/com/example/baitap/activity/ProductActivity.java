@@ -39,7 +39,7 @@ public class ProductActivity extends AppCompatActivity {
     AdapterProductSeller adapterProductSeller;
     public static List<ModelProducts> listProduct;
     ApiInterface apiInterface;
-    public static Boolean isAuthenticated = true;
+    public static Boolean isAuthenticated = false;
     public static ModelUser Login = new ModelUser();
 
     @Override
