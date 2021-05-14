@@ -3,9 +3,12 @@ package com.example.baitap.api;
 import com.example.baitap.model.LoginResponse;
 import com.example.baitap.model.Mess;
 import com.example.baitap.model.ModelCate;
+import com.example.baitap.model.ModelChangeInfo;
+import com.example.baitap.model.ModelChangePass;
 import com.example.baitap.model.ModelLogin;
 import com.example.baitap.model.ModelProducts;
 import com.example.baitap.model.ModelReceipt;
+import com.example.baitap.model.ModelUser;
 import com.example.baitap.model.Promotion;
 import com.example.baitap.model.SignupResponse;
 import java.util.List;
@@ -13,6 +16,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface ApiInterface {
@@ -45,5 +49,12 @@ public interface ApiInterface {
     @POST("api/login")
     Call<LoginResponse> userLogin(@Body ModelLogin login);
 
+    @GET("api/get_user_by_id/{id}")
+    Call<ModelUser> get_user_id(@Path("id") int id);
+
+    @PUT("api/change_password/{id}")
+    Call<Mess> change_pass(@Path("id") int id, @Body ModelChangePass modelChangePass);
+    @PUT("api/change_info_user/{id}")
+    Call<Mess> change_info(@Path("id") int id, @Body ModelChangeInfo modelChangeInfo);
 
 }

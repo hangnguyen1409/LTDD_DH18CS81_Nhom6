@@ -27,7 +27,7 @@ import retrofit2.Response;
 
 public class SignupActivity extends AppCompatActivity {
     EditText edtUser, edtPassword, edtEmail, edtName;
-    Button btnSignUp;
+    Button btnSignUp,butnSingin;
 
 
     @Override
@@ -42,9 +42,15 @@ public class SignupActivity extends AppCompatActivity {
         edtName = findViewById(R.id.edittextname);
 
         btnSignUp = findViewById(R.id.butndangki);
+        butnSingin = findViewById(R.id.butnSingin);
 
 
-
+        butnSingin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SignupActivity.this, LoginActivity.class));
+            }
+        });
         btnSignUp.setOnClickListener(new View.OnClickListener() {
 
 
@@ -89,7 +95,7 @@ public class SignupActivity extends AppCompatActivity {
 
                         }else {
                             int statusCode  = response.code();
-                            Toast.makeText(getApplicationContext(),response.message(),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(),response.body().getMess(),Toast.LENGTH_SHORT).show();
                             System.out.println("err!");
                         }
 
