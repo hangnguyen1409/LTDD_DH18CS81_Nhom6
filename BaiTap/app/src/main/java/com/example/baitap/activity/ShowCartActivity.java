@@ -30,6 +30,7 @@ import retrofit2.Response;
 
 import static com.example.baitap.activity.MainActivity.cart;
 import static com.example.baitap.activity.MainActivity.listDiscount;
+import static com.example.baitap.activity.MainActivity.listCost;
 
 public class ShowCartActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
@@ -51,6 +52,7 @@ public class ShowCartActivity extends AppCompatActivity {
         else
         {
             listDiscount = new ArrayList<>();
+            listCost = new ArrayList<>();
             cart = new ArrayList<>();
         }
 
@@ -62,6 +64,7 @@ public class ShowCartActivity extends AppCompatActivity {
                 noProductAlert();
                 cart.clear();
                 listDiscount.clear();
+                listCost.clear();
                 hide();
                 cartAdapter.notifyDataSetChanged();
             }
@@ -74,6 +77,7 @@ public class ShowCartActivity extends AppCompatActivity {
                         if(creatReceipt()){
                             cart.clear();
                             listDiscount.clear();
+                            listCost.clear();
                             hide();
                             cartAdapter.notifyDataSetChanged();
                         }
@@ -94,13 +98,16 @@ public class ShowCartActivity extends AppCompatActivity {
     }
 
 
-    private static int total() {
-        int total = 0;
-        for (ModelProducts products : cart
+    private static Float total(){
+        float tt = 0;
+        for (Float i: listCost
         ) {
-            total+=products.totalPriceAllSize();
+            if (i!= null){
+                tt+= i;
+            }
+
         }
-        return total;
+        return tt;
     }
     private static Float discounted(){
         float dc = 0;

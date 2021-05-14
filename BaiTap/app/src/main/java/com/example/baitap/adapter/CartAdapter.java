@@ -70,6 +70,7 @@ public class CartAdapter extends BaseAdapter {
                 MainActivity.cart.remove(position);
                 notifyDataSetChanged();
                 MainActivity.listDiscount.remove(position);
+                MainActivity.listCost.remove(position);
                 ShowCartActivity.hide();
             }
         });
