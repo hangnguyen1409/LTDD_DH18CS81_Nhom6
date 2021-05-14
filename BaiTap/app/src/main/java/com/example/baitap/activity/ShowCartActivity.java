@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.baitap.R;
+import com.example.baitap.SessionManagement;
 import com.example.baitap.adapter.CartAdapter;
 import com.example.baitap.api.ApiInterface;
 import com.example.baitap.api.RetrofitClient;
@@ -21,6 +22,7 @@ import com.example.baitap.model.Mess;
 import com.example.baitap.model.ModelProducts;
 import com.example.baitap.model.ModelReceipt;
 import com.example.baitap.model.ModelReciptDetail;
+import com.example.baitap.model.ModelUser;
 
 import org.json.JSONException;
 
@@ -38,6 +40,7 @@ public class ShowCartActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
     CartAdapter cartAdapter;
     ListView listViewProduct;
+    ModelUser login = new ModelUser();
     public static Button btnPay, btnReset;
     public static TextView tvEmpty, totalPrice, totalText, discountText, discountPrice, paymentText, paymentPrice;
 
@@ -71,7 +74,7 @@ public class ShowCartActivity extends AppCompatActivity {
         btnPay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(ProductActivity.isAuthenticated){
+                if (checkSession()){
                     AlertDialog.Builder builder = new AlertDialog.Builder(ShowCartActivity.this);
                     builder.setTitle("Submit");
                     builder.setTitle("Do you still want to pay ?");
@@ -98,13 +101,47 @@ public class ShowCartActivity extends AppCompatActivity {
                         }
                     });
                     builder.show();
-                }else {
-                    startActivity(new Intent(ShowCartActivity.this, LoginActivity.class));
                 }
             }
         });
         cartAdapter = new CartAdapter(cart);
         listViewProduct.setAdapter(cartAdapter);
+    }
+
+    private Boolean checkSession() {
+        //check if user is logged in
+        //if user is logged in --> move to mainActivity
+
+        SessionManagement sessionManagement = new SessionManagement(this);
+        int userID = sessionManagement.getSession();
+
+        if(userID != -1){
+            //user id logged in and so move to mainActivity
+            ApiInterface apiInterface;
+            apiInterface = RetrofitClient.getRetrofitClient().create(ApiInterface.class);
+
+            Call<ModelUser> call = apiInterface.get_user_id(sessionManagement.getSession());
+            call.enqueue(new Callback<ModelUser>() {
+                @Override
+                public void onResponse(Call<ModelUser> call, Response<ModelUser> response) {
+                    if(response.isSuccessful()){
+                        login.setUsername(response.body().getUsername());
+                        login.setEmail(response.body().getEmail());
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ModelUser> call, Throwable t) {
+
+                }
+            });
+            return true;
+        }
+        else{
+            //do nothing
+            startActivity(new Intent(ShowCartActivity.this, LoginActivity.class));
+        }
+        return false;
     }
 
 
@@ -133,7 +170,7 @@ public class ShowCartActivity extends AppCompatActivity {
 
 
     private boolean creatReceipt() throws JSONException {
-        ModelReceipt obj = new ModelReceipt(ProductActivity.Login.getUsername(),ProductActivity.Login.getEmail(),
+        ModelReceipt obj = new ModelReceipt(login.getUsername(),login.getEmail(),
                 mappingCartIntoReceipDetail());
         ApiInterface apiInterface;
         apiInterface = RetrofitClient.getRetrofitClient().create(ApiInterface.class);
@@ -199,9 +236,9 @@ public class ShowCartActivity extends AppCompatActivity {
             paymentPrice.setVisibility(View.VISIBLE);
             btnPay.setVisibility(View.VISIBLE);
             btnReset.setVisibility(View.VISIBLE);
-            totalPrice.setText(String.valueOf(total()));
-            discountPrice.setText(String.valueOf(total()- discounted()));
-            paymentPrice.setText(String.valueOf(discounted()));
+            totalPrice.setText(String.format("%.0f VND", total()));
+            discountPrice.setText(String.format("%.0f VND", total()- discounted()));
+            paymentPrice.setText(String.format("%.0f VND", discounted()));
         }
     }
 
