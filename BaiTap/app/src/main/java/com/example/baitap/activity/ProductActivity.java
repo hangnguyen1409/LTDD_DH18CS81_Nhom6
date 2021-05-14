@@ -1,14 +1,5 @@
 package com.example.baitap.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -17,6 +8,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.baitap.R;
 import com.example.baitap.adapter.AdapterProductSeller;
@@ -43,11 +39,8 @@ public class ProductActivity extends AppCompatActivity {
     AdapterProductSeller adapterProductSeller;
     public static List<ModelProducts> listProduct;
     ApiInterface apiInterface;
-    public static Boolean isAuthenticated = false;
+    public static Boolean isAuthenticated = true;
     public static ModelUser Login = new ModelUser();
-    public static ArrayList<ModelProducts> cart;
-
-    public static ArrayList<Float> listDiscount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,13 +54,7 @@ public class ProductActivity extends AppCompatActivity {
 
         listProduct = new ArrayList<>();
 
-        if(cart!=null){
-        }
-        else
-        {
-            listDiscount = new ArrayList<>();
-            cart = new ArrayList<>();
-        }
+
 
         // lấy ID cate
         Intent i = getIntent();
