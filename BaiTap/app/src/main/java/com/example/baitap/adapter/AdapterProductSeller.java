@@ -230,12 +230,12 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
                 newPrduct.setQuantity_M_size(quanM);
                 newPrduct.setQuantity_L_size(quanL);
                 newPrduct.setQuantity_XL_size(quanXL);
-                MainActivity.cart.add(newPrduct);
                 if (finalCostDiscount !=0){
                     MainActivity.listDiscount.add((float) finalCostDiscount);
                 }else {
                     MainActivity.listDiscount.add((float) finalCostPrice);
                 }
+                MainActivity.cart.add(newPrduct);
                 Toast.makeText(view.getContext(),"Đã thêm sản phẩm vào giỏ hàng",Toast.LENGTH_SHORT).show();
                 dialog.hide();
             }

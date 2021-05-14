@@ -43,6 +43,9 @@ public class ShowCartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_cart);
         drawerLayout = findViewById(R.id.drawer_layout);
+        ProductActivity.Login.setEmail("mr.tuan1749@gmail.com");
+        ProductActivity.Login.setUsername("tuan123");
+        ProductActivity.isAuthenticated = true;
         if(cart!=null){
         }
         else
