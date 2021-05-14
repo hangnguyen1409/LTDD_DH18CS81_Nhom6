@@ -61,8 +61,10 @@ public class ChangePassActivity extends AppCompatActivity {
                         public void onResponse(Call<Mess> call, Response<Mess> response) {
                             if(response.isSuccessful()){
                                 sessionManagement.removeSession();
-                                startActivity(new Intent(ChangePassActivity.this, LoginActivity.class));
-                                Toast.makeText(getApplicationContext(),response.body().getMess(),Toast.LENGTH_SHORT).show();
+                                if(sessionManagement.getSession()==-1) {
+                                    startActivity(new Intent(ChangePassActivity.this, LoginActivity.class));
+                                    Toast.makeText(getApplicationContext(), response.body().getMess(), Toast.LENGTH_SHORT).show();
+                                }
                             }
                             else {
                                 Toast.makeText(getApplicationContext(),response.body().getMess(),Toast.LENGTH_SHORT).show();

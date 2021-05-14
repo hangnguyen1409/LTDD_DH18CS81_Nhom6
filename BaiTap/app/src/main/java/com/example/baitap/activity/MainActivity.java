@@ -79,7 +79,9 @@ public class MainActivity extends AppCompatActivity {
     public void ClickLogout(View view){
         SessionManagement sessionManagement = new SessionManagement(this);
         sessionManagement.removeSession();
-        redirectActivity(this,LoginActivity.class);
+        if(sessionManagement.getSession()==-1){
+            redirectActivity(this,LoginActivity.class);
+        }
     }
     public void ClickExit(View view){
         logout(this);

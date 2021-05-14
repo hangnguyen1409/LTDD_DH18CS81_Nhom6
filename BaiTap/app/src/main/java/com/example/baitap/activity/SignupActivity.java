@@ -95,7 +95,7 @@ public class SignupActivity extends AppCompatActivity {
 
                         }else {
                             int statusCode  = response.code();
-                            Toast.makeText(getApplicationContext(),response.message(),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(),response.body().getMess(),Toast.LENGTH_SHORT).show();
                             System.out.println("err!");
                         }
 

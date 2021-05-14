@@ -3,6 +3,7 @@ package com.example.baitap.api;
 import com.example.baitap.model.LoginResponse;
 import com.example.baitap.model.Mess;
 import com.example.baitap.model.ModelCate;
+import com.example.baitap.model.ModelChangeInfo;
 import com.example.baitap.model.ModelChangePass;
 import com.example.baitap.model.ModelLogin;
 import com.example.baitap.model.ModelProducts;
@@ -53,4 +54,7 @@ public interface ApiInterface {
 
     @PUT("api/change_password/{id}")
     Call<Mess> change_pass(@Path("id") int id, @Body ModelChangePass modelChangePass);
+    @PUT("api/change_info_user/{id}")
+    Call<Mess> change_info(@Path("id") int id, @Body ModelChangeInfo modelChangeInfo);
+
 }
