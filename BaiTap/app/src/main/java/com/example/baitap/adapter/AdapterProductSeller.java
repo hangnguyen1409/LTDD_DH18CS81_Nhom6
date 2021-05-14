@@ -200,7 +200,7 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
             });
         }
         quanS = 0;
-        quanM = 1;
+        quanM = 0;
         quanL = 0;
         quanXL = 0;
 

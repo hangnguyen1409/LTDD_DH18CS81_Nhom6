@@ -31,31 +31,32 @@
                 android:layout_marginTop="100dp"/>
 
             <EditText
-                android:id="@+id/edittextuser"
+                android:layout_centerInParent="true"
+                android:id="@+id/showtextuser"
                 android:layout_width="261dp"
                 android:layout_height="54dp"
-                android:layout_marginLeft="20dp"
                 android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
                 android:layout_marginTop="290dp"
-                android:drawablePadding="10dp"/>
-
+                android:drawablePadding="10dp" />
             <EditText
-                android:id="@+id/edittextname"
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/showtextuser"
+                android:layout_centerInParent="true"
+                android:id="@+id/showtextname"
                 android:layout_width="261dp"
                 android:layout_height="54dp"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="360dp"
                 android:drawablePadding="20dp" />
             <EditText
-                android:id="@+id/edittextemail"
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/showtextname"
+                android:layout_centerInParent="true"
+                android:id="@+id/showtextemail"
                 android:layout_width="261dp"
                 android:layout_height="54dp"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="430dp"
                 android:drawablePadding="20dp" />
-
-
-
 
         </RelativeLayout>
 

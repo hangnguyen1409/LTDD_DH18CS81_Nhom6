@@ -9,7 +9,7 @@
     android:id="@+id/drawer_layout"
     tools:context=".activity.ChangePassActivity">
 
-        <include layout="@layout/main_toolbar" />
+    <include layout="@layout/main_toolbar" />
 
     <LinearLayout
         android:layout_width="match_parent"
