@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.baitap.R;
+import com.example.baitap.SessionManagement;
 import com.example.baitap.adapter.AdapterProductSeller;
 import com.example.baitap.api.ApiInterface;
 import com.example.baitap.api.RetrofitClient;
@@ -26,6 +27,8 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static com.example.baitap.activity.MainActivity.redirectActivity;
 
 public class ProductActivity extends AppCompatActivity {
 
@@ -123,19 +126,23 @@ public class ProductActivity extends AppCompatActivity {
         MainActivity.closeDrawer(drawerLayout);
     }
     public void ClickHome(View view){
-        MainActivity.redirectActivity(this,MainActivity.class);
+        redirectActivity(this,MainActivity.class);
     }
     public void ClickProduct(View view){
         recreate();
     }
     public void ClickUser(View view){
-        MainActivity.redirectActivity(this,UserProfile.class);
+        redirectActivity(this,UserProfile.class);
     }
     public void ClickCart(View view){
-        MainActivity.redirectActivity(this,ShowCartActivity.class);
+        redirectActivity(this,ShowCartActivity.class);
     }
     public void ClickLogout(View view){
-        MainActivity.redirectActivity(this,LoginActivity.class);
+        SessionManagement sessionManagement = new SessionManagement(this);
+        sessionManagement.removeSession();
+        if(sessionManagement.getSession()==-1){
+            redirectActivity(this,LoginActivity.class);
+        }
     }
     public void ClickExit(View view){
         MainActivity.logout(this);
