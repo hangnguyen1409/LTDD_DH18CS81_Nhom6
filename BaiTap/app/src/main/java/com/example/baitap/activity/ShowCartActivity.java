@@ -1,8 +1,5 @@
 package com.example.baitap.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.drawerlayout.widget.DrawerLayout;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +7,9 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.baitap.R;
 import com.example.baitap.adapter.CartAdapter;
@@ -28,6 +28,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.example.baitap.activity.MainActivity.cart;
+import static com.example.baitap.activity.MainActivity.listDiscount;
+
 public class ShowCartActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
     CartAdapter cartAdapter;
@@ -40,21 +43,22 @@ public class ShowCartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_cart);
         drawerLayout = findViewById(R.id.drawer_layout);
-
-        if(ProductActivity.cart!=null){
+        if(cart!=null){
         }
         else
         {
-            ProductActivity.cart = new ArrayList<>();
+            listDiscount = new ArrayList<>();
+            cart = new ArrayList<>();
         }
+
         mapping();
         hide();
-
         btnReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 noProductAlert();
-                ProductActivity.cart.clear();
+                cart.clear();
+                listDiscount.clear();
                 hide();
                 cartAdapter.notifyDataSetChanged();
             }
@@ -65,7 +69,8 @@ public class ShowCartActivity extends AppCompatActivity {
                 if(ProductActivity.isAuthenticated){
                     try {
                         if(creatReceipt()){
-                            ProductActivity.cart.clear();
+                            cart.clear();
+                            listDiscount.clear();
                             hide();
                             cartAdapter.notifyDataSetChanged();
                         }
@@ -79,7 +84,7 @@ public class ShowCartActivity extends AppCompatActivity {
         });
 
 
-        cartAdapter = new CartAdapter(ProductActivity.cart);
+        cartAdapter = new CartAdapter(cart);
 
         listViewProduct.setAdapter(cartAdapter);
 
@@ -88,7 +93,7 @@ public class ShowCartActivity extends AppCompatActivity {
 
     private int total() {
         int total = 0;
-        for (ModelProducts products : ProductActivity.cart
+        for (ModelProducts products : cart
         ) {
             total+=products.totalPriceAllSize();
         }
@@ -96,7 +101,7 @@ public class ShowCartActivity extends AppCompatActivity {
     }
     private Float discounted(){
         float dc = 0;
-        for (Float i: ProductActivity.listDiscount
+        for (Float i: MainActivity.listDiscount
         ) {
             if (i!= null){
                 dc+= i;
@@ -108,6 +113,8 @@ public class ShowCartActivity extends AppCompatActivity {
 
 
     private boolean creatReceipt() throws JSONException {
+        ProductActivity.Login.setUsername("trinh");
+        ProductActivity.Login.setEmail("trinh2709@gmail.com");
         ModelReceipt obj = new ModelReceipt(ProductActivity.Login.getUsername(),ProductActivity.Login.getEmail(),
                 mappingCartIntoReceipDetail());
         ApiInterface apiInterface;
@@ -117,11 +124,11 @@ public class ShowCartActivity extends AppCompatActivity {
         call.enqueue(new Callback<Mess>() {
             @Override
             public void onResponse(Call<Mess> call, Response<Mess> response) {
-                if(response.isSuccessful()) {
-                    Toast.makeText(ShowCartActivity.this,response.body().getMess(),Toast.LENGTH_SHORT).show();
+                if(response.isSuccessful()&response.body().getMess().equals("mua hàng thành công ,cảm ơn bạn đã mua hàng <3")) {
+                    Toast.makeText(ShowCartActivity.this,"mua hàng thành công ,cảm ơn bạn đã mua hàng <3",Toast.LENGTH_LONG).show();
                 }else {
                     int statusCode  = response.code();
-                    Toast.makeText(ShowCartActivity.this,response.message(),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ShowCartActivity.this,response.body().getMess(),Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -137,7 +144,7 @@ public class ShowCartActivity extends AppCompatActivity {
 
     private ArrayList<ModelReciptDetail> mappingCartIntoReceipDetail() {
         ArrayList<ModelReciptDetail> listP = new ArrayList<>();
-        for (ModelProducts p: ProductActivity.cart){
+        for (ModelProducts p: cart){
             ModelReciptDetail product = new ModelReciptDetail(p.getId(),
                     p.getQuantity_S_size(), p.getQuantity_M_size(),
                     p.getQuantity_L_size(), p.getQuantity_XL_size(),
@@ -149,12 +156,12 @@ public class ShowCartActivity extends AppCompatActivity {
 
 
     private void noProductAlert() {
-        if (ProductActivity.cart.isEmpty()){
+        if (cart.isEmpty()){
             Toast.makeText(getApplicationContext(),"no product in cart!!!",Toast.LENGTH_LONG).show();
         }
     }
     private void hide() {
-        if (ProductActivity.cart.isEmpty()){
+        if (cart.isEmpty()){
             tvEmpty.setVisibility(View.VISIBLE);
             totalText.setVisibility(View.INVISIBLE);
             totalPrice.setVisibility(View.INVISIBLE);

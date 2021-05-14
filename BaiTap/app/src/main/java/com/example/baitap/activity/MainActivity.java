@@ -1,47 +1,28 @@
 package com.example.baitap.activity;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ViewFlipper;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.res.Configuration;
-import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.RelativeLayout;
-import android.widget.SearchView;
-import android.widget.TextView;
-import android.widget.ViewFlipper;
 import com.example.baitap.R;
-import com.example.baitap.adapter.AdapterProductSeller;
-import com.example.baitap.api.ApiInterface;
-import com.example.baitap.api.RetrofitClient;
 import com.example.baitap.model.ModelProducts;
-import com.example.baitap.model.ModelUser;
 
 import java.util.ArrayList;
-import java.util.List;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
     ViewFlipper viewFlipper;
     DrawerLayout drawerLayout;
+    public static ArrayList<ModelProducts> cart;
 
+    public static ArrayList<Float> listDiscount;
 
 
     @Override
@@ -54,7 +35,13 @@ public class MainActivity extends AppCompatActivity {
 
         viewFlipper.setFlipInterval(3000);
         viewFlipper.setAutoStart(true);
-
+        if(cart!=null){
+        }
+        else
+        {
+            listDiscount = new ArrayList<>();
+            cart = new ArrayList<>();
+        }
 
     }
     public void ClickMenu(View view){
