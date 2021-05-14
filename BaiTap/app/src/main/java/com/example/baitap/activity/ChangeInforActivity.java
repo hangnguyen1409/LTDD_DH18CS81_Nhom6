@@ -5,9 +5,21 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.baitap.R;
+import com.example.baitap.SessionManagement;
+import com.example.baitap.api.ApiInterface;
+import com.example.baitap.api.RetrofitClient;
+import com.example.baitap.model.Mess;
+import com.example.baitap.model.ModelChangeInfo;
+import com.example.baitap.model.ModelUser;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ChangeInforActivity extends AppCompatActivity {
     Button butnchangeinfor,butnback;
@@ -33,7 +45,31 @@ public class ChangeInforActivity extends AppCompatActivity {
                 switch (view.getId()) {
                     case R.id.butnchangeinfor:
                         if(check(view)){
-                            System.out.println("da vao");
+                            ApiInterface apiInterface;
+                            apiInterface = RetrofitClient.getRetrofitClient().create(ApiInterface.class);
+                            ModelChangeInfo modelChangeInfo = new ModelChangeInfo();
+                            modelChangeInfo.setEmail(edittextemail.getText().toString());
+                            modelChangeInfo.setName(edittextname.getText().toString());
+                            modelChangeInfo.setUsername(edittextuser.getText().toString());
+                            SessionManagement sessionManagement = new SessionManagement(ChangeInforActivity.this);
+                            Call<Mess> call = apiInterface.change_info(sessionManagement.getSession(),modelChangeInfo);
+                            call.enqueue(new Callback<Mess>() {
+                                @Override
+                                public void onResponse(Call<Mess> call, Response<Mess> response) {
+                                    if(response.isSuccessful()){
+                                        Toast.makeText(getApplicationContext(),response.body().getMess(),Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(ChangeInforActivity.this, UserProfile.class));
+                                    }
+                                    else {
+                                        Toast.makeText(getApplicationContext(),response.body().getMess(),Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<Mess> call, Throwable t) {
+
+                                }
+                            });
                         }else
                             System.out.println("err");
 
