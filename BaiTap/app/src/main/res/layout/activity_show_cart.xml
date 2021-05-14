@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/drawer_layout"
-    tools:context=".activity.ShowCartActivity">
+    tools:context=".activity.ShowCartActivity"
+    android:descendantFocusability="blocksDescendants">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -34,16 +35,17 @@
                         android:textSize="35sp"
                         android:text="Cart empty!!!"
                         android:gravity="center"/>
+
                     <ListView
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:id="@+id/listproduct"
                         android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:background="#ffffff"
                         android:cacheColorHint="#ffffff"
+                        android:choiceMode="multipleChoice"
                         android:clickable="true"
-                        android:choiceMode="multipleChoice">
-                    </ListView>
+                        android:focusable="true" />
 
                 </RelativeLayout>
 
@@ -126,6 +128,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="50dp"
                         android:id="@+id/btnReset"
+                        android:focusable="false"
                         android:text="Reset">
                     </Button>
                     <Button
@@ -133,6 +136,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="50dp"
                         android:layout_marginLeft="100dp"
+                        android:focusable="false"
                         android:text="Pay">
                     </Button>
                 </LinearLayout>

@@ -39,6 +39,10 @@ public class ModelProducts {
         return (this.quantity_S_size + this.quantity_L_size + this.quantity_M_size + this.quantity_XL_size)*this.price;
     }
 
+    public int totalQuantitySize(){
+        return this.quantity_S_size + this.quantity_L_size + this.quantity_M_size + this.quantity_XL_size;
+    }
+
     public Integer getCategory() {
         return category;
     }

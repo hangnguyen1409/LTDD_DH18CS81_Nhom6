@@ -1,5 +1,7 @@
 package com.example.baitap.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -29,8 +31,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.example.baitap.activity.MainActivity.cart;
-import static com.example.baitap.activity.MainActivity.listDiscount;
 import static com.example.baitap.activity.MainActivity.listCost;
+import static com.example.baitap.activity.MainActivity.listDiscount;
 
 public class ShowCartActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
@@ -44,9 +46,6 @@ public class ShowCartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_cart);
         drawerLayout = findViewById(R.id.drawer_layout);
-        ProductActivity.Login.setEmail("mr.tuan1749@gmail.com");
-        ProductActivity.Login.setUsername("tuan123");
-        ProductActivity.isAuthenticated = true;
         if(cart!=null){
         }
         else
@@ -73,32 +72,43 @@ public class ShowCartActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(ProductActivity.isAuthenticated){
-                    try {
-                        if(creatReceipt()){
-                            cart.clear();
-                            listDiscount.clear();
-                            listCost.clear();
-                            hide();
-                            cartAdapter.notifyDataSetChanged();
+                    AlertDialog.Builder builder = new AlertDialog.Builder(ShowCartActivity.this);
+                    builder.setTitle("Submit");
+                    builder.setTitle("Do you still want to pay ?");
+                    builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            try {
+                                if(creatReceipt()){
+                                    cart.clear();
+                                    listDiscount.clear();
+                                    listCost.clear();
+                                    hide();
+                                    cartAdapter.notifyDataSetChanged();
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                         }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                    });
+                    builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    builder.show();
                 }else {
                     startActivity(new Intent(ShowCartActivity.this, LoginActivity.class));
                 }
             }
         });
-
-
         cartAdapter = new CartAdapter(cart);
-
         listViewProduct.setAdapter(cartAdapter);
-
     }
 
 
-    private static Float total(){
+    public static Float total(){
         float tt = 0;
         for (Float i: listCost
         ) {
