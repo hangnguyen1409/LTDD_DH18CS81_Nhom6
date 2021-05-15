@@ -1,0 +1,312 @@
+{
+	"info": {
+		"_postman_id": "a9fc9b49-1504-4b5e-bdba-0863a002d5ae",
+		"name": "API ban hang",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Lấy Tất Cả Danh Mục Sản Phẩm",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://phamtuan0907.pythonanywhere.com/api/get-all-category",
+					"protocol": "http",
+					"host": [
+						"phamtuan0907",
+						"pythonanywhere",
+						"com"
+					],
+					"path": [
+						"api",
+						"get-all-category"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Lấy Tất Cả Sản Phẩm",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://phamtuan0907.pythonanywhere.com/api/get_all_product",
+					"protocol": "http",
+					"host": [
+						"phamtuan0907",
+						"pythonanywhere",
+						"com"
+					],
+					"path": [
+						"api",
+						"get_all_product"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Lấy Sản Phẩm Theo Danh Mục Sản Phẩm",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://phamtuan0907.pythonanywhere.com/api/get_product_by_category_id/category=3",
+					"protocol": "http",
+					"host": [
+						"phamtuan0907",
+						"pythonanywhere",
+						"com"
+					],
+					"path": [
+						"api",
+						"get_product_by_category_id",
+						"category=3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Đăng Nhập",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\":\"admin\",\"password\":\"12345\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://phamtuan0907.pythonanywhere.com/api/login",
+					"protocol": "http",
+					"host": [
+						"phamtuan0907",
+						"pythonanywhere",
+						"com"
+					],
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Đổi Mật Khảu",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"password\":\"12345\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://phamtuan0907.pythonanywhere.com/api/change_password/1",
+					"protocol": "http",
+					"host": [
+						"phamtuan0907",
+						"pythonanywhere",
+						"com"
+					],
+					"path": [
+						"api",
+						"change_password",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Đổi Thông Tin",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"username\":\"admin\",\r\n\t\"name\":\"Tuân\",\r\n\t\"email\":\"mr.tuan@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://phamtuan0907.pythonanywhere.com/api/change_info_user/1",
+					"protocol": "http",
+					"host": [
+						"phamtuan0907",
+						"pythonanywhere",
+						"com"
+					],
+					"path": [
+						"api",
+						"change_info_user",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Lấy sản phẩm theo ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://phamtuan0907.pythonanywhere.com/api/get_product/id=1",
+					"protocol": "http",
+					"host": [
+						"phamtuan0907",
+						"pythonanywhere",
+						"com"
+					],
+					"path": [
+						"api",
+						"get_product",
+						"id=1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Đăng Ký",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"username\":\"tuan123\",\r\n\t\"password\":\"123456\",\r\n\t\"name\":\"Phạm Tuân\",\r\n\t\"email\":\"mr.tuan1749@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://phamtuan0907.pythonanywhere.com/api/signup_user",
+					"protocol": "http",
+					"host": [
+						"phamtuan0907",
+						"pythonanywhere",
+						"com"
+					],
+					"path": [
+						"api",
+						"signup_user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tạo Hóa Đơn",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n    \"username\":\"tuan\",\r\n    \"email\":\"1851050167tuan@ou.edu.vn\",\r\n    \"listProduct\":[{\r\n        \"product_id\":1,\r\n        \"quantity_M_size\":0,\r\n        \"quantity_L_size\":0,\r\n        \"quantity_S_size\":0,\r\n        \"quantity_XL_size\":10, \r\n        \"price\":150000\r\n    },\r\n    {\r\n        \"product_id\":2,\r\n        \"quantity_M_size\":0,\r\n        \"quantity_L_size\":0,\r\n        \"quantity_S_size\":0,\r\n        \"quantity_XL_size\":10,\r\n        \"price\":150000\r\n    }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://phamtuan0907.pythonanywhere.com/saleapp/create_bills",
+					"protocol": "http",
+					"host": [
+						"phamtuan0907",
+						"pythonanywhere",
+						"com"
+					],
+					"path": [
+						"saleapp",
+						"create_bills"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Lấy Khuyến Mãi Hôm Nay",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://phamtuan0907.pythonanywhere.com/api/get_promotion_today",
+					"protocol": "http",
+					"host": [
+						"phamtuan0907",
+						"pythonanywhere",
+						"com"
+					],
+					"path": [
+						"api",
+						"get_promotion_today"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Lấy Sản Phẩm Theo Khuyến Mãi",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://phamtuan0907.pythonanywhere.com/api/get_list_product_by_promotion/1",
+					"protocol": "http",
+					"host": [
+						"phamtuan0907",
+						"pythonanywhere",
+						"com"
+					],
+					"path": [
+						"api",
+						"get_list_product_by_promotion",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Lấy Khuyến Mãi Theo ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://phamtuan0907.pythonanywhere.com/api/get_promotion_by_id/1",
+					"protocol": "http",
+					"host": [
+						"phamtuan0907",
+						"pythonanywhere",
+						"com"
+					],
+					"path": [
+						"api",
+						"get_promotion_by_id",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
