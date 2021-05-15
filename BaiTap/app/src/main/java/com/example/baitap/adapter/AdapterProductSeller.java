@@ -226,34 +226,71 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
         continueBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ModelProducts newPrduct = null;
-                try {
-                    newPrduct = (ModelProducts) modelProducts.clone();
-                } catch (CloneNotSupportedException e) {
-                    e.printStackTrace();
-                }
-                newPrduct.setQuantity_S_size(quanS);
-                newPrduct.setQuantity_M_size(quanM);
-                newPrduct.setQuantity_L_size(quanL);
-                newPrduct.setQuantity_XL_size(quanXL);
-                Float total = modelProducts.getPrice()*(quanS+quanM+quanL+quanXL);
-                if(total == 0){
-                    Toast.makeText(view.getContext(),"Please choose your size...",Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    MainActivity.listCost.add(total);
-                    if (finalCostDiscount != 0) {
-                        MainActivity.listDiscount.add((float) finalCostDiscount);
-                        newPrduct.setPrice((float) costDiscount);
-                    } else {
-                        MainActivity.listDiscount.add((float) finalCostPrice);
-                        newPrduct.setPrice((float) costPrice);
+                int index = -1;
+                if (cart.size()>0){
+                    for (int i=0 ; i < MainActivity.cart.size(); i++){
+                        if (modelProducts.getId() == (MainActivity.cart.get(i).getId())) {
+                            index = i;
+                        }
                     }
-                    MainActivity.cart.add(newPrduct);
-                    Toast.makeText(view.getContext(), "Add To Cart...", Toast.LENGTH_SHORT).show();
-                    dialog.hide();
                 }
-
+                if (index > -1){ // trung voi product trong cart
+                    ModelProducts newPrduct = null;
+                    try {
+                        newPrduct = (ModelProducts) MainActivity.cart.get(index).clone();
+                    } catch (CloneNotSupportedException e) {
+                        e.printStackTrace();
+                    }
+                    newPrduct.setQuantity_S_size(quanS + newPrduct.getQuantity_S_size());
+                    newPrduct.setQuantity_M_size(quanM + newPrduct.getQuantity_M_size());
+                    newPrduct.setQuantity_L_size(quanL + newPrduct.getQuantity_L_size());
+                    newPrduct.setQuantity_XL_size(quanXL + newPrduct.getQuantity_XL_size());
+                    Float total = modelProducts.getPrice()*(quanS+quanM+quanL+quanXL);
+                    if(total == 0){
+                        Toast.makeText(view.getContext(),"Please choose your size...",Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        MainActivity.listCost.set(index, MainActivity.listCost.get(index) + total);
+                        if (finalCostDiscount != 0) {
+                            MainActivity.listDiscount.set(index, MainActivity.listDiscount.get(index) + (float) finalCostDiscount);
+                            newPrduct.setPrice(newPrduct.getPrice() + (float) costDiscount);
+                        } else {
+                            MainActivity.listDiscount.set(index, MainActivity.listDiscount.get(index) + (float) finalCostPrice);
+                            newPrduct.setPrice(newPrduct.getPrice() + (float) costPrice);
+                        }
+                        MainActivity.cart.set(index, newPrduct);
+                        Toast.makeText(view.getContext(), "Add To Cart...", Toast.LENGTH_SHORT).show();
+                        dialog.hide();
+                    }
+                }else { // khong trung
+                    ModelProducts newPrduct = null;
+                    try {
+                        newPrduct = (ModelProducts) modelProducts.clone();
+                    } catch (CloneNotSupportedException e) {
+                        e.printStackTrace();
+                    }
+                    newPrduct.setQuantity_S_size(quanS);
+                    newPrduct.setQuantity_M_size(quanM);
+                    newPrduct.setQuantity_L_size(quanL);
+                    newPrduct.setQuantity_XL_size(quanXL);
+                    Float total = modelProducts.getPrice()*(quanS+quanM+quanL+quanXL);
+                    if(total == 0){
+                        Toast.makeText(view.getContext(),"Please choose your size...",Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        MainActivity.listCost.add(total);
+                        if (finalCostDiscount != 0) {
+                            MainActivity.listDiscount.add((float) finalCostDiscount);
+                            newPrduct.setPrice((float) costDiscount);
+                        } else {
+                            MainActivity.listDiscount.add((float) finalCostPrice);
+                            newPrduct.setPrice((float) costPrice);
+                        }
+                        MainActivity.cart.add(newPrduct);
+                        Toast.makeText(view.getContext(), "Add To Cart...", Toast.LENGTH_SHORT).show();
+                        dialog.hide();
+                    }
+                }
             }
         });
         incrementBtnS.setOnClickListener(new View.OnClickListener() {

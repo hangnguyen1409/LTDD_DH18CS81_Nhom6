@@ -96,6 +96,14 @@
         android:gravity="center_horizontal"
         android:orientation="horizontal">
 
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textAlignment="viewStart"
+            android:text="Size S: "
+            android:textSize="16dp"/>
+
 
         <ImageButton
             android:id="@+id/decrementBtnS"
@@ -133,7 +141,13 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:orientation="horizontal">
-
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textAlignment="viewStart"
+            android:text="Size M: "
+            android:textSize="16dp"/>
 
         <ImageButton
             android:id="@+id/decrementBtnM"
@@ -170,7 +184,13 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:orientation="horizontal">
-
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textAlignment="viewStart"
+            android:text="Size L: "
+            android:textSize="16dp"/>
 
         <ImageButton
             android:layout_margin="5dp"
@@ -209,7 +229,13 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:orientation="horizontal">
-
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textAlignment="viewStart"
+            android:text="Size XL: "
+            android:textSize="16dp"/>
 
         <ImageButton
             android:layout_margin="5dp"
