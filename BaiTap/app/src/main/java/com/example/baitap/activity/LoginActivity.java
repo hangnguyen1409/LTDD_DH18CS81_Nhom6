@@ -97,7 +97,8 @@ public class LoginActivity extends AppCompatActivity {
                                 sessionManagement.saveSession(response.body().user_login);
                                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
                             }
-                            Toast.makeText(LoginActivity.this,"Login Successful!!!...",Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginActivity.this, loginResponse.getMess(), Toast.LENGTH_SHORT).show();
+
                         } else {
                             Toast.makeText(LoginActivity.this, loginResponse.getMess(), Toast.LENGTH_SHORT).show();
                             System.out.println(loginResponse);
