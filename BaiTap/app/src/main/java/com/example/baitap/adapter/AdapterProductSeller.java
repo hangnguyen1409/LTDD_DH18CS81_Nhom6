@@ -225,22 +225,26 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
         continueBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ModelProducts newPrduct = modelProducts;
-                newPrduct.setQuantity_S_size(quanS);
-                newPrduct.setQuantity_M_size(quanM);
-                newPrduct.setQuantity_L_size(quanL);
-                newPrduct.setQuantity_XL_size(quanXL);
-                MainActivity.listCost.add(modelProducts.getPrice()*(quanS+quanM+quanL+quanXL));
-                if (finalCostDiscount !=0){
-                    MainActivity.listDiscount.add((float) finalCostDiscount);
-                    newPrduct.setPrice((float) costDiscount);
-                }else {
-                    MainActivity.listDiscount.add((float) finalCostPrice);
-                    newPrduct.setPrice((float) costPrice);
+                try {
+                    ModelProducts newPrduct =(ModelProducts) modelProducts.clone();
+                    newPrduct.setQuantity_S_size(quanS);
+                    newPrduct.setQuantity_M_size(quanM);
+                    newPrduct.setQuantity_L_size(quanL);
+                    newPrduct.setQuantity_XL_size(quanXL);
+                    MainActivity.listCost.add(modelProducts.getPrice()*(quanS+quanM+quanL+quanXL));
+                    if (finalCostDiscount !=0){
+                        MainActivity.listDiscount.add((float) finalCostDiscount);
+                        newPrduct.setPrice((float) costDiscount);
+                    }else {
+                        MainActivity.listDiscount.add((float) finalCostPrice);
+                        newPrduct.setPrice((float) costPrice);
+                    }
+                    MainActivity.cart.add(newPrduct);
+                    Toast.makeText(view.getContext(),"Đã thêm sản phẩm vào giỏ hàng",Toast.LENGTH_SHORT).show();
+                    dialog.hide();
+                } catch (CloneNotSupportedException e) {
+                    e.printStackTrace();
                 }
-                MainActivity.cart.add(newPrduct);
-                Toast.makeText(view.getContext(),"Đã thêm sản phẩm vào giỏ hàng",Toast.LENGTH_SHORT).show();
-                dialog.hide();
             }
         });
         incrementBtnS.setOnClickListener(new View.OnClickListener() {
