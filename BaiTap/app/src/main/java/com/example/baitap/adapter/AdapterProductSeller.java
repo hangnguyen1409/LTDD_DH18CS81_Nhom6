@@ -226,7 +226,12 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
         continueBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ModelProducts newPrduct = modelProducts;
+                ModelProducts newPrduct = null;
+                try {
+                    newPrduct = (ModelProducts) modelProducts.clone();
+                } catch (CloneNotSupportedException e) {
+                    e.printStackTrace();
+                }
                 newPrduct.setQuantity_S_size(quanS);
                 newPrduct.setQuantity_M_size(quanM);
                 newPrduct.setQuantity_L_size(quanL);
@@ -291,7 +296,7 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
                 if (quanL <= quantity_L_size && promotion_id != null) {
                     quanL++;
                     quanL_TV.setText(String.valueOf(quanL));
-
+                    finalCostDiscount = finalCostDiscount + costDiscount;
                     finalPriceTV.setText(String.format("%.0f",finalCostDiscount) + "VNĐ");
                 }
                 else if(quanL <= quantity_XL_size && promotion_id == null){
@@ -323,13 +328,13 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
         decrementBtnS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (quanS >= 1 && promotion_id != null) {
+                if (quanS > 0 && promotion_id != null ) {
                     quanS--;
                     quanS_TV.setText(String.valueOf(quanS));
                     finalCostDiscount = finalCostDiscount - costDiscount;
                     finalPriceTV.setText(String.format("%.0f",finalCostDiscount) + "VNĐ");
                 }
-                else if(quanS >= 1 && promotion_id == null){
+                else if(quanS > 0 && promotion_id == null&& quanS > 0){
                     quanS--;
                     quanS_TV.setText(String.valueOf(quanS));
                     finalCostPrice = finalCostPrice - costPrice;
@@ -340,13 +345,13 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
         decrementBtnM.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (quanM >= 1 && promotion_id != null) {
+                if (quanM > 0 && promotion_id != null) {
                     quanM--;
                     quanM_TV.setText(String.valueOf(quanM));
                     finalCostDiscount = finalCostDiscount - costDiscount;
                     finalPriceTV.setText(String.format("%.0f",finalCostDiscount) + "VNĐ");
                 }
-                else if(quanM >= 1 && promotion_id == null){
+                else if(quanM > 0 && promotion_id == null&& quanM > 0){
                     quanM--;
                     quanM_TV.setText(String.valueOf(quanM));
                     finalCostPrice = finalCostPrice - costPrice;
@@ -357,13 +362,13 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
         decrementBtnL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (quanL >= 1 && promotion_id != null) {
+                if (quanL > 0 && promotion_id != null) {
                     quanL--;
                     quanL_TV.setText(String.valueOf(quanL));
                     finalCostDiscount = finalCostDiscount - costDiscount;
                     finalPriceTV.setText(String.format("%.0f",finalCostDiscount) + "VNĐ");
                 }
-                else if(quanL <= quantity_XL_size && promotion_id == null){
+                else if(quanL <= quantity_XL_size && promotion_id == null&& quanL > 0){
                     quanL--;
                     quanL_TV.setText(String.valueOf(quanL));
                     finalCostPrice = finalCostPrice - costPrice;
@@ -374,13 +379,13 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
         decrementBtnXL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (quanXL >= 1 && promotion_id != null) {
+                if (quanXL > 0 && promotion_id != null) {
                     quanXL--;
                     quanXL_TV.setText(String.valueOf(quanXL));
                     finalCostDiscount = finalCostDiscount - costDiscount;
                     finalPriceTV.setText(String.format("%.0f",finalCostDiscount) + "VNĐ");
                 }
-                else if(quanXL <= quantity_XL_size && promotion_id == null){
+                else if(quanXL <= quantity_XL_size && promotion_id == null && quanXL > 0){
                     quanXL--;
                     quanXL_TV.setText(String.valueOf(quanXL));
                     finalCostPrice = finalCostPrice - costPrice;

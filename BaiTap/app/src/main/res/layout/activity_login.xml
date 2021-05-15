@@ -45,14 +45,6 @@
         android:background="@drawable/round_border"
         android:text="LOGIN"
         app:backgroundTint="#2196F3" />
-    <Button
-        android:id="@+id/butnhome"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/round_border"
-        android:text="HOME"
-        app:backgroundTint="#2196F3" />
 
 
     <LinearLayout

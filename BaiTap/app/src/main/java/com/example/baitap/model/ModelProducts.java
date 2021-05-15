@@ -3,7 +3,7 @@ package com.example.baitap.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class ModelProducts {
+public class ModelProducts implements  Cloneable{
     private Integer category;
     private String description;
     private Integer id;
@@ -42,7 +42,9 @@ public class ModelProducts {
     public int totalQuantitySize(){
         return this.quantity_S_size + this.quantity_L_size + this.quantity_M_size + this.quantity_XL_size;
     }
-
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
     public Integer getCategory() {
         return category;
     }

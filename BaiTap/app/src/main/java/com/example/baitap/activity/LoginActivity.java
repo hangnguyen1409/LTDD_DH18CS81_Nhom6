@@ -30,7 +30,7 @@ import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
     EditText edtUser, edtPassword;
-    Button btnLogin,butnhome;
+    Button btnLogin;
     //    TextView tvSignup;
     String username, password;
 //    private List<ModelUser> mListModelUser;
@@ -43,7 +43,6 @@ public class LoginActivity extends AppCompatActivity {
         edtUser = findViewById(R.id.edittextuser);
         edtPassword = findViewById(R.id.edittextpassword);
         btnLogin = findViewById(R.id.butndangnhap);
-        butnhome = findViewById(R.id.butnhome);
 //      tvSignup = findViewById(R.id.textViewSignUp);
 
         TextView btn = findViewById(R.id.textViewSignUp);
@@ -55,12 +54,7 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(new Intent(LoginActivity.this, SignupActivity.class));
             }
         });
-        butnhome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, MainActivity.class));
-            }
-        });
+
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,12 +92,12 @@ public class LoginActivity extends AppCompatActivity {
                     public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                         LoginResponse loginResponse = response.body();
                         if (response.isSuccessful()) {
-                            if (loginResponse.getMess().equals("Login Successful!")) {
+                            if (loginResponse.getMess().equals("Đăng Nhập Thành Công!")) {
                                 SessionManagement sessionManagement = new SessionManagement(LoginActivity.this);
                                 sessionManagement.saveSession(response.body().user_login);
                                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
                             }
-                            Toast.makeText(LoginActivity.this, loginResponse.getMess(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this,"Login Successful!!!...",Toast.LENGTH_LONG).show();
                         } else {
                             Toast.makeText(LoginActivity.this, loginResponse.getMess(), Toast.LENGTH_SHORT).show();
                             System.out.println(loginResponse);

@@ -180,8 +180,8 @@ public class ShowCartActivity extends AppCompatActivity {
         call.enqueue(new Callback<Mess>() {
             @Override
             public void onResponse(Call<Mess> call, Response<Mess> response) {
-                if(response.isSuccessful()&response.body().getMess().equals("Add To Cart...")) {
-                    Toast.makeText(ShowCartActivity.this,"Add To Cart...",Toast.LENGTH_LONG).show();
+                if(response.isSuccessful()&response.body().getMess().equals("mua hàng thành công ,cảm ơn bạn đã mua hàng <3")) {
+                    Toast.makeText(ShowCartActivity.this,"Thank you for shopping!!!...",Toast.LENGTH_LONG).show();
                 }else {
                     int statusCode  = response.code();
                     Toast.makeText(ShowCartActivity.this,response.body().getMess(),Toast.LENGTH_SHORT).show();
