@@ -102,9 +102,9 @@ public class UserProfile extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<ModelUser> call, Response<ModelUser> response) {
                     if(response.isSuccessful()){
-                        showtextuser.setText("Username:  "+ response.body().getUsername());
-                        showtextname.setText("Name:  "+ response.body().getName());
-                        showtextemail.setText("Email:  "+ response.body().getEmail());
+                        showtextuser.setText("username:  "+ response.body().getUsername());
+                        showtextname.setText("name:  "+ response.body().getName());
+                        showtextemail.setText("email:  "+ response.body().getEmail());
                     }
                 }
 
@@ -119,5 +119,8 @@ public class UserProfile extends AppCompatActivity {
             startActivity(new Intent(UserProfile.this, LoginActivity.class));
         }
     }
+
+
+
 
 }

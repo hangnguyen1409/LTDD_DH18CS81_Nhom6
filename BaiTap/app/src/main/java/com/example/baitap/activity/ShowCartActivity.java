@@ -213,7 +213,7 @@ public class ShowCartActivity extends AppCompatActivity {
 
     private void noProductAlert() {
         if (cart.isEmpty()){
-            Toast.makeText(getApplicationContext(),"Cart is empty!!!",Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"no product in cart!!!",Toast.LENGTH_LONG).show();
         }
     }
     public static void hide() {
@@ -237,14 +237,15 @@ public class ShowCartActivity extends AppCompatActivity {
             paymentPrice.setVisibility(View.VISIBLE);
             btnPay.setVisibility(View.VISIBLE);
             btnReset.setVisibility(View.VISIBLE);
-            totalPrice.setText(String.format("%.0f", total()) +"VNĐ");
-            discountPrice.setText(String.format("%.0f", total()- discounted())+"VNĐ");
-            paymentPrice.setText(String.format("%.0f", discounted())+"VNĐ");
+            totalPrice.setText(String.format("%.0f VND", total()));
+            discountPrice.setText(String.format("%.0f VND", total()- discounted()));
+            paymentPrice.setText(String.format("%.0f VND", discounted()));
         }
     }
 
     private void mapping() {
         listViewProduct = findViewById(R.id.listproduct);
+//        btnBack = findViewById(R.id.backBtn);
         btnPay = findViewById(R.id.btnPay);
         btnReset = findViewById(R.id.btnReset);
         tvEmpty = findViewById(R.id.tv_Empty);

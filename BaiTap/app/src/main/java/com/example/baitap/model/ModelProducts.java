@@ -3,7 +3,7 @@ package com.example.baitap.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class ModelProducts implements  Cloneable{
+public class ModelProducts implements Cloneable{
     private Integer category;
     private String description;
     private Integer id;
@@ -88,7 +88,6 @@ public class ModelProducts implements  Cloneable{
     public Float getPrice() {
         return price;
     }
-
     public void setPrice(Float price) {
         this.price = price;
     }
