@@ -180,8 +180,8 @@ public class ShowCartActivity extends AppCompatActivity {
         call.enqueue(new Callback<Mess>() {
             @Override
             public void onResponse(Call<Mess> call, Response<Mess> response) {
-                if(response.isSuccessful()&response.body().getMess().equals("mua hàng thành công ,cảm ơn bạn đã mua hàng <3")) {
-                    Toast.makeText(ShowCartActivity.this,"mua hàng thành công ,cảm ơn bạn đã mua hàng <3",Toast.LENGTH_LONG).show();
+                if(response.isSuccessful()&response.body().getMess().equals("Add To Cart...")) {
+                    Toast.makeText(ShowCartActivity.this,"Add To Cart...",Toast.LENGTH_LONG).show();
                 }else {
                     int statusCode  = response.code();
                     Toast.makeText(ShowCartActivity.this,response.body().getMess(),Toast.LENGTH_SHORT).show();
@@ -213,7 +213,7 @@ public class ShowCartActivity extends AppCompatActivity {
 
     private void noProductAlert() {
         if (cart.isEmpty()){
-            Toast.makeText(getApplicationContext(),"no product in cart!!!",Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"Cart is empty!!!",Toast.LENGTH_LONG).show();
         }
     }
     public static void hide() {
@@ -237,15 +237,14 @@ public class ShowCartActivity extends AppCompatActivity {
             paymentPrice.setVisibility(View.VISIBLE);
             btnPay.setVisibility(View.VISIBLE);
             btnReset.setVisibility(View.VISIBLE);
-            totalPrice.setText(String.format("%.0f VND", total()));
-            discountPrice.setText(String.format("%.0f VND", total()- discounted()));
-            paymentPrice.setText(String.format("%.0f VND", discounted()));
+            totalPrice.setText(String.format("%.0f", total()) +"VNĐ");
+            discountPrice.setText(String.format("%.0f", total()- discounted())+"VNĐ");
+            paymentPrice.setText(String.format("%.0f", discounted())+"VNĐ");
         }
     }
 
     private void mapping() {
         listViewProduct = findViewById(R.id.listproduct);
-//        btnBack = findViewById(R.id.backBtn);
         btnPay = findViewById(R.id.btnPay);
         btnReset = findViewById(R.id.btnReset);
         tvEmpty = findViewById(R.id.tv_Empty);

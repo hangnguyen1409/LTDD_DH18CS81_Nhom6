@@ -10,6 +10,7 @@ import android.widget.Button;
 import androidx.fragment.app.Fragment;
 
 import com.example.baitap.R;
+import com.example.baitap.activity.LoginActivity;
 import com.example.baitap.activity.MainActivity;
 
 public class IntroducingFragment4 extends Fragment {
@@ -30,7 +31,7 @@ public class IntroducingFragment4 extends Fragment {
         btnGetStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent  intent = new Intent(getActivity(), MainActivity.class);
+                Intent  intent = new Intent(getActivity(), LoginActivity.class);
                 getActivity().startActivity(intent);
             }
         });

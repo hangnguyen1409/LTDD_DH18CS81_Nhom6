@@ -1,6 +1,4 @@
 package com.example.baitap.adapter;
-
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.Paint;
@@ -14,26 +12,27 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
 import com.example.baitap.R;
 import com.example.baitap.activity.MainActivity;
+import com.example.baitap.activity.ShowCartActivity;
 import com.example.baitap.api.ApiInterface;
 import com.example.baitap.api.RetrofitClient;
 import com.example.baitap.model.ModelCate;
 import com.example.baitap.model.ModelProducts;
 import com.example.baitap.model.Promotion;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static com.example.baitap.activity.MainActivity.cart;
+import static com.example.baitap.activity.MainActivity.listCost;
+import static com.example.baitap.activity.MainActivity.listDiscount;
 
 
 public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSeller.HolderProductSeller> implements Filterable {
@@ -73,7 +72,7 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
             holder.TV_QuantityM.setText(quantity_M_size.toString());
             holder.TV_QuantityL.setText(quantity_L_size.toString());
             holder.TV_QuantityXL.setText(quantity_XL_size.toString());
-            holder.TV_originalPrice.setText(String.format("%.0f", price) + " VNĐ");
+            holder.TV_originalPrice.setText(String.format("%.0f", price) + "VNĐ");
             try {
                 Glide.with(context).load(img).into(holder.IV_productIcon);;
             }
@@ -169,8 +168,9 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
             discountNoteTV.setVisibility(View.GONE);
             discountPriceTV.setVisibility(View.GONE);
             costPrice = Double.parseDouble(String.valueOf(price).replaceAll("VNĐ",""));
-            finalCostPrice = Double.parseDouble(String.valueOf(price).replaceAll("VNĐ",""));
-            finalPriceTV.setText("" + finalCostPrice);
+            finalCostPrice = Double.parseDouble(String.valueOf(0).replaceAll("VNĐ",""));
+
+            finalPriceTV.setText(String.format("%.0f",finalCostPrice) +"VNĐ");
         }
         else {
             //discount
@@ -187,8 +187,9 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
                     discountPriceTV.setText(String.format("%.0f",discountPrice) + "VNĐ");
                     originalPriceTV.setPaintFlags(originalPriceTV.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
                     costDiscount = Double.parseDouble(String.valueOf(discountPrice).replaceAll("VNĐ",""));
-                    finalCostDiscount = Double.parseDouble(String.valueOf(discountPrice).replaceAll("VNĐ",""));
-                    finalPriceTV.setText("" + finalCostDiscount);
+                    finalCostDiscount = Double.parseDouble(String.valueOf(0).replaceAll("VNĐ",""));
+                    finalPriceTV.setText(String.format("%.0f",finalCostDiscount) +"VNĐ");
+
                 }
 
                 @Override
@@ -197,7 +198,7 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
             });
         }
         quanS = 0;
-        quanM = 1;
+        quanM = 0;
         quanL = 0;
         quanXL = 0;
 
@@ -230,17 +231,24 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
                 newPrduct.setQuantity_M_size(quanM);
                 newPrduct.setQuantity_L_size(quanL);
                 newPrduct.setQuantity_XL_size(quanXL);
-                MainActivity.listCost.add(modelProducts.getPrice()*(quanS+quanM+quanL+quanXL));
-                if (finalCostDiscount !=0){
-                    MainActivity.listDiscount.add((float) finalCostDiscount);
-                    newPrduct.setPrice((float) costDiscount);
-                }else {
-                    MainActivity.listDiscount.add((float) finalCostPrice);
-                    newPrduct.setPrice((float) costPrice);
+                Float total = modelProducts.getPrice()*(quanS+quanM+quanL+quanXL);
+                if(total == 0){
+                    Toast.makeText(view.getContext(),"Please choose your size...",Toast.LENGTH_SHORT).show();
                 }
-                MainActivity.cart.add(newPrduct);
-                Toast.makeText(view.getContext(),"Đã thêm sản phẩm vào giỏ hàng",Toast.LENGTH_SHORT).show();
-                dialog.hide();
+                else {
+                    MainActivity.listCost.add(total);
+                    if (finalCostDiscount != 0) {
+                        MainActivity.listDiscount.add((float) finalCostDiscount);
+                        newPrduct.setPrice((float) costDiscount);
+                    } else {
+                        MainActivity.listDiscount.add((float) finalCostPrice);
+                        newPrduct.setPrice((float) costPrice);
+                    }
+                    MainActivity.cart.add(newPrduct);
+                    Toast.makeText(view.getContext(), "Add To Cart...", Toast.LENGTH_SHORT).show();
+                    dialog.hide();
+                }
+
             }
         });
         incrementBtnS.setOnClickListener(new View.OnClickListener() {
@@ -283,7 +291,7 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
                 if (quanL <= quantity_L_size && promotion_id != null) {
                     quanL++;
                     quanL_TV.setText(String.valueOf(quanL));
-                    finalCostDiscount = finalCostDiscount + costDiscount;
+
                     finalPriceTV.setText(String.format("%.0f",finalCostDiscount) + "VNĐ");
                 }
                 else if(quanL <= quantity_XL_size && promotion_id == null){
@@ -315,13 +323,13 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
         decrementBtnS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (quanS > 1 && promotion_id != null) {
+                if (quanS >= 1 && promotion_id != null) {
                     quanS--;
                     quanS_TV.setText(String.valueOf(quanS));
                     finalCostDiscount = finalCostDiscount - costDiscount;
                     finalPriceTV.setText(String.format("%.0f",finalCostDiscount) + "VNĐ");
                 }
-                else if(quanS > 1 && promotion_id == null){
+                else if(quanS >= 1 && promotion_id == null){
                     quanS--;
                     quanS_TV.setText(String.valueOf(quanS));
                     finalCostPrice = finalCostPrice - costPrice;
@@ -332,13 +340,13 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
         decrementBtnM.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (quanM > 1 && promotion_id != null) {
+                if (quanM >= 1 && promotion_id != null) {
                     quanM--;
                     quanM_TV.setText(String.valueOf(quanM));
                     finalCostDiscount = finalCostDiscount - costDiscount;
                     finalPriceTV.setText(String.format("%.0f",finalCostDiscount) + "VNĐ");
                 }
-                else if(quanM > 1 && promotion_id == null){
+                else if(quanM >= 1 && promotion_id == null){
                     quanM--;
                     quanM_TV.setText(String.valueOf(quanM));
                     finalCostPrice = finalCostPrice - costPrice;
@@ -349,7 +357,7 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
         decrementBtnL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (quanL > 1 && promotion_id != null) {
+                if (quanL >= 1 && promotion_id != null) {
                     quanL--;
                     quanL_TV.setText(String.valueOf(quanL));
                     finalCostDiscount = finalCostDiscount - costDiscount;
@@ -366,7 +374,7 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
         decrementBtnXL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (quanXL > 1 && promotion_id != null) {
+                if (quanXL >= 1 && promotion_id != null) {
                     quanXL--;
                     quanXL_TV.setText(String.valueOf(quanXL));
                     finalCostDiscount = finalCostDiscount - costDiscount;
@@ -392,10 +400,6 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
         TextView TV_discountNote = view.findViewById(R.id.TV_discountNote);
         TextView TV_productName = view.findViewById(R.id.TV_productName);
         TextView TV_productDes = view.findViewById(R.id.TV_productDes);
-        TextView TV_QuantityS = view.findViewById(R.id.TV_QuanS);
-        TextView TV_QuantityM = view.findViewById(R.id.TV_QuanM);
-        TextView TV_QuantityL = view.findViewById(R.id.TV_QuanL);
-        TextView TV_QuantityXL = view.findViewById(R.id.TV_QuanXL);
         TextView TV_originalPrice = view.findViewById(R.id.TV_originalPrice);
         TextView TV_discountPrice = view.findViewById(R.id.TV_discountPrice);
         TextView TV_category = view.findViewById(R.id.TV_category);
@@ -405,10 +409,6 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
         Integer cate = modelProducts.getCategory();
         Float price = modelProducts.getPrice();
         Integer promotion_id = modelProducts.getPromotion_id();
-        Integer quantity_L_size = modelProducts.getQuantity_L_size();
-        Integer quantity_M_size = modelProducts.getQuantity_M_size();
-        Integer quantity_S_size = modelProducts.getQuantity_S_size();
-        Integer quantity_XL_size = modelProducts.getQuantity_XL_size();
 
 
         ApiInterface apiInterface = RetrofitClient.getRetrofitClient().create(ApiInterface.class);
@@ -435,10 +435,6 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
         }catch (NullPointerException ex){
         }
 
-        TV_QuantityS.setText("Quantity of Size S: " + quantity_S_size.toString());
-        TV_QuantityM.setText("Quantity of Size M: " +quantity_M_size.toString());
-        TV_QuantityL.setText("Quantity of Size L: "+quantity_L_size.toString());
-        TV_QuantityXL.setText("Quantity of Size XL: " +quantity_XL_size.toString());
         TV_originalPrice.setText(String.format("%.0f", price) + "VNĐ");
         if (promotion_id == null) {
             //not discount

@@ -98,7 +98,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                         LoginResponse loginResponse = response.body();
                         if (response.isSuccessful()) {
-                            if (loginResponse.getMess().equals("Đăng Nhập Thành Công!")) {
+                            if (loginResponse.getMess().equals("Login Successful!")) {
                                 SessionManagement sessionManagement = new SessionManagement(LoginActivity.this);
                                 sessionManagement.saveSession(response.body().user_login);
                                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
